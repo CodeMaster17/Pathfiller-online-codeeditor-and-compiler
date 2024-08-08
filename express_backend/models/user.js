@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
   },
-  { time_stamps: true } //WIP: time stamp
+  { timestamps: true } //WIP: time stamp
 )
 
 module.exports = mongoose.model("user", userSchema)
