@@ -10,12 +10,12 @@
 
 ### To run frontend
 
-`cd frontend`
-`npm i `
+`cd frontend`\
+`npm i `\
 `npx vite `
 
 ### To run backend
 
-`cd express_backend`
-`npm i `
+`cd express_backend`\
+`npm i `\
 `npm start`
