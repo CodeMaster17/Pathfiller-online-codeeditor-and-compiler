@@ -1,15 +1,24 @@
 import './App.css'
-import { Alert } from './components/ui/alert'
-import { Button } from './components/ui/button'
+import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Problem from './pages/Problem';
+import Home from './pages/Home';
+import Navbar from './components/common/Navbar';
+import Footer from './components/common/Footer';
 
 function App() {
 
   return (
     <>
-      <Button>
-        Button
-      </Button>
-      <Alert />
+    <div className='flex min-h-screen w-full flex-col border'>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/problem" element={<Problem />} />
+      </Routes>
+      <Footer />
+      </Router>
+    </div>
     </>
   )
 }
