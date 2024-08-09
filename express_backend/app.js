@@ -4,7 +4,7 @@ const app = express()
 const database = require("./config/database");
 const userRoutes = require("./routes/user");
 const { generateFile } = require('./code/generateFile');
-
+const { executeCpp } = require('./code/code_execution/execute_cpp')
 require('dotenv').config()
 app.use(express())
 app.use(cors())
@@ -27,7 +27,8 @@ app.post("/run", async (req, res) => {
     }
     // need to generate a c++ file with content from the request
     const filepath = await generateFile(language, code);
-    return res.json({ filepath })
+    const output = await executeCpp(filepath)
+    return res.json({ filepath, output })
 });
 
 
