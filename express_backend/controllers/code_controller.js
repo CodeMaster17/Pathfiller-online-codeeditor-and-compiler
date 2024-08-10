@@ -18,7 +18,7 @@ exports.run_code = async (req, res) => {
         res.status(201).json({ jobId });
 
     } catch (error) {
-        return res.status(500).json({ success: false, err: JSON.stringify(err) })
+        return res.status(500).json({ success: false, err: JSON.stringify(error) })
     }
 }
 

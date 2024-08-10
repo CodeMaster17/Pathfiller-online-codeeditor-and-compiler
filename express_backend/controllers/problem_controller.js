@@ -60,3 +60,17 @@ exports.getProblemById = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+exports.getAllProblems = async (req, res) => {
+    try {
+        const problems = await Problem.find()
+            .populate('testCases')
+            .populate('tags');
+
+        res.status(200).json(problems);
+        console.log('All problems retrieved:', problems);
+    } catch (err) {
+        console.error('Error getting all problems:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
