@@ -7,7 +7,7 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 
-const Problem = () => {
+const CodingArena = () => {
   const problem = {
     id: "123",
     title: "Sample Problem",
@@ -51,4 +51,4 @@ const Problem = () => {
   );
 };
 
-export default Problem;
+export default CodingArena;
