@@ -65,9 +65,9 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 	};
 
 	return (
-		<div className="bg-dark-layer-2 w-full">
+		<div className="bg-dark-layer-2 w-full overflow-y-scroll h-full">
 			<div className="text-white bg-black px-5 pb-2 flex space-x-3 cursor-pointer">
-				<div>logo</div>
+				<div className="text-dark-yellow font-bold">Pathfiller</div>
 				<div className="text-slate-800 text-transparent">|</div>
 				<div className="flex space-x-4">
 					<div className="text-gray-400 pt-0.5"><ListIcon size={22}/></div>
@@ -78,7 +78,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 				</div>
 			</div>
 			{/* TAB */}
-			<div className="flex h-9 w-fullitems-center pt-3 px-5 space-x-3 cursor-pointer rounded-lg bg-dark-layer-1 text-sm text-white">
+			<div className="flex h-9 w-full items-center pt-3 px-5 space-x-3 cursor-pointer rounded-lg bg-dark-layer-1 text-sm text-white">
 				<div className="flex space-x-1">
 					<Book size={13} color="#ffa825"/>
 					<div className="-translate-y-1">Description</div>
@@ -193,7 +193,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 					</div>
 
 
-					<div className="border-t flex text-gray-500 pl-9 pt-5 space-x-14 mt-5">
+					<div className="border-t flex text-gray-500 pl-9 pt-3 space-x-14 mt-3">
 						<div>Accepted <span className="text-white pl-2">14.1M</span></div>
 						<div className="text-slate-200 text-transparent">|</div>
 						<div>Submissions <span className="text-white pl-2">26.4M</span></div>
@@ -201,7 +201,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 						<div>Acceptance Rate <span className="text-white pl-2">53.4%</span></div>
 					</div>
 
-					<div className="text-gray-500 text-sm mt-12">Copyright ©️ 2024 PathFillers All rights reserved</div>
+					<div className="text-gray-500 text-sm mt-9">Copyright ©️ 2024 PathFillers All rights reserved</div>
 				</div>
 			</div>
 		</div>
