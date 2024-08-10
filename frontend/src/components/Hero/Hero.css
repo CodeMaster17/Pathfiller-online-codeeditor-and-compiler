@@ -1,0 +1,37 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem 6rem;
+    background-color: black;
+    /* border:2px solid #ffa825; */
+  }
+  
+  .header-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: white; 
+    width: 60%;
+    padding-top: 9rem;
+    line-height: normal;
+  }
+
+  .coders{
+    color: #ffa825;
+  }
+  
+  .header-subtitle {
+    font-size: 1.5rem;
+    color: #f1f1f1;
+    width: 45%;
+    padding-top: 1rem;
+  }
+  
+  .header-buttons {
+    display: flex;
+    padding-top: 2rem;
+  }
+  
+  
