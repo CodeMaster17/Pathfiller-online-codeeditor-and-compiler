@@ -4,6 +4,7 @@ const app = express()
 const database = require("./config/database");
 const userRoutes = require("./routes/user");
 const codeRoutes = require("./routes/code")
+const problemRoutes = require("./routes/problem_route")
 
 require('dotenv').config()
 app.use(express())
@@ -14,7 +15,8 @@ app.use(express.json())
 database.connect();
 
 app.use("/api/v1/auth", userRoutes);
-app.use("/api/v1/code", codeRoutes)
+app.use("/api/v1/code", codeRoutes);
+app.use("/api/v1/problem", problemRoutes);
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

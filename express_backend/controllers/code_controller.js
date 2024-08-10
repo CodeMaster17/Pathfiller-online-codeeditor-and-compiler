@@ -11,7 +11,6 @@ exports.run_code = async (req, res) => {
     }
     let job;
     try {
-
         const filepath = await generateFile(language, code);
         job = await new jobs({ language, filepath }).save();
         const jobId = job["_id"];
