@@ -6,11 +6,7 @@
   }
   
   .featuresLeft {
-    /* display: grid; */
-    /* grid-template-columns: repeat(2, 1fr); */
-    /* gap: 20px; */
     width: 50%;
-    /* margin-top: 1rem; */
   }
 
   .codingPlayground, .codingBattleground{
@@ -18,7 +14,14 @@
     border-right: 2px solid #9f9e9d;
     border-bottom: 2px solid #9f9e9d;
     padding: 1rem;
-    margin-top: 5rem;
+    box-shadow: 5px 5px 5px #ffa825;
+    /* margin-top: 5rem; */
+    width: 50%;
+    padding-left: 6rem;
+  }
+
+  .codingBattleground{
+    margin-top: 7rem;
   }
   
   .codingArena{
@@ -26,7 +29,11 @@
     border-left: 2px solid #9f9e9d;
     border-bottom: 2px solid #9f9e9d;
     padding: 1rem;
-    margin-top: 5rem;
+    margin-top: 7rem;
+    box-shadow: 5px 5px 5px #ffa825;
+    width: 50%;
+    padding-left: 8rem;
+    margin-left: 16rem;
   }
 
   .featureCard {

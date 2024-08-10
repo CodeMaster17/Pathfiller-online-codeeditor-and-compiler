@@ -1,4 +1,3 @@
-// import React from 'react';
 import './Hero.css';
 import { Button } from '../ui/button';
 import GridPattern from '../magicui/grid-pattern';
@@ -10,8 +9,8 @@ const Hero = () => {
       <h1 className="header-title">The Battleground for <span className='coders'>Coders</span>. Compete, <span className='coders'>Code</span>, Create.</h1>
       <p className="header-subtitle">Every challenge is an opportunity to showcase your coding process and rise above the rest.Your code is your craft; let every keystroke reflect your dedication to excellence.</p>
       <div className="header-buttons">
-        <Button className='bg-[#ffa825] text-black m-3 hover:bg-[#ff9800] text-lg'>Sign Up</Button>
-        <Button className='bg-[#ffa825] text-black m-3 hover:bg-[#ff9800] text-lg'>Code</Button>
+        {/* <Button className='bg-[#ffa825] text-black m-3 hover:bg-[#ff9800] text-lg'>Sign Up</Button> */}
+        <Button className='bg-[#ffa825] text-black m-3 hover:bg-[#ff9800] text-lg'><a href="/codingarena">Start Coding</a></Button>
       </div>
       <GridPattern
         squares={[

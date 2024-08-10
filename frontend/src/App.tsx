@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import ProblemSet from './pages/ProblemSet';
+import NotFound from './pages/NotFound';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/codingplayground" element={<CodingPlayground />} />
         <Route path="/codingbattleground" element={<CodingBattleGround />} />
         <Route path="/problemset" element={<ProblemSet />} />
+        <Route path="*" element={<NotFound />}/>
       </Routes>
       <Footer />
       </Router>

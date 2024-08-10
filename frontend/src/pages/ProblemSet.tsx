@@ -84,7 +84,7 @@ const ProblemSet = () => {
           placeholder="Search for a question"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="max-w-md"
+          className="max-w-md placeholder-slate-400"
         />
         <div className="mt-2 relative">
           {loading ? (
@@ -99,7 +99,7 @@ const ProblemSet = () => {
                   <TableHead>S.no</TableHead>
                   <TableHead>Question</TableHead>
                   <TableHead>Difficulty</TableHead>
-                  <TableHead className="text-right">Category</TableHead>
+                  <TableHead className="pr-10 text-right">Category</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -120,9 +120,9 @@ const ProblemSet = () => {
                     </TableCell>
                     <TableCell className="text-right">
                       {problem.tags.map((tag: any, index: number) => (
-                        <span key={index} className="tag">
+                        <span key={index} className="tag inline-block px-1 mr-1 mb-1 bg-gray-300 border border-gray-400 rounded-full text-dark-layer-1">
                           {tag.name}
-                          {index < problem.tags.length - 1 && ", "}
+                          {/* {index < problem.tags.length - 1 && ", "} */}
                         </span>
                       ))}
                     </TableCell>
