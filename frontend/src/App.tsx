@@ -1,8 +1,11 @@
 import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Problem from './pages/Problem';
+import CodingArena from './pages/CodingArena';
+import CodingPlayground from './pages/CodingPlayground';
+import CodingBattleGround from './pages/CodingBattleGround';
 import Home from './pages/Home';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
+import ProblemSet from './pages/ProblemSet';
 
 
 function App() {
@@ -13,7 +16,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/problem" element={<Problem />} />
+        <Route path="/codingarena" element={<CodingArena />} />
+        <Route path="/codingplayground" element={<CodingPlayground />} />
+        <Route path="/codingbattleground" element={<CodingBattleGround />} />
+        <Route path="/problemset" element={<ProblemSet />} />
       </Routes>
       <Footer />
       </Router>
