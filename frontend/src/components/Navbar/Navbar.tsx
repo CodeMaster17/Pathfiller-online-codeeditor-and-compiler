@@ -4,9 +4,9 @@ import './Navbar.css';
 const Navbar = () => {
   return (
     <div className="navbar">
-      <h1 className='logo'>PathFiller</h1>
+      <li className='logo'><a href="/">PathFiller</a></li>
       <ul className="navbarList">
-        <li><a href="#home">Problems</a></li>
+        <li><a href="/problemset">Problems</a></li>
         <li><a href="#contest">Contest</a></li>
         <li><a href="#discuss">Discuss</a></li>
         <li><a href="#documents">Documents</a></li>
