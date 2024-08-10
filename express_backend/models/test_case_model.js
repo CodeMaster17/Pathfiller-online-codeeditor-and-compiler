@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-// Define the schema for a test case
 const testCaseSchema = new Schema({
     input: {
         type: String,

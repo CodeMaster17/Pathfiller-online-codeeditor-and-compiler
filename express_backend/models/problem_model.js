@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-// Import the TestCase model
-const TestCase = require('./test_case_model'); // Adjust the path to your TestCase model
-const Tag = require('./tag_model'); // Adjust the path to your Tag model
 
-// Define the schema for a problem
+const TestCase = require('./test_case_model');
+const Tag = require('./tag_model');
 const problemSchema = new Schema({
     id: {
         type: String,
