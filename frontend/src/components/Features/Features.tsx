@@ -28,6 +28,9 @@ const Features = () => {
   return (
     <div className="featuresContainer">
       <div className="featuresLeft">
+        <div className='codingPlayground'><h1>Coding Playground</h1></div>
+        <div className='codingArena'><h1>Coding Arena</h1></div>
+        <div className='codingBattleground'><h1>Coding Battleground</h1></div>
         {/* <div className="mx-auto pl-7 mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
           <dl className="grid max-w-xl grid-cols-1 gap-x-10 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
             {features.map((feature) => (

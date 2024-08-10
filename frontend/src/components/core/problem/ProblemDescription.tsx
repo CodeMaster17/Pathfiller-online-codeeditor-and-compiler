@@ -1,5 +1,6 @@
+import { Book, BookMarked, ListIcon, Loader, ShuffleIcon } from "lucide-react";
 import { useState } from "react";
-import { AiFillLike, AiFillDislike, AiOutlineLoading3Quarters, AiFillStar } from "react-icons/ai";
+import { AiFillLike, AiFillDislike, AiOutlineLoading3Quarters, AiFillStar, AiOutlineSolution } from "react-icons/ai";
 import { BsCheck2Circle } from "react-icons/bs";
 import { TiStarOutline } from "react-icons/ti";
 
@@ -64,24 +65,52 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 	};
 
 	return (
-		<div className="bg-dark-layer-1 w-full">
+		<div className="bg-dark-layer-2 w-full">
+			<div className="text-white bg-black px-5 pb-2 flex space-x-3 cursor-pointer">
+				<div>logo</div>
+				<div className="text-slate-800 text-transparent">|</div>
+				<div className="flex space-x-4">
+					<div className="text-gray-400 pt-0.5"><ListIcon size={22}/></div>
+					<div className="font-bold text-sm pt-1">Problem List</div>
+					<div className="text-xl text-gray-400 -translate-y-1">&lt;</div>
+					<div className="text-xl text-gray-400 -translate-y-1">&gt;</div>
+					<div className="pt-1 text-gray-400"><ShuffleIcon size={16}/></div>
+				</div>
+			</div>
 			{/* TAB */}
-			<div className="flex h-11 w-full items-center pt-2 bg-dark-layer-2 text-white">
-				<div className={"bg-dark-layer-1 rounded-t-[5px] px-5 py-[10px] text-xs cursor-pointer"}>
-					Description
+			<div className="flex h-9 w-fullitems-center pt-3 px-5 space-x-3 cursor-pointer rounded-lg bg-dark-layer-1 text-sm text-white">
+				<div className="flex space-x-1">
+					<Book size={13} color="#ffa825"/>
+					<div className="-translate-y-1">Description</div>
+				</div>
+				<div className="text-slate-700 text-transparent -translate-y-1">|</div>
+				<div className="flex space-x-1">
+					<BookMarked size={13} color="#ffa825"/>
+					<div className="-translate-y-1">Editorial</div>
+				</div>
+				<div className="text-slate-700 text-transparent -translate-y-1">|</div>
+				<div className="flex space-x-1">
+					<AiOutlineSolution size={13} color="#ffa825"/>
+					<div className="-translate-y-1">Solutions</div>
+				</div>
+				<div className="text-slate-700 text-transparent -translate-y-1">|</div>
+				<div className="flex space-x-1">
+					<Loader size={13} color="#ffa825"/>
+					<div className="-translate-y-1">Submissions</div>
 				</div>
 			</div>
 
-			<div className="flex px-0 py-4 h-[calc(100vh-94px)]">
+			<div className="flex px-0 py-6 h-[calc(100vh-94px)]">
 				<div className="px-5">
 					{/* Problem heading */}
 					<div className="w-full">
 						<div className="flex space-x-4">
-							<div className="flex-1 mr-2 text-lg text-white font-medium">{problem?.title}</div>
+							{/* <div className="flex-1 mr-2 text-lg text-white font-medium">{problem?.title}</div> */}
+							<div className="flex-1 mr-2 text-2xl text-white font-medium">1. Two Sum</div>
 						</div>
-						<div className="flex items-center mt-3">
+						<div className="flex items-center mt-4">
 							<div
-								className={`${difficultyColor} inline-block rounded-[21px] bg-opacity-[.15] px-2.5 py-1 text-xs font-medium capitalize `}
+								className={`${difficultyColor} inline-block rounded-[21px] bg-opacity-[.15] bg-white px-2.5 py-1 pb-1.5 text-xs font-medium capitalize `}
 							>
 								{problem.difficulty}
 							</div>
@@ -120,24 +149,31 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 					</div>
 
 					{/* Problem Statement */}
-					<div className="text-white text-sm">
-						<div dangerouslySetInnerHTML={{ __html: problem.problemStatement }} />
+					<div className="text-white text-sm mt-4 space-y-4">
+						{/* <div dangerouslySetInnerHTML={{ __html: problem.problemStatement }} /> */}
+						<div className="leading-7">Given an array of integers <span className="rounded-[5px] border border-slate-400 p-0.5 bg-opacity-[.15] bg-white">nums</span> and an integer <span className="rounded-[5px] border border-slate-400 p-0.5 bg-opacity-[.15] bg-white">target</span>, return indices of the two numbers such that they add up to <span className="rounded-[5px] border border-slate-400 p-0.5 bg-opacity-[.15] bg-white">target</span>.</div>
+						<div>You may assume that each input would have exactly one solution, and you may not use the same element twice.</div>
+						<div>You can return the answer in any order.</div>
 					</div>
 
 					{/* Examples */}
-					<div className="mt-4">
+					<div className="mt-10">
 						{problem.examples.map((example, index) => (
 							<div key={example.id}>
 								<p className="font-medium text-white">Example {index + 1}: </p>
 								{example.img && <img src={example.img} alt="" className="mt-3" />}
 								<div className="example-card text-zinc-600">
 									<pre>
-										<strong className="text-white">Input: </strong> {example.inputText}
+										<strong className="text-white">Input: <span className="text-gray-400">nums = [2,7,11,15], target = 9</span></strong> 
+										{/* {example.inputText} */}
 										<br />
-										<strong>Output:</strong> {example.outputText} <br />
+										<strong className="text-white">Output: <span className="text-gray-400">[0,1]</span></strong> 
+										{/* {example.outputText}  */}
+										<br />
 										{example.explanation && (
 											<>
-												<strong>Explanation:</strong> {example.explanation}
+												<strong className="text-white">Explanation: <span className="text-gray-400">Because nums[0] + nums[1] == 9, we return [0, 1].</span></strong> 
+												{/* {example.explanation} */}
 											</>
 										)}
 									</pre>
@@ -148,11 +184,24 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 
 					{/* Constraints */}
 					<div className="my-8 pb-4">
-						<div className="text-white text-sm font-medium">Constraints:</div>
-						<ul className="text-white ml-5 list-disc">
-							<div dangerouslySetInnerHTML={{ __html: problem.constraints }} />
+						<div className="text-white font-medium">Constraints:</div>
+						<ul className="text-white ml-5 list-disc text-sm mt-2">
+							<li className="rounded-[21px] bg-opacity-[.15] bg-white px-2 w-[28%]">2 &lt;= nums.length &lt;= 10<sup>4</sup></li>
+							<li className="rounded-[21px] bg-opacity-[.15] bg-white px-2 mt-1 w-[26%]">-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></li>
+							<li className="rounded-[21px] bg-opacity-[.15] bg-white px-2 mt-1 w-[24%]">-10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup></li>
 						</ul>
 					</div>
+
+
+					<div className="border-t flex text-gray-500 pl-9 pt-5 space-x-14 mt-5">
+						<div>Accepted <span className="text-white pl-2">14.1M</span></div>
+						<div className="text-slate-200 text-transparent">|</div>
+						<div>Submissions <span className="text-white pl-2">26.4M</span></div>
+						<div className="text-slate-200 text-transparent">|</div>
+						<div>Acceptance Rate <span className="text-white pl-2">53.4%</span></div>
+					</div>
+
+					<div className="text-gray-500 text-sm mt-12">Copyright ©️ 2024 PathFillers All rights reserved</div>
 				</div>
 			</div>
 		</div>

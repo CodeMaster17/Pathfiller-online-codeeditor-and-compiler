@@ -6,12 +6,29 @@
   }
   
   .featuresLeft {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    /* display: grid; */
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* gap: 20px; */
     width: 50%;
+    /* margin-top: 1rem; */
+  }
+
+  .codingPlayground, .codingBattleground{
+    border-top: 2px solid #9f9e9d;
+    border-right: 2px solid #9f9e9d;
+    border-bottom: 2px solid #9f9e9d;
+    padding: 1rem;
+    margin-top: 5rem;
   }
   
+  .codingArena{
+    border-top: 2px solid #9f9e9d;
+    border-left: 2px solid #9f9e9d;
+    border-bottom: 2px solid #9f9e9d;
+    padding: 1rem;
+    margin-top: 5rem;
+  }
+
   .featureCard {
     background-color: #2a2a2a;
     border-radius: 8px;
