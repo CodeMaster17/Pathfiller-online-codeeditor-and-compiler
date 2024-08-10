@@ -30,10 +30,10 @@ const CodingArena = () => {
   const _solved = false;
 
   return (
-    <div className="h-full border-black bg-black border-4">
+    <div className="h-full bg-black">
       <ResizablePanelGroup
         direction="horizontal"
-        className="min-h-[600px] w-full rounded-lg border-red-600 border-4"
+        className="min-h-[600px] w-full rounded-lg"
       >
         <ResizablePanel defaultSize={25}>
           <div className="flex h-full items-center justify-center p-1">
@@ -42,7 +42,7 @@ const CodingArena = () => {
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={75}>
-          <div className="flex h-full items-center justify-center p-1 border-red-600 border-4">
+          <div className="flex h-full items-center justify-center p-1">
             <VerticalResizable />
           </div>
         </ResizablePanel>

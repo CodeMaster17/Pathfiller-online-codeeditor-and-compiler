@@ -11,7 +11,7 @@ import ProblemSet from './pages/ProblemSet';
 function App() {
   return (
     <>
-    <div className='min-h-screen w-full border-4'>
+    <div className='min-h-screen w-full'>
     <Router>
       <Navbar />
       <Routes>
