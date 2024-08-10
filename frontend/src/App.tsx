@@ -8,7 +8,7 @@ import Footer from './components/common/Footer';
 function App() {
   return (
     <>
-    <div className='flex min-h-screen w-full flex-col border'>
+    <div className='min-h-screen w-full border-4'>
     <Router>
       <Navbar />
       <Routes>
