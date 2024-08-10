@@ -1,27 +1,27 @@
 // import { Button } from '../ui/button';
-import { AtomIcon, BanIcon, CheckIcon, ChevronRightIcon, GitBranchPlus, Icon, Linkedin, LinkIcon, PenBoxIcon } from 'lucide-react';
+import { CheckIcon, ChevronRightIcon, GitBranchPlus, Linkedin, } from 'lucide-react';
 import './Features.css';
 import { AnimatedSubscribeButton } from '../magicui/animated-subscribe-button';
-import CodeBlocks from '../CodeBlocks/CodeBlocks';
+// import CodeBlocks from '../CodeBlocks/CodeBlocks';
 
-const features = [
-    {
-        name: 'Feature 1',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero illum, accusant'
-    },
-    {
-        name: 'Feature 1',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero illum, accusant'
-    },
-    {
-        name: 'Feature 1',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero illum, accusant'
-    },
-    {
-        name: 'Feature 1',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero illum, accusant'
-    }
-]
+// const features = [
+//     {
+//         name: 'Feature 1',
+//         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero illum, accusant'
+//     },
+//     {
+//         name: 'Feature 1',
+//         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero illum, accusant'
+//     },
+//     {
+//         name: 'Feature 1',
+//         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero illum, accusant'
+//     },
+//     {
+//         name: 'Feature 1',
+//         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero illum, accusant'
+//     }
+// ]
 
 
 const Features = () => {
