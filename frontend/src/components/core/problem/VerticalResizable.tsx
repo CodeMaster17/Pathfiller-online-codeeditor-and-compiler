@@ -17,13 +17,15 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { BACKEND_ROUTE_CODE } from '@/constants';
 
 const VerticalResizable = () => {
   const [userCode, setUserCode] = useState<string>('');
   const [selectedLanguage, setSelectedLanguage] = useState<string>("C++");
   const [output, setOutput] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [status, setStatus] = useState<string | null>("")
+  const [jobId, setJobId] = useState<string>("")
   const onChange = (value: string) => {
     setUserCode(value);
   };
@@ -42,9 +44,41 @@ const VerticalResizable = () => {
         language: selectedLanguage.toLowerCase() === "c++" ? "cpp" : "py",
         code: userCode,
       };
-      const { data } = await axios.post('http://localhost:5002/api/v1/code/run', payload);
+      const { data } = await axios.post(`${BACKEND_ROUTE_CODE}/code/run`, payload);
+      console.log(data);
+      setOutput(data.jobId);
 
-      setOutput(data.output || "No output received");
+      // polling to get the job result
+      let intervalId = setInterval(async () => {
+        const { data: statusResult } = await axios.get(`${BACKEND_ROUTE_CODE}/code/status`, { params: { id: data.jobId } });
+        console.log(statusResult)
+        const { success, job_res, error } = statusResult
+        console.log(statusResult);
+        // if the job is success --> displaying result
+        if (success) {
+          const { status: jobStatus, output: jobOutput } = job_res;
+          setStatus(jobStatus)
+          if (jobStatus === "pending") return;
+          setOutput(jobOutput)
+          setJobId(jobId)
+          // clearing the interval
+          clearInterval(intervalId)
+          console.log("Executed")
+        } else {
+          setStatus("Error! Please retry")
+          console.error(error);
+          setOutput(error)
+        }
+      }, 1000)
+
+      // FIXME: Fix the timeout problem which is setting the pending status
+      setTimeout(() => {
+        console.log("Clearing the interval")
+        clearInterval(intervalId);
+        setStatus("Timelimit exceeded");
+      }, 10000);
+
+
     } catch (error) {
       console.error("Error running code:", error);
       setOutput("An error occurred while running the code.");
@@ -99,7 +133,12 @@ const VerticalResizable = () => {
           <div className="flex h-full items-center justify-center p-6">
             <span className="font-semibold text-white">
               {output ? (
-                <pre>{output}</pre>
+                <>
+                  <pre>{output}</pre>
+                  { }
+                  <p>{status}</p>
+                  <p>{jobId && `JobId is ${jobId}`}</p>
+                </>
               ) : (
                 "Content"
               )}
