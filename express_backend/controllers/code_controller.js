@@ -2,7 +2,7 @@ const { generateFile } = require('../code/generateFile')
 const jobs = require('../models/jobs');
 const { addJobToQueue } = require('../code/job_queue');
 exports.run_code = async (req, res) => {
-    const { language = "cpp", code } = req.body;
+    const { language = "cpp", code, problem_id } = req.body;
 
     console.log(language, "Length:", code.length);
 
@@ -14,7 +14,7 @@ exports.run_code = async (req, res) => {
         const filepath = await generateFile(language, code);
         job = await new jobs({ language, filepath }).save();
         const jobId = job["_id"];
-        addJobToQueue(jobId)
+        await addJobToQueue({ jobId, problemId: problem_id });
         res.status(201).json({ jobId });
 
     } catch (error) {

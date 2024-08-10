@@ -1,14 +1,17 @@
-
 const Problem = require("../models/problem_model");
 const Tag = require("../models/tag_model");
 const TestCase = require("../models/test_case_model");
 
 exports.addProblemWithTagsAndTestCases = async (req, res) => {
     try {
-        const { testCases, tags, ...problem } = req.body;
-
+        const { testCases, tags = [], initialCode, ...problem } = req.body;
         const tagIds = [];
         for (const tag of tags) {
+
+            if (!tag.name) {
+                return res.status(400).json({ message: 'Tag name cannot be null or empty' });
+            }
+
             let existingTag = await Tag.findOne({ name: tag.name });
             if (!existingTag) {
                 const newTag = await Tag.create(tag);
@@ -27,10 +30,11 @@ exports.addProblemWithTagsAndTestCases = async (req, res) => {
 
         problem.testCases = testCaseIds;
         problem.tags = tagIds;
+        //
+        problem.initialCode = initialCode;
 
         const newProblem = await Problem.create(problem);
         res.status(201).json({ newProblem, message: 'Problem added successfully' });
-        console.log('Problem added:', newProblem);
     } catch (err) {
         console.error('Error adding problem with tags and test cases:', err);
     }
