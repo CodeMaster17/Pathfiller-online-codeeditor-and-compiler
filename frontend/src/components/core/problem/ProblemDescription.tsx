@@ -67,7 +67,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 	return (
 		<div className="bg-dark-layer-2 w-full overflow-y-scroll h-full">
 			<div className="text-white bg-black px-5 pb-2 flex space-x-3 cursor-pointer">
-				<div className="text-dark-yellow font-bold">Pathfiller</div>
+				<div className="text-dark-yellow font-bold"><a href="/">Pathfiller</a></div>
 				<div className="text-slate-800 text-transparent">|</div>
 				<div className="flex space-x-4">
 					<div className="text-gray-400 pt-0.5"><ListIcon size={22}/></div>
