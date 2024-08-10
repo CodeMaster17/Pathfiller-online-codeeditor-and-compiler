@@ -18,6 +18,10 @@ const problemSchema = new Schema({
         type: String,
         required: true
     },
+    initialCode: {
+        type: String,
+        required: true
+    },
     constraints: {
         type: String
     },
