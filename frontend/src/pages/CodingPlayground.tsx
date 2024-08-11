@@ -49,11 +49,6 @@ const CodingPlayground = () => {
     console.log("Selected Language:", selectedLanguage);
     console.log("User Code:", userCode);
     console.log("User Input:", inputValue);
-    // if (inputValue === "") {
-    //   alert("Please enter the input");
-    //   setLoading(false);
-    //   return;
-    // }
 
     try {
       const payload = {
