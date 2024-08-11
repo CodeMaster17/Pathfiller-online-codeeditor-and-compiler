@@ -24,17 +24,15 @@ type ProblemDescriptionProps = {
 	_solved: boolean;
 };
 
-const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solved }) => {
+const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
 	const [liked, setLiked] = useState(false);
 	const [disliked, setDisliked] = useState(false);
-	const [starred, setStarred] = useState(false);
 	const [updating, setUpdating] = useState(false);
 
 
 	useEffect(() => {
 		setLiked(false);
 		setDisliked(false);
-		setStarred(false);
 	});
 
 	const difficultyColor =
@@ -62,14 +60,6 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 		setUpdating(false);
 	};
 
-	const handleStar = async () => {
-		if (updating) return;
-		setUpdating(true);
-
-
-		setStarred(!starred);
-		setUpdating(false);
-	};
 
 	return (
 		<div className="bg-dark-layer-2 w-full overflow-y-scroll h-full">
