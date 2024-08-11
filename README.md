@@ -1,5 +1,8 @@
 # Team Pathfillers - Online Coding Platform
 
+
+#### Deployement Link: https://pathfillers.vercel.app/
+
 ### Coding Playground
 • A place where users can play with code.\
 • Users can code in a code editor and execute it with custom inputs.\
@@ -8,6 +11,14 @@
 • A place where users can practice their coding skills by solving various problems available on the platform.
 
 
+## Features
+
+• Language support for C++\
+• Language support for python\
+• Pagination\
+• Searching the question\
+• Code mirror - For code editor space\
+• Vscode theme from codemirror
 
 ## Tech Stack:
 • Frontend: ReactJS\
@@ -17,10 +28,11 @@
 • Routing: Axios\
 • Backend: ExpressJS\
 • Database: MongoDB\
+• Message Queue: Bull\
+• Child_process: For executing OS Commands with NodeJS\
 • ORM: Mongoose\
 • Deployment: Vercel (Frontend)
 
-## Deployement Link: https://pathfillers.vercel.app/
 
 ## Getting Started:
 
