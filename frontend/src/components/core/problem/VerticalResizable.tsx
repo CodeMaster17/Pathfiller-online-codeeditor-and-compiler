@@ -20,22 +20,7 @@ import {
 // import { Settings } from 'lucide-react';
 import { BACKEND_ROUTE_CODE } from '@/constants';
 // import { DropdownMenuArrow, DropdownMenuGroup } from '@radix-ui/react-dropdown-menu';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-const cases = {
-  case1: {
-    nums: [1, 2, 3, 4],
-    target: 6,
-  },
-  case2: {
-    nums: [5, 6, 7, 8],
-    target: 10,
-  },
-  case3: {
-    nums: [9, 10, 11, 12],
-    target: 15,
-  },
-};
 
 interface JobId {
   jobId: string;
