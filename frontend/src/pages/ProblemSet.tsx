@@ -20,6 +20,8 @@ import {
 
 import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar/Navbar";
+import { PROBLEM_ROUTE } from "@/constants";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -33,10 +35,15 @@ const ProblemSet = () => {
   const [error, setError] = useState<string | null>(null);
   const [totalProblems, setTotalProblems] = useState<number>(0);
 
+  const navigate = useNavigate();
+  const handleRoute = (id: string) => {
+    navigate(`/codingarena/${id}`);
+  }
+
   useEffect(() => {
     const fetchProblems = async () => {
       try {
-        const response = await fetch("http://localhost:5002/api/v1/problem/all");
+        const response = await fetch(`${PROBLEM_ROUTE}/all`);
         if (!response.ok) {
           throw new Error("Failed to fetch problems");
         }
@@ -53,7 +60,7 @@ const ProblemSet = () => {
         setLoading(false);
       }
     };
-  
+
     fetchProblems();
   }, []);
 
@@ -78,7 +85,7 @@ const ProblemSet = () => {
 
   return (
     <div className="bg-dark-layer-2 ">
-      <Navbar/>
+      <Navbar />
       <div className="min-h-screen pt-5 max-w-7xl mx-auto">
         <Input
           placeholder="Search for a question"
@@ -104,7 +111,9 @@ const ProblemSet = () => {
               </TableHeader>
               <TableBody>
                 {currentItems.map((problem, index) => (
-                  <TableRow key={problem._id} className={index % 2 !== 0 ? "bg-dark-layer-1" : ""}>
+                  <TableRow key={problem._id} className={index % 2 !== 0 ? "bg-dark-layer-1 hover:cursor-pointer" : "hover:cursor-pointer"} onClick={
+                    () => handleRoute(problem._id)
+                  }>
                     <TableCell>{(currentPage - 1) * itemsPerPage + index + 1}</TableCell>
                     <TableCell className="font-medium">{problem.title}</TableCell>
                     <TableCell
@@ -112,8 +121,8 @@ const ProblemSet = () => {
                         problem.difficulty === "easy"
                           ? "text-green-500"
                           : problem.difficulty === "medium"
-                          ? "text-yellow-500"
-                          : "text-red-500"
+                            ? "text-yellow-500"
+                            : "text-red-500"
                       }
                     >
                       {problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}
