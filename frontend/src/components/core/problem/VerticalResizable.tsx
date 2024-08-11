@@ -54,9 +54,10 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [status, setStatus] = useState<string | null>("")
   const [jobId, setJobId] = useState<string>("")
-  const [caseData, setCaseData] = useState<any>(cases.case1);
+
   const [mismatchesData, setMismatchesData] = useState<Mismatch[]>([]);
   const [selectedTab, setSelectedTab] = useState<string>("case1");
+  const [executionStatus, setExecutionStatus] = useState<string>("");
   const [jobIdData, setJobIdData] = useState<JobId>({
     jobId: ""
   })
@@ -75,10 +76,6 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
     console.log(userCode, selectedLanguage);
     console.log("problemId", problem.id);
     console.log("status", status)
-    setCaseData({
-      nums: [1, 2, 3, 4],
-      target: 6,
-    });
     console.log("selectedTab", selectedTab)
     console.log("jobIdData", jobIdData)
     try {
@@ -100,17 +97,27 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
 
         if (success) {
           const { status: jobStatus, output: jobOutput } = job_res;
-          setStatus(jobStatus)
-          if (jobStatus === "pending") return;
+          setStatus(job_res.status)
+          if (jobStatus === "pending") {
+            setStatus("pending")
+            return;
+          };
           setOutput(jobOutput)
           setJobId(jobId)
+          // console logs for reference
           console.log("output", output)
           console.log("inside success", job_res)
+
+          // setting the status of the execution
+          setExecutionStatus("Executed")
+
+          // setting up the test cases which failed
           setMismatchesData(job_res.mismatches)
           console.log("job_res.mismatches", job_res.mismatches)
           if (mismatchesData.length > 0) {
             setSelectedTab("mismatches")
           }
+          console.log('execution Status:', executionStatus);
           console.log("mismatched", mismatchesData)
           clearInterval(intervalId)
           console.log("Executed")
@@ -125,11 +132,12 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
         }
       }, 1000)
 
-      // FIXME: Fix the timeout problem which is setting the pending status
       setTimeout(() => {
         console.log("Clearing the interval")
         clearInterval(intervalId);
-        setStatus("Timelimit exceeded");
+        if (status === "pending") {
+          setStatus("Timelimit exceeded");
+        }
       }, 10000);
 
 
@@ -143,10 +151,7 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
 
   return (
     <div className='h-full w-full border bg-dark-layer-2 overflow-hidden'>
-      {/* <div className="text-white bg-black px-5 pb-2 flex space-x-7 cursor-pointer h-9 flex justify-end">
-        <div className="text-gray-400 pt-2"><Settings size={18}/></div>
-        <div className="text-gray-400 pt-2"><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY5g-s7BVLfq4FLrHjo8e5AL1ABnn7wwK0PA&s' width={18} height={18} alt='profile' className='rounded-full'/></div>
-			</div> */}
+
       <ResizablePanelGroup
         direction="vertical"
         className="min-h-[500px] w-full rounded-lg"
@@ -181,7 +186,7 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
               </DropdownMenu>
             </div>
           </div>
-          {/* code-editor */}
+          {/* ---- code-editor ---- */}
           <ReactCodeMirror
             value={userCode}
             theme={vscodeDark}
@@ -192,6 +197,8 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
           />
         </ResizablePanel>
         <ResizableHandle />
+
+        {/* --- ouput screen --- */}
         <ResizablePanel defaultSize={50}>
           <div className="flex h-full p-6 w-full">
             <span className="font-semibold text-white">
@@ -200,40 +207,9 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
                 <div className="p-5">
 
                   {mismatchesData.length < 0 ? (
-                    <Tabs defaultValue="case1" className="w-[400px]">
-                      <TabsList className="grid w-full grid-cols-3">
-                        <TabsTrigger value="case1" onClick={() => setSelectedTab("case1")}>Case 1</TabsTrigger>
-                        <TabsTrigger value="case2" onClick={() => setSelectedTab("case2")}>Case 2</TabsTrigger>
-                        <TabsTrigger value="case3" onClick={() => setSelectedTab("case3")}>Case 3</TabsTrigger>
-                      </TabsList>
-
-                      <TabsContent value="case1">
-                        {caseData && (
-                          <div className="text-white bg-gray-800 p-4 rounded mt-4">
-                            <p>nums = 1{caseData.nums.join(', ')}</p>
-                            <p>target = {caseData.target}</p>
-                          </div>
-                        )}
-                      </TabsContent>
-                      <TabsContent value="case2">
-                        {caseData && (
-                          <div className="text-white bg-gray-800 p-4 rounded mt-4">
-                            <p>nums = 2{caseData.nums.join(', ')}</p>
-                            <p>target = {caseData.target}</p>
-                          </div>
-                        )}
-                      </TabsContent>
-                      <TabsContent value="case3">
-                        {caseData && (
-                          <div className="text-white bg-gray-800 p-4 rounded mt-4">
-                            <p>nums = 3{caseData.nums.join(', ')}</p>
-                            <p>target = {caseData.target}</p>
-                          </div>
-                        )}
-                      </TabsContent>
-                    </Tabs>
+                    ""
                   ) : (
-                    <>
+                    <div className='flex gap-8'>
                       {mismatchesData.map((item: any) => (
                         <div key={item._id} className="text-white bg-gray-800 p-4 rounded mt-4">
                           <p>Input: {item.input}</p>
@@ -241,15 +217,32 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
                           <p>Actual Output: {item.actualOutput}</p>
                         </div>
                       ))}
-                    </>
+                    </div>
                   )}
+                  {mismatchesData.length == 0 && status === "success" &&
+                    <div className="text-white bg-gray-800 p-4 rounded mt-4">
+                      All test cases passed
+                    </div>
+                  }
+                  <div className="p-4">
+                    <span className={
+                      status === 'success' ? 'dark-green-s' :
+                        status === 'Error! Please retry' ? 'dark-pink' :
+                          status === 'error' ? 'dark-pink' :
+                            status === 'Timelimit exceeded' ? 'dark-pink' :
+                              status === 'pending' ? 'brand-orange-s' :
+                                'status'
+                    }>
+                      {status}
+                    </span>
+                  </div>
                 </div>
               </div>
             </span>
           </div>
-        </ResizablePanel>
-      </ResizablePanelGroup>
-    </div>
+        </ResizablePanel >
+      </ResizablePanelGroup >
+    </div >
   );
 }
 
