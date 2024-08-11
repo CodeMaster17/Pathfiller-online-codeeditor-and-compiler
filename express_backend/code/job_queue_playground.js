@@ -20,7 +20,8 @@ jobQueuePlayground.process(NUM_WORKERS, async ({ data }) => {
         if (job.language === "cpp") {
             output = await executeCpp(job.filepath, data.inputs);
         } else if (job.language === "py") {
-            output = await executePy(job.filepath);
+            console.log("Inside python block")
+            output = await executePy(job.filepath, data.inputs);
         }
         job["completedAt"] = new Date();
         job["output"] = output;
