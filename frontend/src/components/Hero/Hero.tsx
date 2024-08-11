@@ -10,7 +10,7 @@ const Hero = () => {
       <p className="header-subtitle">Every challenge is an opportunity to showcase your coding process and rise above the rest.Your code is your craft; let every keystroke reflect your dedication to excellence.</p>
       <div className="header-buttons">
         {/* <Button className='bg-[#ffa825] text-black m-3 hover:bg-[#ff9800] text-lg'>Sign Up</Button> */}
-        <Button className='bg-[#ffa825] text-black m-3 hover:bg-[#ff9800] text-lg'><a href="/codingarena">Start Coding</a></Button>
+        <Button className='bg-[#ffa825] text-black m-3 hover:bg-[#ff9800] text-lg'><a href="/codingplayground">Start Coding</a></Button>
       </div>
       <GridPattern
         squares={[
@@ -28,9 +28,9 @@ const Hero = () => {
           [15, 10],
         ]}
         className={cn(
-            "[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
-          )}
+          "[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]",
+          "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
+        )}
       />
     </header>
   );

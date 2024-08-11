@@ -16,13 +16,21 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
+import axios from 'axios';
+import { PLAYGROUND_ROUTE } from '@/constants';
+import { TimeDifferenceDisplay } from '@/components/TimeDifferenceDisplay';
 
 const CodingPlayground = () => {
   const [userCode, setUserCode] = useState<string>('');
   const [inputValue, setInputValue] = useState<string>('');
+  const [jobId, setJobId] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("C++");
-
+  const [status, setStatus] = useState<string | null>("")
+  const [output, setOutput] = useState<string | null>(null);
+  const [startTime, setStartTime] = useState<string>("");
+  const [endTime, setEndTime] = useState<string>("");
+  const [executionStatus, setExecutionStatus] = useState<string>("");
   const handleCodeChange = (value: string) => {
     setUserCode(value);
   };
@@ -41,7 +49,64 @@ const CodingPlayground = () => {
     console.log("Selected Language:", selectedLanguage);
     console.log("User Code:", userCode);
     console.log("User Input:", inputValue);
-    setLoading(false);
+    // if (inputValue === "") {
+    //   alert("Please enter the input");
+    //   setLoading(false);
+    //   return;
+    // }
+
+    try {
+      const payload = {
+        language: selectedLanguage.toLowerCase() === "c++" ? "cpp" : "py",
+        code: userCode,
+        inputs: inputValue,
+      };
+      const { data } = await axios.post(`${PLAYGROUND_ROUTE}/run`, payload);
+      setJobId(data.jobId)
+      console.log(data)
+      const intervalId = setInterval(async () => {
+        const response = await fetch(`${PLAYGROUND_ROUTE}/status?id=${data.jobId}`);
+        const statusResult = await response.json();
+        const { success, job_res, error } = statusResult
+        console.log('Status result:', statusResult);
+        setStartTime(job_res.startedAt)
+        setEndTime(job_res.completedAt)
+        if (success) {
+          setStatus(job_res.status)
+          setExecutionStatus("Executed")
+          const { status: jobStatus, output: jobOutput } = job_res;
+          console.log('Job Output:', jobOutput);
+          setOutput(jobOutput)
+          if (jobStatus === "pending") {
+            setStatus("pending")
+            return;
+          }
+
+          setJobId(jobId)
+          clearInterval(intervalId)
+          console.log("Executed")
+        } else {
+          console.log("inside else", job_res)
+
+          setStatus("Error! Please retry")
+          console.error(error);
+          setOutput(error)
+        }
+
+      }, 1000)
+
+      setTimeout(() => {
+        console.log("Clearing the interval")
+        clearInterval(intervalId);
+        setStatus("Timelimit exceeded");
+      }, 10000);
+
+    } catch (error) {
+      console.error("Error:", error);
+      setOutput("An error occurred while running the code.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -79,6 +144,7 @@ const CodingPlayground = () => {
                     <div className="text-white items-center font-bold pt-2">
                       <span className="text-dark-yellow">&lt;/&gt;</span> Input
                     </div>
+
 
                     {/* submit-button */}
                     <div className="flex flex-row-reverse ml-auto gap-x-5">
@@ -121,11 +187,36 @@ const CodingPlayground = () => {
                 </ResizablePanel>
                 <ResizableHandle />
                 <ResizablePanel defaultSize={75}>
-                  <div className="flex gap-x-5 w-full rounded-lg ml-auto bg-dark-layer-1">
-                    <div className="text-white items-center font-bold py-2 pl-4">
-                      <span className="text-dark-yellow">&lt;/&gt;</span> Output
+                  <>
+                    <div className="flex gap-x-5 w-full rounded-lg ml-auto bg-dark-layer-1">
+                      <div className="text-white items-center font-bold py-2 pl-4">
+                        <span className="text-dark-yellow">&lt;/&gt;</span> Output
+                      </div>
                     </div>
-                  </div>
+                    <div className="p-4">
+                      <span className={
+                        status === 'success' ? 'dark-green-s' :
+                          status === 'Error! Please retry' ? 'dark-pink' :
+                            status === 'error' ? 'dark-pink' :
+                            status === 'Timelimit exceeded' ? 'dark-pink' :
+                              status === 'pending' ? 'brand-orange-s' :
+                                'status'
+                      }>
+                        {status}
+                      </span>
+                    </div>
+                    <div className='p-4'>
+                      <p className="text-white">
+                        {loading ? "Running..." : output}
+                      </p>
+                    </div>
+                    <div>
+                      <div className='p-4'>
+                        {executionStatus === "Executed" && !loading && startTime && endTime ? <TimeDifferenceDisplay startTime={startTime} endTime={endTime} /> : ""}
+                      </div>
+
+                    </div>
+                  </>
                 </ResizablePanel>
               </ResizablePanelGroup>
             </div>
