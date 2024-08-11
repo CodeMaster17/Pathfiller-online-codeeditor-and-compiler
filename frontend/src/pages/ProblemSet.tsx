@@ -25,7 +25,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const itemsPerPage = 3;
+const itemsPerPage = 10;
 
 const ProblemSet = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
