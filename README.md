@@ -21,8 +21,8 @@
 
 • Language support for C++\
 • Language support for python\
-• Pagination\
-• Searching the question\
+• Pagination support\
+• Search functionality for questions\
 • Code mirror - For code editor space\
 • Vscode theme from codemirror
 
