@@ -65,7 +65,7 @@
 
 ```
 PORT= <port_to_run_node_server>
-DATABASE_URL= <mongodb_connection_string>
+MONGODB_URL= <mongodb_connection_string>
 JWT= <JWT_secret>
 ```
 
