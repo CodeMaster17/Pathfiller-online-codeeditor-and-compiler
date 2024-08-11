@@ -36,16 +36,30 @@ const cases = {
     target: 15,
   },
 };
-const VerticalResizable = () => {
+
+interface JobId {
+  jobId: string;
+}
+
+interface Mismatch {
+  input: string;
+  expectedOutput: string;
+  actualOutput: string;
+  _id: string;
+}
+const VerticalResizable: React.FC<any> = ({ problem }) => {
   const [userCode, setUserCode] = useState<string>('');
   const [selectedLanguage, setSelectedLanguage] = useState<string>("C++");
   const [output, setOutput] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [status, setStatus] = useState<string | null>("")
   const [jobId, setJobId] = useState<string>("")
-  const [caseData, setCaseData] = useState(cases.case1);
-
-  
+  const [caseData, setCaseData] = useState<any>(cases.case1);
+  const [mismatchesData, setMismatchesData] = useState<Mismatch[]>([]);
+  const [selectedTab, setSelectedTab] = useState<string>("case1");
+  const [jobIdData, setJobIdData] = useState<JobId>({
+    jobId: ""
+  })
 
   const onChange = (value: string) => {
     setUserCode(value);
@@ -59,33 +73,52 @@ const VerticalResizable = () => {
     setLoading(true);
     setOutput(null);
     console.log(userCode, selectedLanguage);
-
+    console.log("problemId", problem.id);
+    console.log("status", status)
+    setCaseData({
+      nums: [1, 2, 3, 4],
+      target: 6,
+    });
+    console.log("selectedTab", selectedTab)
+    console.log("jobIdData", jobIdData)
     try {
       const payload = {
         language: selectedLanguage.toLowerCase() === "c++" ? "cpp" : "py",
         code: userCode,
+        problem_id: problem.id,
       };
+      console.log("payload", payload);
       const { data } = await axios.post(`${BACKEND_ROUTE_CODE}/code/run`, payload);
       console.log(data);
-      setOutput(data.jobId);
-
-      // polling to get the job result
+      setJobIdData(data)
       const intervalId = setInterval(async () => {
-        const { data: statusResult } = await axios.get(`${BACKEND_ROUTE_CODE}/code/status`, { params: { id: data.jobId } });
-        console.log(statusResult)
+        const response = await fetch(`${BACKEND_ROUTE_CODE}/code/status?id=${data.jobId}`);
+        console.log('Response status:', response.status);
+        const statusResult = await response.json();
+        console.log('Status result:', statusResult);
         const { success, job_res, error } = statusResult
-        console.log(statusResult);
-        // if the job is success --> displaying result
+
         if (success) {
           const { status: jobStatus, output: jobOutput } = job_res;
           setStatus(jobStatus)
           if (jobStatus === "pending") return;
           setOutput(jobOutput)
           setJobId(jobId)
-          // clearing the interval
+          console.log("output", output)
+          console.log("inside success", job_res)
+          setMismatchesData(job_res.mismatches)
+          console.log("job_res.mismatches", job_res.mismatches)
+          if (mismatchesData.length > 0) {
+            setSelectedTab("mismatches")
+          }
+          console.log("mismatched", mismatchesData)
           clearInterval(intervalId)
           console.log("Executed")
         } else {
+          console.log("inside else", job_res)
+          setMismatchesData(job_res.mismatches)
+          setSelectedTab("mismatches")
+
           setStatus("Error! Please retry")
           console.error(error);
           setOutput(error)
@@ -118,35 +151,34 @@ const VerticalResizable = () => {
         direction="vertical"
         className="min-h-[500px] w-full rounded-lg"
       >
-        <ResizablePanel defaultSize={25}>
+        <ResizablePanel defaultSize={50}>
           <div className="flex gap-x-5 w-full  rounded-lg ml-auto bg-dark-layer-1">
             <div className='text-white items-center font-bold pt-2 pl-4'><span className='text-dark-yellow'>&lt;/&gt;</span> Code</div>
-            
             {/* submit-button */}
             <div className="flex flex-row-reverse ml-auto gap-x-5 ">
-            <Button className='bg-green-600 text-base' onClick={handleSubmit} disabled={loading}>
-              {loading ? "Running..." : "Submit"}
-            </Button>
-            {/* language selector */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button className='rounded-[5px] border-2 border-slate-400 p-1 px-6 bg-opacity-[.15] bg-white text-white'>{selectedLanguage}</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-36">
-                <DropdownMenuCheckboxItem
-                  checked={selectedLanguage === "C++"}
-                  onCheckedChange={() => handleLanguageChange("C++")}
-                >
-                  C++
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                  checked={selectedLanguage === "Python"}
-                  onCheckedChange={() => handleLanguageChange("Python")}
-                >
-                  Python
-                </DropdownMenuCheckboxItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+              <Button className='bg-green-600 text-base' onClick={handleSubmit} disabled={loading}>
+                {loading ? "Running..." : "Submit"}
+              </Button>
+              {/* language selector */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className='rounded-[5px] border-2 border-slate-400 p-1 px-6 bg-opacity-[.15] bg-white text-white'>{selectedLanguage}</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-36">
+                  <DropdownMenuCheckboxItem
+                    checked={selectedLanguage === "C++"}
+                    onCheckedChange={() => handleLanguageChange("C++")}
+                  >
+                    C++
+                  </DropdownMenuCheckboxItem>
+                  <DropdownMenuCheckboxItem
+                    checked={selectedLanguage === "Python"}
+                    onCheckedChange={() => handleLanguageChange("Python")}
+                  >
+                    Python
+                  </DropdownMenuCheckboxItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
           {/* code-editor */}
@@ -155,34 +187,30 @@ const VerticalResizable = () => {
             theme={vscodeDark}
             extensions={[javascript()]}
             onChange={onChange}
+            height={'100%'}
+            placeholder={'Write your code here...'}
           />
         </ResizablePanel>
         <ResizableHandle />
-        <ResizablePanel defaultSize={75}>
+        <ResizablePanel defaultSize={50}>
           <div className="flex h-full p-6 w-full">
             <span className="font-semibold text-white">
-              {output ? (
-                <>
-                  <pre>{output}</pre>
-                  { }
-                  <p>{status}</p>
-                  <p>{jobId && `JobId is ${jobId}`}</p>
-                </>
-              ) : (
-                // "content"
-                <div>
-                  <div className='text-white font-bold text-lg pt-2 pl-4'>Test Cases</div>
-                  <div className="p-5">
+              <div>
+                <div className='text-white font-bold text-lg pt-2 pl-4'>Test Cases</div>
+                <div className="p-5">
+
+                  {mismatchesData.length < 0 ? (
                     <Tabs defaultValue="case1" className="w-[400px]">
                       <TabsList className="grid w-full grid-cols-3">
-                        <TabsTrigger value="case1" onClick={() => setCaseData(cases.case1)}>Case 1</TabsTrigger>
-                        <TabsTrigger value="case2" onClick={() => setCaseData(cases.case1)}>Case 2</TabsTrigger>
-                        <TabsTrigger value="case3" onClick={() => setCaseData(cases.case1)}>Case 3</TabsTrigger>
+                        <TabsTrigger value="case1" onClick={() => setSelectedTab("case1")}>Case 1</TabsTrigger>
+                        <TabsTrigger value="case2" onClick={() => setSelectedTab("case2")}>Case 2</TabsTrigger>
+                        <TabsTrigger value="case3" onClick={() => setSelectedTab("case3")}>Case 3</TabsTrigger>
                       </TabsList>
+
                       <TabsContent value="case1">
                         {caseData && (
                           <div className="text-white bg-gray-800 p-4 rounded mt-4">
-                            <p>nums = {caseData.nums.join(', ')}</p>
+                            <p>nums = 1{caseData.nums.join(', ')}</p>
                             <p>target = {caseData.target}</p>
                           </div>
                         )}
@@ -190,7 +218,7 @@ const VerticalResizable = () => {
                       <TabsContent value="case2">
                         {caseData && (
                           <div className="text-white bg-gray-800 p-4 rounded mt-4">
-                            <p>nums = {caseData.nums.join(', ')}</p>
+                            <p>nums = 2{caseData.nums.join(', ')}</p>
                             <p>target = {caseData.target}</p>
                           </div>
                         )}
@@ -198,17 +226,25 @@ const VerticalResizable = () => {
                       <TabsContent value="case3">
                         {caseData && (
                           <div className="text-white bg-gray-800 p-4 rounded mt-4">
-                            <p>nums = {caseData.nums.join(', ')}</p>
+                            <p>nums = 3{caseData.nums.join(', ')}</p>
                             <p>target = {caseData.target}</p>
                           </div>
                         )}
                       </TabsContent>
                     </Tabs>
+                  ) : (
+                    <>
+                      {mismatchesData.map((item: any) => (
+                        <div key={item._id} className="text-white bg-gray-800 p-4 rounded mt-4">
+                          <p>Input: {item.input}</p>
+                          <p>Expected Output: {item.expectedOutput}</p>
+                          <p>Actual Output: {item.actualOutput}</p>
+                        </div>
+                      ))}
+                    </>
+                  )}
                 </div>
               </div>
-                
-                
-              )}
             </span>
           </div>
         </ResizablePanel>

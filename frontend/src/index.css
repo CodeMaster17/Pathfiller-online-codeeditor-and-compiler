@@ -63,7 +63,24 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  .dark-green-s {
+    @apply bg-dark-green-s text-white px-4 py-2 rounded-md;
+  }
+
+  .dark-pink {
+    @apply bg-dark-pink text-white px-4 py-2 rounded-md;
+  }
+
+  .brand-orange-s {
+    @apply bg-brand-orange-s text-white px-4 py-2 rounded-md;
+  }
+
+  .status {
+    @apply text-white px-4 py-2 rounded-md;
   }
 }
