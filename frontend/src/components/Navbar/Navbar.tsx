@@ -11,7 +11,6 @@ const Navbar = () => {
         <li><a href="#discuss">Discuss</a></li>
         <li><a href="#documents">Documents</a></li>
       </ul>
-      <Button className='bg-[#ffa825] text-black m-3 hover:bg-[#ff9800] text-lg'>Sign Up</Button>
     </div>
   );
 }
