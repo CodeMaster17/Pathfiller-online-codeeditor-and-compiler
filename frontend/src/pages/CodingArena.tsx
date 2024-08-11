@@ -6,26 +6,31 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { PROBLEM_ROUTE } from "@/constants";
+import axios from "axios";
 
 const CodingArena = () => {
-  const problem = {
-    id: "123",
-    title: "Sample Problem",
-    difficulty: "Easy",
-    problemStatement: "<p>This is a sample problem statement.</p>",
-    examples: [
-      {
-        id: "1",
-        inputText: "Example input",
-        outputText: "Example output",
-        explanation: "This is an example explanation.",
-        img: "",
-      },
-    ],
-    constraints: "<li>Constraint 1</li><li>Constraint 2</li>",
-    likes: 100,
-    dislikes: 20,
-  };
+
+  const { id } = useParams<{ id: string }>();
+  const [problem, setProblem] = useState<any>({});
+
+  useEffect(() => {
+    const fetchProblem = async () => {
+
+      try {
+        const data = await axios.get(`${PROBLEM_ROUTE}/get/${id}`);
+        const result = data.data;
+        console.log(result);
+        setProblem(result);
+      } catch (error) {
+        console.log("Error fetching problem")
+      }
+    }
+    fetchProblem();
+  }, [])
+
 
   const _solved = false;
 
@@ -35,15 +40,15 @@ const CodingArena = () => {
         direction="horizontal"
         className="min-h-[600px] w-full rounded-lg"
       >
-        <ResizablePanel defaultSize={25}>
+        <ResizablePanel defaultSize={50}>
           <div className="flex h-full items-center justify-center p-1">
             <ProblemDescription problem={problem} _solved={_solved} />
           </div>
         </ResizablePanel>
         <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={75}>
+        <ResizablePanel defaultSize={50}>
           <div className="flex h-full items-center justify-center p-1">
-            <VerticalResizable />
+            <VerticalResizable problem={problem} />
           </div>
         </ResizablePanel>
       </ResizablePanelGroup>
