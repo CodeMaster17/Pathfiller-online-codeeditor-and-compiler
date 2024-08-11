@@ -44,10 +44,9 @@ exports.addProblemWithTagsAndTestCases = async (req, res) => {
 // get the problem by id
 exports.getProblemById = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.params
 
-
-        const problem = await Problem.findOne({ id: id }).populate('testCases').populate('tags');
+        const problem = await Problem.findOne({ _id: id }).populate('testCases').populate('tags');
 
         if (!problem) {
             return res.status(404).json({ message: 'Problem not found' });

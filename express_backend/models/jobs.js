@@ -28,6 +28,11 @@ const JobSchema = mongoose.Schema({
     output: {
         type: String,
     },
+    mismatches: [{
+        input: String,
+        expectedOutput: String,
+        actualOutput: String,
+    }],
 });
 
 module.exports = mongoose.model("job", JobSchema);

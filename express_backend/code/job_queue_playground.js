@@ -2,12 +2,11 @@ const Queue = require('bull');
 const jobs = require('../models/jobs');
 const { executeCpp } = require('./code_execution/execute_cpp');
 const { executePy } = require('./code_execution/executePy');
-const Problem = require('../models/problem_model');
 
-const jobQueue = new Queue('job-queue');
+const jobQueuePlayground = new Queue('job-queue-playground');
 const NUM_WORKERS = 5;
 
-jobQueue.process(NUM_WORKERS, async ({ data }) => {
+jobQueuePlayground.process(NUM_WORKERS, async ({ data }) => {
     const jobId = data.id;
     const job = await jobs.findById(jobId);
     if (job === undefined) {
@@ -37,12 +36,12 @@ jobQueue.process(NUM_WORKERS, async ({ data }) => {
     }
 })
 
-jobQueue.on("failed", (error) => {
+jobQueuePlayground.on("failed", (error) => {
     console.error(error.data.id, error.failedReason);
 });
 
 const addJobToQueueForPlayground = async ({ jobId, inputs, language, filepath }) => {
-    await jobQueue.add({
+    await jobQueuePlayground.add({
         id: jobId,
         inputs: inputs,
         language: language,

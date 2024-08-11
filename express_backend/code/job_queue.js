@@ -15,6 +15,7 @@ jobQueue.process(NUM_WORKERS, async ({ data }) => {
     }
     console.log("data", data)
     try {
+        const mismatches = []
         console.log("Inside try block of jobQueue")
         const problem = await Problem.findOne({ id: data.problemId }).populate('testCases');
 
@@ -29,6 +30,8 @@ jobQueue.process(NUM_WORKERS, async ({ data }) => {
         job["startedAt"] = new Date();
         if (job.language === "cpp") {
             for (const testCase of problem.testCases) {
+                "Inside loop"
+
                 output = await executeCpp(job.filepath, testCase.input);
                 console.log("output", output)
 
@@ -39,19 +42,23 @@ jobQueue.process(NUM_WORKERS, async ({ data }) => {
                         actualOutput: output
                     });
                 }
+
             }
         } else if (job.language === "py") {
             output = await executePy(job.filepath);
         }
         job["completedAt"] = new Date();
         job["output"] = output;
-        job["status"] = "success";
+        job["status"] = mismatches.length ? "error" : "success";
+        job["mismatches"] = mismatches;
         await job.save();
         return true;
     } catch (err) {
         job["completedAt"] = new Date();
         job["output"] = JSON.stringify(err);
         job["status"] = "error";
+        job.status = "error";
+        job.mismatches = mismatches;
         await job.save();
         throw Error(JSON.stringify(err));
     }
