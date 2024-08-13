@@ -1,8 +1,6 @@
 # Team Pathfillers - Online Coding Platform
 
-
-#### Frontend Deployement Link: https://pathfillers.vercel.app/
-#### References Link : https://desert-engineer-f93.notion.site/CodeBrewers-Hackathon-f99f787cac0848368fea3e100e3c9072
+### Deployed link coming soon!!!
 
 <img width="1377" alt="image" src="https://github.com/user-attachments/assets/611bce92-04ae-4423-82ed-b006d16f4371">
 
