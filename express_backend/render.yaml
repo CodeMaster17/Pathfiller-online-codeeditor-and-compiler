@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: code-execution-service
+    plan: free
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
