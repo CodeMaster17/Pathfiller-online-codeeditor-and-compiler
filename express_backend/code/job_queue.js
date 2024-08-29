@@ -5,10 +5,14 @@ const { executePy } = require('./code_execution/executePy');
 const Problem = require('../models/problem_model');
 
 const Redis = require('ioredis');
-const redisUrl = process.env.UPSTASH_REDIS_URL;
-const redisToken = process.env.UPSTASH_REDIS_TOKEN;
 
-const redisClient = new Redis("rediss://default:Aex2AAIjcDE1ZDI1MTQ0YTRiYTY0NWRiODUyYzk2NmE5ZGI2NTg5NXAxMA@prompt-alien-60534.upstash.io:6379", {
+// FIXME: Remove this duplicate
+// const redisClient = new Redis("rediss://default:Aex2AAIjcDE1ZDI1MTQ0YTRiYTY0NWRiODUyYzk2NmE5ZGI2NTg5NXAxMA@prompt-alien-60534.upstash.io:6379", {
+//     maxRetriesPerRequest: null
+// })
+
+
+const redisClient = new Redis("rediss://default:AdovAAIjcDE1MzU4YmQ0OWZmMTk0NWRkOGI4NjgwZWZiZmNiZmI3OXAxMA@actual-cowbird-55855.upstash.io:6379", {
     maxRetriesPerRequest: null
 })
 
