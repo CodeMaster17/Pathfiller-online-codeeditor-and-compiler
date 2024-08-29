@@ -14,11 +14,12 @@ exports.run_code_playground = async (req, res) => {
         const filepath = await generateFile(language, code);
         job = await new jobs({ language, filepath }).save();
         const jobId = job["_id"];
+        console.log("job", job)
         await addJobToQueueForPlayground({ jobId, inputs: inputs });
         res.status(201).json({ jobId });
 
     } catch (error) {
-        return res.status(500).json({ success: false, err: JSON.stringify(err) })
+        return res.status(500).json({ success: false, err: JSON.stringify(error) })
     }
 }
 
