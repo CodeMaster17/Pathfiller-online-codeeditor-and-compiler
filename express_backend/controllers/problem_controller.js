@@ -53,7 +53,6 @@ exports.getProblemById = async (req, res) => {
         }
 
         res.status(200).json(problem);
-        console.log('Problem found:', problem);
     } catch (err) {
         console.error('Error getting problem by id:', err);
         res.status(500).json({ message: 'Server error' });

@@ -1,40 +1,50 @@
-const Queue = require('bull');
+const { Queue, Worker, QueueScheduler } = require('bullmq');
 const jobs = require('../models/jobs');
 const { executeCpp } = require('./code_execution/execute_cpp');
 const { executePy } = require('./code_execution/executePy');
 const Problem = require('../models/problem_model');
 
-const jobQueue = new Queue('job-queue');
-const NUM_WORKERS = 5;
+const Redis = require('ioredis');
+const redisUrl = process.env.UPSTASH_REDIS_URL;
+const redisToken = process.env.UPSTASH_REDIS_TOKEN;
 
-jobQueue.process(NUM_WORKERS, async ({ data }) => {
-    const jobId = data.id;
-    const job = await jobs.findById(jobId);
-    if (job === undefined) {
-        throw Error(`cannot find Job with id ${jobId}`);
+const redisClient = new Redis("rediss://default:Aex2AAIjcDE1ZDI1MTQ0YTRiYTY0NWRiODUyYzk2NmE5ZGI2NTg5NXAxMA@prompt-alien-60534.upstash.io:6379", {
+    maxRetriesPerRequest: null
+})
+
+// Create a new BullMQ queue
+const jobQueue = new Queue('job-queue', {
+    connection: redisClient
+});
+
+
+// Create a worker to process jobs
+const worker = new Worker('job-queue', async job => {
+    const jobId = job.data.id;
+    console.log(jobId)
+    const jobDoc = await jobs.findById(jobId);
+    if (!jobDoc) {
+        throw new Error(`Cannot find Job with id ${jobId}`);
     }
-    console.log("data", data)
+
+    const problemId = job.data.problemId; // Use job.data to access problemId
+
+    const problem = await Problem.findOne({ id: problemId }).populate('testCases');
+
+    if (!problem) {
+        throw Error(`Cannot find Problem with id ${problemId}`);
+    }
+
+    console.log("Processing job:", job.data);
+
+    const mismatches = [];
     try {
-        const mismatches = []
-        console.log("Inside try block of jobQueue")
-        const problem = await Problem.findOne({ id: data.problemId }).populate('testCases');
-
-        console.log("problem", problem)
-        if (!problem) {
-            console.log("Inside not of problem", data.problemId)
-            throw Error(`Cannot find Problem with id ${data.problemId}`);
-        }
-        console.log("problem", problem)
-
         let output;
-        job["startedAt"] = new Date();
-        if (job.language === "cpp") {
+        jobDoc.startedAt = new Date();
+
+        if (jobDoc.language === "cpp") {
             for (const testCase of problem.testCases) {
-                "Inside loop"
-
-                output = await executeCpp(job.filepath, testCase.input);
-                console.log("output", output)
-
+                output = await executeCpp(jobDoc.filepath, testCase.input);
                 if (output.trim() !== testCase.output.trim()) {
                     mismatches.push({
                         input: testCase.input,
@@ -42,34 +52,39 @@ jobQueue.process(NUM_WORKERS, async ({ data }) => {
                         actualOutput: output
                     });
                 }
-
             }
-        } else if (job.language === "py") {
-            output = await executePy(job.filepath);
+        } else if (jobDoc.language === "py") {
+            output = await executePy(jobDoc.filepath);
         }
-        job["completedAt"] = new Date();
-        job["output"] = output;
-        job["status"] = mismatches.length ? "error" : "success";
-        job["mismatches"] = mismatches;
-        await job.save();
+
+        jobDoc.completedAt = new Date();
+        jobDoc.output = output;
+        jobDoc.status = mismatches.length ? "error" : "success";
+        jobDoc.mismatches = mismatches;
+
+        await jobDoc.save();
         return true;
     } catch (err) {
-        job["completedAt"] = new Date();
-        job["output"] = JSON.stringify(err);
-        job["status"] = "error";
-        job.status = "error";
-        job.mismatches = mismatches;
-        await job.save();
-        throw Error(JSON.stringify(err));
-    }
-})
+        jobDoc.completedAt = new Date();
+        jobDoc.output = JSON.stringify(err);
+        jobDoc.status = "error";
+        jobDoc.mismatches = mismatches;
 
-jobQueue.on("failed", (error) => {
-    console.error(error.data.id, error.failedReason);
+        await jobDoc.save();
+        throw err;
+    }
+}, {
+    connection: redisClient
 });
 
+
+worker.on('failed', (job, err) => {
+    console.error(`Job ${job.id} failed with error:`, err);
+});
+
+// Add jobs to the queue
 const addJobToQueue = async ({ jobId, problemId, language, filepath }) => {
-    await jobQueue.add({
+    await jobQueue.add('job', {
         id: jobId,
         problemId: problemId,
         language: language,

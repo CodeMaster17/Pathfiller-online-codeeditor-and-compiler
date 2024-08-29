@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const app = express()
@@ -8,7 +9,7 @@ const codeRoutes = require("./routes/code_route")
 const playgroundRoutes = require("./routes/playground_route")
 const problemRoutes = require("./routes/problem_route")
 
-require('dotenv').config()
+
 app.use(express())
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));

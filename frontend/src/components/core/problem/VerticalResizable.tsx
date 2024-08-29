@@ -17,9 +17,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import { Settings } from 'lucide-react';
 import { BACKEND_ROUTE_CODE } from '@/constants';
-// import { DropdownMenuArrow, DropdownMenuGroup } from '@radix-ui/react-dropdown-menu';
 
 
 interface JobId {
@@ -115,7 +113,7 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
           console.error(error);
           setOutput(error)
         }
-      }, 1000)
+      }, 10000)
 
       setTimeout(() => {
         console.log("Clearing the interval")
