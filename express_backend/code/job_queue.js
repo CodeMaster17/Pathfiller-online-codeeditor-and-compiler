@@ -4,17 +4,9 @@ const { executeCpp } = require('./code_execution/execute_cpp');
 const { executePy } = require('./code_execution/executePy');
 const Problem = require('../models/problem_model');
 
-const Redis = require('ioredis');
+const getRedisClient = require('../config/get_redis_client');
 
-// FIXME: Remove this duplicate
-// const redisClient = new Redis("rediss://default:Aex2AAIjcDE1ZDI1MTQ0YTRiYTY0NWRiODUyYzk2NmE5ZGI2NTg5NXAxMA@prompt-alien-60534.upstash.io:6379", {
-//     maxRetriesPerRequest: null
-// })
-
-
-const redisClient = new Redis("rediss://default:AdovAAIjcDE1MzU4YmQ0OWZmMTk0NWRkOGI4NjgwZWZiZmNiZmI3OXAxMA@actual-cowbird-55855.upstash.io:6379", {
-    maxRetriesPerRequest: null
-})
+const redisClient = getRedisClient();
 
 // Create a new BullMQ queue
 const jobQueue = new Queue('job-queue', {
@@ -30,8 +22,7 @@ const worker = new Worker('job-queue', async job => {
     if (!jobDoc) {
         throw new Error(`Cannot find Job with id ${jobId}`);
     }
-
-    const problemId = job.data.problemId; // Use job.data to access problemId
+    const problemId = job.data.problemId;
 
     const problem = await Problem.findOne({ id: problemId }).populate('testCases');
 
@@ -78,7 +69,8 @@ const worker = new Worker('job-queue', async job => {
         throw err;
     }
 }, {
-    connection: redisClient
+    connection: redisClient,
+    concurrency: 5
 });
 
 
@@ -86,14 +78,26 @@ worker.on('failed', (job, err) => {
     console.error(`Job ${job.id} failed with error:`, err);
 });
 
+process.on('SIGINT', async () => {
+    console.log('Shutting down gracefully...');
+    await worker.close();
+    await redisClient.quit();
+    process.exit(0);
+});
+
 // Add jobs to the queue
 const addJobToQueue = async ({ jobId, problemId, language, filepath }) => {
-    await jobQueue.add('job', {
-        id: jobId,
-        problemId: problemId,
-        language: language,
-        filepath: filepath
-    });
+    try {
+        await jobQueue.add('job', {
+            id: jobId,
+            problemId: problemId,
+            language: language,
+            filepath: filepath
+        });
+        console.log(`Added job ${jobId} to the queue.`);
+    } catch (err) {
+        console.error(`Error adding job ${jobId} to queue:`, err);
+    }
 }
 
 module.exports = {
