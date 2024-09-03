@@ -84,7 +84,7 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
           if (jobStatus === "pending") {
             setStatus("pending")
             return;
-          };
+          }
           setOutput(jobOutput)
           setJobId(jobId)
           // console logs for reference
