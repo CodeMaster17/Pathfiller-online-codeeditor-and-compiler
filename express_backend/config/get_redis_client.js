@@ -4,11 +4,13 @@ let redisClient;
 
 const getRedisClient = () => {
     if (!redisClient) {
-        if (!process.env.REDIS_URL) {
-            throw new Error('REDIS_URL environment variable is not set');
-        }
+        // if (!process.env.REDIS_URL) {
+        //     throw new Error('REDIS_URL environment variable is not set');
+        // }
 
-        redisClient = new Redis(process.env.REDIS_URL, {
+        const redisUrl = "redis://127.0.0.1:6379";
+
+        redisClient = new Redis(redisUrl, {
             maxRetriesPerRequest: null,
             enableReadyCheck: false,
             reconnectOnError: (err) => {
