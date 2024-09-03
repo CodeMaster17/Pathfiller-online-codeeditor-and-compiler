@@ -68,9 +68,12 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
         problem_id: problem.id,
       };
       console.log("payload", payload);
+
       const { data } = await axios.post(`${BACKEND_ROUTE_CODE}/code/run`, payload);
       console.log(data);
       setJobIdData(data)
+
+
       const intervalId = setInterval(async () => {
         const response = await fetch(`${BACKEND_ROUTE_CODE}/code/status?id=${data.jobId}`);
         console.log('Response status:', response.status);
