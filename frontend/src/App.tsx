@@ -3,7 +3,6 @@ import CodingArena from './pages/CodingArena';
 import CodingPlayground from './pages/CodingPlayground';
 import CodingBattleGround from './pages/CodingBattleGround';
 import Home from './pages/Home';
-import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import ProblemSet from './pages/ProblemSet';
 import NotFound from './pages/NotFound';
@@ -14,7 +13,6 @@ function App() {
     <>
       <div className='min-h-screen w-full'>
         <Router>
-          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/codingarena/:id" element={<CodingArena />} />

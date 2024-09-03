@@ -113,7 +113,7 @@ const CodingPlayground = () => {
         <ResizablePanel defaultSize={70}>
           <div className="flex flex-col h-full gap-x-5 w-full rounded-lg ml-auto bg-dark-layer-1 px-3">
             <div className="text-white items-center font-bold py-2">
-              <span className="text-dark-yellow">&lt;/&gt;</span> Code
+              <span className="text-dark-yellow">&lt;/&gt;</span> CodePlayground
             </div>
             <div className="flex h-full w-full items-center justify-center p-1 bg-dark-layer-3">
               <ReactCodeMirror
