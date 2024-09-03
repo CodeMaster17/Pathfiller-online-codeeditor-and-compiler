@@ -108,7 +108,7 @@ const CodingPlayground = () => {
     <div className="">
       <ResizablePanelGroup
         direction="horizontal"
-        className="min-h-[calc(100vh-8px)] max-w-full rounded-lg border text-black my-1"
+        className="min-h-[calc(100vh-8px)] max-w-full rounded-lg  text-black my-1"
       >
         <ResizablePanel defaultSize={70}>
           <div className="flex flex-col h-full gap-x-5 w-full rounded-lg ml-auto bg-dark-layer-1 px-3">
@@ -129,7 +129,7 @@ const CodingPlayground = () => {
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={30}>
           <div className="h-full">
-            <div className="h-full w-full border rounded-l-md bg-dark-layer-2 overflow-hidden">
+            <div className="h-full w-full  rounded-l-md bg-dark-layer-2 overflow-hidden">
               <ResizablePanelGroup
                 direction="vertical"
                 className="min-h-[500px] w-full rounded-lg"
@@ -174,7 +174,7 @@ const CodingPlayground = () => {
                     </div>
                   </div>
                   <textarea
-                    className="w-full h-40 p-2 mt-2 text-white bg-dark-layer-2 border border-slate-600 rounded"
+                    className="w-full h-40 p-2 mt-2 text-white bg-dark-layer-2  border-slate-600 rounded"
                     value={inputValue}
                     onChange={handleInputChange}
                     placeholder="Enter your input here..."
@@ -193,9 +193,9 @@ const CodingPlayground = () => {
                         status === 'success' ? 'dark-green-s' :
                           status === 'Error! Please retry' ? 'dark-pink' :
                             status === 'error' ? 'dark-pink' :
-                            status === 'Timelimit exceeded' ? 'dark-pink' :
-                              status === 'pending' ? 'brand-orange-s' :
-                                'status'
+                              status === 'Timelimit exceeded' ? 'dark-pink' :
+                                status === 'pending' ? 'brand-orange-s' :
+                                  'status'
                       }>
                         {status}
                       </span>
