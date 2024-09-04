@@ -18,15 +18,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { BACKEND_ROUTE_CODE } from '@/constants';
-import { Mismatch } from '@/types/types';
+import { IMismatch, IProblemType } from '@/types/types';
+import { getJobStatusById } from '@/api/codeApi';
 
 
 interface JobId {
   jobId: string;
 }
 
+interface VerticalResizableProps {
+  problem: IProblemType;
+}
 
-const VerticalResizable: React.FC<any> = ({ problem }) => {
+
+const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
   const [userCode, setUserCode] = useState<string>('');
   const [selectedLanguage, setSelectedLanguage] = useState<string>("C++");
   const [output, setOutput] = useState<string | null>(null);
@@ -34,7 +39,7 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
   const [status, setStatus] = useState<string | null>("")
   const [jobId, setJobId] = useState<string>("")
 
-  const [mismatchesData, setMismatchesData] = useState<Mismatch[]>([]);
+  const [mismatchesData, setMismatchesData] = useState<IMismatch[]>([]);
   const [selectedTab, setSelectedTab] = useState<string>("case1");
   const [executionStatus, setExecutionStatus] = useState<string>("");
   const [jobIdData, setJobIdData] = useState<JobId>({
@@ -71,10 +76,8 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
 
 
       const intervalId = setInterval(async () => {
-        const response = await fetch(`${BACKEND_ROUTE_CODE}/code/status?id=${data.jobId}`);
-        console.log('Response status:', response.status);
+        const response = await getJobStatusById(data.jobId);
         const statusResult = await response.json();
-        console.log('Status result:', statusResult);
         const { success, job_res, error } = statusResult
 
         if (success) {
@@ -192,7 +195,7 @@ const VerticalResizable: React.FC<any> = ({ problem }) => {
                     ""
                   ) : (
                     <div className='flex gap-8'>
-                      {mismatchesData.map((item: any) => (
+                      {mismatchesData.map((item: IMismatch) => (
                         <div key={item._id} className="text-white bg-gray-800 p-4 rounded mt-4">
                           <p>Input: {item.input}</p>
                           <p>Expected Output: {item.expectedOutput}</p>

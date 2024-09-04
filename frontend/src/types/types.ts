@@ -38,7 +38,7 @@ export interface IProblemType {
   dislikes: number;
 }
 
-export interface Mismatch {
+export interface IMismatch {
   input: string;
   expectedOutput: string;
   actualOutput: string;
