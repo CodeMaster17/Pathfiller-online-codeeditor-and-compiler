@@ -1,3 +1,4 @@
+import { IProblem } from "@/types/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -39,9 +40,29 @@ export function getTimeDifference(
   };
 }
 
-// Example usage:
-const startTime = "2024-08-11T04:33:27.652Z";
-const endTime = "2024-08-11T05:45:30.123Z";
-const timeDiff = getTimeDifference(startTime, endTime);
+// get total pages for problems page
+export const getTotalPages = (problemLength: number, itemPerPage: number) => {
+  return Math.ceil(problemLength / itemPerPage);
+};
 
-console.log(timeDiff);
+// filter problems based on search query
+export const getProblemsBySearchQuery = (
+  problems: IProblem[],
+  searchQuery: string
+) => {
+  return problems.filter((problem) =>
+    problem.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+};
+
+// get list of current items in problem list
+export const getCurrentProblems = (
+  filteredProblems: IProblem[],
+  currentPage: number,
+  itemsPerPage: number
+) => {
+  return filteredProblems.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+};

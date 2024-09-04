@@ -22,6 +22,8 @@ import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar/Navbar";
 import { PROBLEM_ROUTE } from "@/constants";
 import { useNavigate } from "react-router-dom";
+import { IProblem, ITag } from "@/types/types";
+import { getCurrentProblems, getProblemsBySearchQuery, getTotalPages } from "@/lib/utils";
 
 
 
@@ -30,7 +32,7 @@ const itemsPerPage = 10;
 const ProblemSet = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [problems, setProblems] = useState<any[]>([]);
+  const [problems, setProblems] = useState<IProblem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [totalProblems, setTotalProblems] = useState<number>(0);
@@ -49,7 +51,7 @@ const ProblemSet = () => {
         }
         const data = await response.json();
         setProblems(data);
-        setTotalProblems(data.length); // Store the total number of problems
+        setTotalProblems(data.length);
         setLoading(false);
       } catch (err) {
         if (err instanceof Error) {
@@ -64,16 +66,15 @@ const ProblemSet = () => {
     fetchProblems();
   }, []);
 
-  const filteredProblems = problems.filter((problem) =>
-    problem.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // getting problems based on search
+  const filteredProblems: IProblem[] = getProblemsBySearchQuery(problems, searchQuery);
 
-  const totalPages = Math.ceil(filteredProblems.length / itemsPerPage);
 
-  const currentItems = filteredProblems.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  // getting total pages for problems list
+  const totalPages: number = getTotalPages(filteredProblems.length, itemsPerPage)
+
+  // getting list of current items in table
+  const currentItems: IProblem[] = getCurrentProblems(filteredProblems, currentPage, itemsPerPage)
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -128,10 +129,9 @@ const ProblemSet = () => {
                       {problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}
                     </TableCell>
                     <TableCell className="text-right">
-                      {problem.tags.map((tag: any, index: number) => (
+                      {problem.tags.map((tag: ITag, index: number) => (
                         <span key={index} className="tag inline-block px-1 mr-1 mb-1 bg-gray-300 border border-gray-400 rounded-full text-dark-layer-1">
                           {tag.name}
-                          {/* {index < problem.tags.length - 1 && ", "} */}
                         </span>
                       ))}
                     </TableCell>

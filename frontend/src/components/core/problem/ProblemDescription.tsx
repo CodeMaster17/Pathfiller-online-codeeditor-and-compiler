@@ -1,39 +1,25 @@
+import { IProblemType } from "@/types/types";
 import { Book, BookMarked, ListIcon, Loader, ShuffleIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AiFillLike, AiFillDislike, AiOutlineLoading3Quarters, AiOutlineSolution } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-type ProblemDescriptionProps = {
-	problem: {
-		id: string;
-		title: string;
-		description: string;
-		difficulty: string;
-		problemStatement: string;
-		examples: Array<{
-			id: string;
-			inputText: string;
-			outputText: string;
-			explanation?: string;
-			img?: string;
-		}>;
-		constraints: string;
-		likes: number;
-		dislikes: number;
-	};
+interface ProblemDescriptionProps {
+	problem: IProblemType;
 	_solved: boolean;
-};
+}
 
-const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
+const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solved }) => {
 	const [liked, setLiked] = useState(false);
 	const [disliked, setDisliked] = useState(false);
 	const [updating, setUpdating] = useState(false);
-
+	const solved = _solved;
+	console.log("Problem Description", solved);
 
 	useEffect(() => {
 		setLiked(false);
 		setDisliked(false);
-	});
+	}, []);
 
 	const difficultyColor =
 		problem.difficulty === "Easy"
