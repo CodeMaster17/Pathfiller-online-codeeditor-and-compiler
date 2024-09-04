@@ -17,7 +17,7 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
 import { TimeDifferenceDisplay } from '@/components/TimeDifferenceDisplay';
-import { getJobIdByPayload, getJobStatusByIdForPlayground } from '@/api/codePlaygroundApi';
+import { getJobIdByPayloadForPlayground, getJobStatusByIdForPlayground } from '@/api/codePlaygroundApi';
 
 
 const CodingPlayground = () => {
@@ -56,7 +56,7 @@ const CodingPlayground = () => {
         code: userCode,
         inputs: inputValue,
       };
-      const data = await getJobIdByPayload(payload);
+      const data = await getJobIdByPayloadForPlayground(payload);
       setJobId(data.jobId);
       const intervalId = setInterval(async () => {
         const response = await getJobStatusByIdForPlayground(jobId);

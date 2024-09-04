@@ -1,4 +1,5 @@
 import { PLAYGROUND_ROUTE } from "@/constants";
+import { payloadTypePlayground } from "@/types/types";
 
 export const getJobStatusByIdForPlayground = async (jobId: string) => {
   const response = await fetch(`${PLAYGROUND_ROUTE}/status?id=${jobId}`);
@@ -9,13 +10,9 @@ export const getJobStatusByIdForPlayground = async (jobId: string) => {
   return response;
 };
 
-interface payloadInterface {
-  language: string;
-  code: string;
-  inputs: string;
-}
-
-export const getJobIdByPayload = async (payload: payloadInterface) => {
+export const getJobIdByPayloadForPlayground = async (
+  payload: payloadTypePlayground
+) => {
   const response = await fetch(`${PLAYGROUND_ROUTE}/run`, {
     method: "POST",
     headers: {

@@ -44,3 +44,15 @@ export interface IMismatch {
   actualOutput: string;
   _id: string;
 }
+
+export interface payloadTypePlayground {
+  language: string;
+  code: string;
+  inputs: string;
+}
+
+export interface payloadTypeArena {
+  language: string;
+  code: string;
+  problem_id: string;
+}

@@ -2,8 +2,6 @@ import ReactCodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { useState } from 'react';
-import axios from 'axios';
-
 import {
   ResizableHandle,
   ResizablePanel,
@@ -17,9 +15,8 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { BACKEND_ROUTE_CODE } from '@/constants';
 import { IMismatch, IProblemType } from '@/types/types';
-import { getJobStatusById } from '@/api/codeArenaApi';
+import { getJobIdByPayloadForArena, getJobStatusById } from '@/api/codeArenaApi';
 
 
 interface JobId {
@@ -68,13 +65,10 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
         code: userCode,
         problem_id: problem.id,
       };
-      console.log("payload", payload);
-
-      const { data } = await axios.post(`${BACKEND_ROUTE_CODE}/code/run`, payload);
-      console.log(data);
+      const data = await getJobIdByPayloadForArena(payload);
       setJobIdData(data)
 
-
+      // setting the status of the execution
       const intervalId = setInterval(async () => {
         const response = await getJobStatusById(data.jobId);
         const statusResult = await response.json();
