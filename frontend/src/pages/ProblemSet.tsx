@@ -20,11 +20,11 @@ import {
 
 import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar/Navbar";
-import { PROBLEM_ROUTE } from "@/constants";
 import { useNavigate } from "react-router-dom";
 import { IProblem, ITag } from "@/types/types";
 import { getCurrentProblems, getProblemsBySearchQuery, getTotalPages } from "@/lib/utils";
 import { EASY_DIFFICULTY, MEDIUM_DIFFICULTY } from "@/constants/problemConstants";
+import { getAllProblems } from "@/api/problemApi";
 
 
 
@@ -46,11 +46,7 @@ const ProblemSet = () => {
   useEffect(() => {
     const fetchProblems = async () => {
       try {
-        const response = await fetch(`${PROBLEM_ROUTE}/all`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch problems");
-        }
-        const data = await response.json();
+        const data: IProblem[] = await getAllProblems();
         setProblems(data);
         setTotalProblems(data.length);
         setLoading(false);
