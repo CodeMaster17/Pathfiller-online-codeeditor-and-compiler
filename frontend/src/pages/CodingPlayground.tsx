@@ -47,6 +47,7 @@ const CodingPlayground = () => {
   const handleSubmit = useCallback(async () => {
     setLoading(true);
 
+
     try {
       const payload = {
         language: selectedLanguage.toLowerCase() === "c++" ? "cpp" : "py",
@@ -86,13 +87,12 @@ const CodingPlayground = () => {
 
       setTimeout(() => {
         clearInterval(intervalId);
+        setLoading(false);
         setStatus("Timelimit exceeded");
       }, 10000);
 
     } catch (error) {
       setOutput("An error occurred while running the code.");
-    } finally {
-      setLoading(false);
     }
   }, [selectedLanguage, userCode, inputValue, jobId]);
 
