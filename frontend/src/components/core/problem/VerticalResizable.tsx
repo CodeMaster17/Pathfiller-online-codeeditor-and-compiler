@@ -18,18 +18,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { BACKEND_ROUTE_CODE } from '@/constants';
+import { Mismatch } from '@/types/types';
 
 
 interface JobId {
   jobId: string;
 }
 
-interface Mismatch {
-  input: string;
-  expectedOutput: string;
-  actualOutput: string;
-  _id: string;
-}
+
 const VerticalResizable: React.FC<any> = ({ problem }) => {
   const [userCode, setUserCode] = useState<string>('');
   const [selectedLanguage, setSelectedLanguage] = useState<string>("C++");

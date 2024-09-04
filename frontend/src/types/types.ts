@@ -37,3 +37,10 @@ export interface IProblemType {
   likes: number;
   dislikes: number;
 }
+
+export interface Mismatch {
+  input: string;
+  expectedOutput: string;
+  actualOutput: string;
+  _id: string;
+}
