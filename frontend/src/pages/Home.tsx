@@ -1,5 +1,5 @@
 import Footer from '@/components/Footer/Footer'
-import { AnimatedListDemo } from '@/components/Leaderboard/Leaderboard'
+import { LeaderboardDemo } from '@/components/Leaderboard/Leaderboard'
 import Navbar from '@/components/Navbar/Navbar'
 import CodeBlocks from '@/components/CodeBlocks/CodeBlocks'
 import Features from '@/components/Features/Features'
@@ -11,7 +11,7 @@ const Home = () => {
       <Navbar />
       <HeroArea />
       <Features />
-      <AnimatedListDemo />
+      <LeaderboardDemo />
       <CodeBlocks />
       <Footer />
     </div>

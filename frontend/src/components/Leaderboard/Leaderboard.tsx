@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { AnimatedList } from "@/components/magicui/animated-list";
-import GridPattern from "../magicui/grid-pattern";
+import GridPatternSquares from "../ui/GridPattern";
 
 interface Item {
   name: string;
@@ -80,7 +80,7 @@ const Notification = ({ name, description, icon, color, time }: Item) => {
   );
 };
 
-export function AnimatedListDemo({
+export function LeaderboardDemo({
   className,
 }: {
   className?: string;
@@ -94,10 +94,20 @@ export function AnimatedListDemo({
     >
       <div className="w-full md:w-1/2 flex flex-col justify-center pl-16">
         <h2 className="text-white text-3xl font-bold mb-4">
-          On our leaderboard, you'll find the elite coders who consistently rise to the top in every contest.
+          <span className="text-dark-yellow">
+            Leaderboard {" "}
+          </span>
         </h2>
         <p className="text-gray-300 text-xl pt-4">
-          These fast coders are the epitome of precision and speed, turning challenges into opportunities to showcase their expertise. With quick thinking and flawless execution, they set the standard for excellence, proving that mastery isn't just about solving problems—it's about doing so with efficiency and finesse. Every contest is a testament to their dedication, and their presence on the leaderboard is a mark of their relentless pursuit of coding perfection.
+          This is where you'll find the
+          <span className="text-dark-yellow">
+            {" "}elite coders, {" "}
+          </span>
+
+          who consistently rise to the top in every contest.
+          <br />
+          <br />
+          These fast coders showcase precision and speed, solving challenges with efficiency and finesse. Their leaderboard presence reflects their relentless pursuit of coding perfection.
         </p>
       </div>
       <div className="w-full md:w-1/2 mt-6 md:mt-0">
@@ -107,26 +117,7 @@ export function AnimatedListDemo({
           ))}
         </AnimatedList>
       </div>
-      <GridPattern
-        squares={[
-          [4, 4],
-          [5, 1],
-          [8, 2],
-          [5, 3],
-          [5, 5],
-          [10, 10],
-          [12, 15],
-          [15, 10],
-          [10, 15],
-          [15, 10],
-          [10, 15],
-          [15, 10],
-        ]}
-        className={cn(
-            "[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
-          )}
-      />
+      <GridPatternSquares />
     </div>
   );
 }
