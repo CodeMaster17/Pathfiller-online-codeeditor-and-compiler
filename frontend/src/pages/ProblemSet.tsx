@@ -24,6 +24,7 @@ import { PROBLEM_ROUTE } from "@/constants";
 import { useNavigate } from "react-router-dom";
 import { IProblem, ITag } from "@/types/types";
 import { getCurrentProblems, getProblemsBySearchQuery, getTotalPages } from "@/lib/utils";
+import { EASY_DIFFICULTY, MEDIUM_DIFFICULTY } from "@/constants/problemConstants";
 
 
 
@@ -97,7 +98,7 @@ const ProblemSet = () => {
         <div className="mt-2 relative">
           {loading ? (
             <div className="absolute flex items-center justify-center text-white inset-0 h-8 text-bold">
-              <div className="loader">Loading...</div> {/* Replace with your preferred loader */}
+              <div className="loader">Loading...</div>
               <img src="" alt="" />
             </div>
           ) : (
@@ -119,9 +120,9 @@ const ProblemSet = () => {
                     <TableCell className="font-medium">{problem.title}</TableCell>
                     <TableCell
                       className={
-                        problem.difficulty === "easy"
+                        problem.difficulty === EASY_DIFFICULTY
                           ? "text-green-500"
-                          : problem.difficulty === "medium"
+                          : problem.difficulty === MEDIUM_DIFFICULTY
                             ? "text-yellow-500"
                             : "text-red-500"
                       }

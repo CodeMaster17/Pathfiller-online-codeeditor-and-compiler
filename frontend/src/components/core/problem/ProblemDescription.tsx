@@ -1,3 +1,4 @@
+import { EASY_DIFFICULTY, MEDIUM_DIFFICULTY } from "@/constants/problemConstants";
 import { IProblemType } from "@/types/types";
 import { Book, BookMarked, ListIcon, Loader, ShuffleIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -22,9 +23,9 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 	}, []);
 
 	const difficultyColor =
-		problem.difficulty === "Easy"
+		problem.difficulty === EASY_DIFFICULTY
 			? "text-dark-green-s"
-			: problem.difficulty === "Medium"
+			: problem.difficulty === MEDIUM_DIFFICULTY
 				? "text-dark-yellow"
 				: "text-dark-pink";
 
