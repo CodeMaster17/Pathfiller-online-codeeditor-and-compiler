@@ -106,7 +106,7 @@ const CodingPlayground = () => {
   };
 
   return (
-    <div className="">
+    <div>
       <ResizablePanelGroup
         direction="horizontal"
         className="min-h-[calc(100vh-8px)] max-w-full rounded-lg  text-black my-1"
