@@ -8,9 +8,8 @@ import {
 } from "@/components/ui/resizable";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { PROBLEM_ROUTE } from "@/constants";
-import axios from "axios";
 import { IProblemType } from "@/types/types";
+import { getProblemById } from "@/api/problemApi";
 
 const CodingArena = () => {
 
@@ -29,18 +28,19 @@ const CodingArena = () => {
 
   useEffect(() => {
     const fetchProblem = async () => {
-
-      try {
-        const data = await axios.get(`${PROBLEM_ROUTE}/get/${id}`);
-        const result = data.data;
-        console.log(result);
-        setProblem(result);
-      } catch (error) {
-        console.log("Error fetching problem")
+      if (id) {
+        try {
+          const data = await getProblemById(id);
+          setProblem(data);
+        } catch (error) {
+          throw new Error("Error fetching problem")
+        }
+      } else {
+        throw new Error("Problem ID not found")
       }
     }
     fetchProblem();
-  }, [])
+  }, [id]);
 
   const solved = false;
 

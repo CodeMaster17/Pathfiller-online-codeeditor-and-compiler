@@ -8,6 +8,16 @@ export const getAllProblems = async () => {
   }
 
   const data = await response.json();
-  console.log(typeof data);
   return data;
+};
+
+export const getProblemById = async (id: string) => {
+  const response = await fetch(`${PROBLEM_ROUTE}/get/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch problem");
+  }
+
+  const result = await response.json();
+  return result;
 };
