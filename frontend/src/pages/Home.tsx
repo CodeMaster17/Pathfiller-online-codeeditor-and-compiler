@@ -12,7 +12,6 @@ const Home = () => {
       <Hero />
       <Features />
       <AnimatedListDemo />
-      
       <CodeBlocks />
       <Footer />
     </div>
