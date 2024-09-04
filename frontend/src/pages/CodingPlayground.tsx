@@ -1,16 +1,8 @@
-import { Button } from '@/components/ui/button';
+
 import ReactCodeMirror from '@uiw/react-codemirror';
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { javascript } from '@codemirror/lang-javascript';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
-
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
 import {
   ResizableHandle,
   ResizablePanel,
@@ -18,7 +10,11 @@ import {
 } from "@/components/ui/resizable"
 import { TimeDifferenceDisplay } from '@/components/TimeDifferenceDisplay';
 import { getJobIdByPayloadForPlayground, getJobStatusByIdForPlayground } from '@/api/codePlaygroundApi';
-import { ERROR_STATUS, PENDING_STATUS, SUCCESS_STATUS, TIMELIMIT_EXCEEDED_STATUS } from '@/constants/statusConstants';
+import { PENDING_STATUS } from '@/constants/statusConstants';
+import StatusIndicator from '@/components/core/StatusIndicator';
+import InputArea from '@/components/core/playground/InputArea';
+import LanguageSelector from '@/components/core/LanguageSelector';
+import SubmitButton from '@/components/core/SubmitButton';
 
 
 const CodingPlayground = () => {
@@ -32,6 +28,8 @@ const CodingPlayground = () => {
   const [startTime, setStartTime] = useState<string>("");
   const [endTime, setEndTime] = useState<string>("");
   const [executionStatus, setExecutionStatus] = useState<string>("");
+
+
   const handleCodeChange = (value: string) => {
     setUserCode(value);
   };
@@ -40,16 +38,14 @@ const CodingPlayground = () => {
     setInputValue(e.target.value);
   };
 
+
   const handleLanguageChange = (language: string) => {
     setSelectedLanguage(language);
   };
 
-  const handleSubmit = async () => {
+
+  const handleSubmit = useCallback(async () => {
     setLoading(true);
-    // Log the values for demonstration
-    console.log("Selected Language:", selectedLanguage);
-    console.log("User Code:", userCode);
-    console.log("User Input:", inputValue);
 
     try {
       const payload = {
@@ -57,53 +53,48 @@ const CodingPlayground = () => {
         code: userCode,
         inputs: inputValue,
       };
+
       const data = await getJobIdByPayloadForPlayground(payload);
       setJobId(data.jobId);
+
       const intervalId = setInterval(async () => {
         const response = await getJobStatusByIdForPlayground(jobId);
         const statusResult = await response.json();
+        const { success, job_res, error } = statusResult;
 
-        const { success, job_res, error } = statusResult
-        console.log('Status result:', statusResult);
-        setStartTime(job_res.startedAt)
-        setEndTime(job_res.completedAt)
+        setStartTime(job_res.startedAt);
+        setEndTime(job_res.completedAt);
+
         if (success) {
-          setStatus(job_res.status)
-          setExecutionStatus("Executed")
           const { status: jobStatus, output: jobOutput } = job_res;
-          console.log('Job Output:', jobOutput);
-          setOutput(jobOutput)
+          setStatus(job_res.status);
+          setExecutionStatus("Executed");
+          setOutput(jobOutput);
+
           if (jobStatus === PENDING_STATUS) {
-            setStatus(PENDING_STATUS)
+            setStatus(PENDING_STATUS);
             return;
           }
 
-          setJobId(jobId)
           clearInterval(intervalId)
-          console.log("Executed")
+
         } else {
-          console.log("inside else", job_res)
-
-          setStatus("Error! Please retry")
-          console.error(error);
-          setOutput(error)
+          setStatus("Error! Please retry");
+          setOutput(error);
         }
-
       }, 1000)
 
       setTimeout(() => {
-        console.log("Clearing the interval")
         clearInterval(intervalId);
         setStatus("Timelimit exceeded");
       }, 10000);
 
     } catch (error) {
-      console.error("Error:", error);
       setOutput("An error occurred while running the code.");
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedLanguage, userCode, inputValue, jobId]);
 
   return (
     <div>
@@ -144,42 +135,14 @@ const CodingPlayground = () => {
 
                     {/* submit-button */}
                     <div className="flex flex-row-reverse ml-auto gap-x-5">
-                      <Button
-                        className="bg-green-600 text-base"
-                        onClick={handleSubmit}
-                        disabled={loading}
-                      >
-                        {loading ? "Running..." : "Run"}
-                      </Button>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button className="rounded-[5px] border-2 border-slate-400 p-1 px-6 bg-opacity-[.15] bg-white text-white">
-                            {selectedLanguage}
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-36">
-                          <DropdownMenuCheckboxItem
-                            checked={selectedLanguage === "C++"}
-                            onCheckedChange={() => handleLanguageChange("C++")}
-                          >
-                            C++
-                          </DropdownMenuCheckboxItem>
-                          <DropdownMenuCheckboxItem
-                            checked={selectedLanguage === "Python"}
-                            onCheckedChange={() => handleLanguageChange("Python")}
-                          >
-                            Python
-                          </DropdownMenuCheckboxItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                      <SubmitButton onClick={handleSubmit} isLoading={loading} />
+                      <LanguageSelector
+                        selectedLanguage={selectedLanguage}
+                        onLanguageChange={handleLanguageChange}
+                      />
                     </div>
                   </div>
-                  <textarea
-                    className="w-full h-40 p-2 mt-2 text-white bg-dark-layer-2  border-slate-600 rounded"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    placeholder="Enter your input here..."
-                  />
+                  <InputArea inputValue={inputValue} onInputChange={handleInputChange} />
                 </ResizablePanel>
                 <ResizableHandle />
                 <ResizablePanel defaultSize={75}>
@@ -189,18 +152,10 @@ const CodingPlayground = () => {
                         <span className="text-dark-yellow">&lt;/&gt;</span> Output
                       </div>
                     </div>
-                    <div className="p-4">
-                      <span className={
-                        status === SUCCESS_STATUS ? 'dark-green-s' :
-                          status === 'Error! Please retry' ? 'dark-pink' :
-                            status === ERROR_STATUS ? 'dark-pink' :
-                              status === TIMELIMIT_EXCEEDED_STATUS ? 'dark-pink' :
-                                status === PENDING_STATUS ? 'brand-orange-s' :
-                                  'status'
-                      }>
-                        {status}
-                      </span>
-                    </div>
+
+                    {/* status indicator */}
+                    <StatusIndicator status={status} />
+
                     <div className='p-4'>
                       <p className="text-white">
                         {loading ? "Running..." : output}
@@ -208,7 +163,8 @@ const CodingPlayground = () => {
                     </div>
                     <div>
                       <div className='p-4'>
-                        {executionStatus === "Executed" && !loading && startTime && endTime ? <TimeDifferenceDisplay startTime={startTime} endTime={endTime} /> : ""}
+                        {executionStatus === "Executed" && !loading && startTime && endTime ?
+                          <TimeDifferenceDisplay startTime={startTime} endTime={endTime} /> : ""}
                       </div>
 
                     </div>
