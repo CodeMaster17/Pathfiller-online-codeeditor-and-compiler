@@ -1,4 +1,4 @@
-# Team Pathfillers - Online Coding Platform
+# Pathfillers - An Online Coding Platform
 
 #### Frontend Deployement Link: https://pathfillers.vercel.app/
 
