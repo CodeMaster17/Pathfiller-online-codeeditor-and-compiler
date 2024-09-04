@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/resizable"
 import { TimeDifferenceDisplay } from '@/components/TimeDifferenceDisplay';
 import { getJobIdByPayloadForPlayground, getJobStatusByIdForPlayground } from '@/api/codePlaygroundApi';
+import { ERROR_STATUS, PENDING_STATUS, SUCCESS_STATUS, TIMELIMIT_EXCEEDED_STATUS } from '@/constants/statusConstants';
 
 
 const CodingPlayground = () => {
@@ -72,8 +73,8 @@ const CodingPlayground = () => {
           const { status: jobStatus, output: jobOutput } = job_res;
           console.log('Job Output:', jobOutput);
           setOutput(jobOutput)
-          if (jobStatus === "pending") {
-            setStatus("pending")
+          if (jobStatus === PENDING_STATUS) {
+            setStatus(PENDING_STATUS)
             return;
           }
 
@@ -190,11 +191,11 @@ const CodingPlayground = () => {
                     </div>
                     <div className="p-4">
                       <span className={
-                        status === 'success' ? 'dark-green-s' :
+                        status === SUCCESS_STATUS ? 'dark-green-s' :
                           status === 'Error! Please retry' ? 'dark-pink' :
-                            status === 'error' ? 'dark-pink' :
-                              status === 'Timelimit exceeded' ? 'dark-pink' :
-                                status === 'pending' ? 'brand-orange-s' :
+                            status === ERROR_STATUS ? 'dark-pink' :
+                              status === TIMELIMIT_EXCEEDED_STATUS ? 'dark-pink' :
+                                status === PENDING_STATUS ? 'brand-orange-s' :
                                   'status'
                       }>
                         {status}

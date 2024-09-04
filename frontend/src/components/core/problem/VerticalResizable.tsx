@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { IMismatch, IProblemType } from '@/types/types';
 import { getJobIdByPayloadForArena, getJobStatusById } from '@/api/codeArenaApi';
+import { ERROR_STATUS, PENDING_STATUS, SUCCESS_STATUS, TIMELIMIT_EXCEEDED_STATUS } from '@/constants/statusConstants';
 
 
 interface JobId {
@@ -77,8 +78,8 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
         if (success) {
           const { status: jobStatus, output: jobOutput } = job_res;
           setStatus(job_res.status)
-          if (jobStatus === "pending") {
-            setStatus("pending")
+          if (jobStatus === PENDING_STATUS) {
+            setStatus(PENDING_STATUS)
             return;
           }
           setOutput(jobOutput)
@@ -114,7 +115,7 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
       setTimeout(() => {
         console.log("Clearing the interval")
         clearInterval(intervalId);
-        if (status === "pending") {
+        if (status === PENDING_STATUS) {
           setStatus("Timelimit exceeded");
         }
       }, 10000);
@@ -205,11 +206,11 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
                   }
                   <div className="p-4">
                     <span className={
-                      status === 'success' ? 'dark-green-s' :
+                      status === SUCCESS_STATUS ? 'dark-green-s' :
                         status === 'Error! Please retry' ? 'dark-pink' :
-                          status === 'error' ? 'dark-pink' :
-                            status === 'Timelimit exceeded' ? 'dark-pink' :
-                              status === 'pending' ? 'brand-orange-s' :
+                          status === ERROR_STATUS ? 'dark-pink' :
+                            status === TIMELIMIT_EXCEEDED_STATUS ? 'dark-pink' :
+                              status === PENDING_STATUS ? 'brand-orange-s' :
                                 'status'
                     }>
                       {status}
