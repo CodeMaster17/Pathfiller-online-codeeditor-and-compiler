@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { BACKEND_ROUTE_CODE } from '@/constants';
 import { IMismatch, IProblemType } from '@/types/types';
-import { getJobStatusById } from '@/api/codeApi';
+import { getJobStatusById } from '@/api/codeArenaApi';
 
 
 interface JobId {

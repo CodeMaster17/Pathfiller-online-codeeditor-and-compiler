@@ -16,9 +16,9 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
-import axios from 'axios';
-import { PLAYGROUND_ROUTE } from '@/constants';
 import { TimeDifferenceDisplay } from '@/components/TimeDifferenceDisplay';
+import { getJobIdByPayload, getJobStatusByIdForPlayground } from '@/api/codePlaygroundApi';
+
 
 const CodingPlayground = () => {
   const [userCode, setUserCode] = useState<string>('');
@@ -56,12 +56,12 @@ const CodingPlayground = () => {
         code: userCode,
         inputs: inputValue,
       };
-      const { data } = await axios.post(`${PLAYGROUND_ROUTE}/run`, payload);
-      setJobId(data.jobId)
-      console.log(data)
+      const data = await getJobIdByPayload(payload);
+      setJobId(data.jobId);
       const intervalId = setInterval(async () => {
-        const response = await fetch(`${PLAYGROUND_ROUTE}/status?id=${data.jobId}`);
+        const response = await getJobStatusByIdForPlayground(jobId);
         const statusResult = await response.json();
+
         const { success, job_res, error } = statusResult
         console.log('Status result:', statusResult);
         setStartTime(job_res.startedAt)
