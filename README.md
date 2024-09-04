@@ -4,14 +4,15 @@
 
 <img width="1377" alt="image" src="https://github.com/user-attachments/assets/611bce92-04ae-4423-82ed-b006d16f4371">
 
-
-
 ### Coding Playground
+
 • A place where users can play with code.\
 • Users can code in a code editor and execute it with custom inputs.\
 • Users can see errors, output and metrics like execution time.
 <img width="1374" alt="image" src="https://github.com/user-attachments/assets/e08a9521-f6a0-4b58-a93b-65e1f3ac7770">
+
 ### Coding Arena
+
 • A place where users can practice their coding skills by solving various problems available on the platform.
 
 Problem list page
@@ -23,8 +24,6 @@ CodeArena page
 CodeArena when test case fails
 ![image](https://github.com/user-attachments/assets/5893d549-9415-4589-bef4-b3f81d3952c1)
 
-
-
 ### Flow Diagram for data flow
 
 #### CodeArena
@@ -35,12 +34,9 @@ CodeArena when test case fails
 
 ![image](https://github.com/user-attachments/assets/07e38dc0-0de4-40c4-ba9a-4f1fe68f48ec)
 
-
 #### Scalable and secure approach
 
 ![image](https://github.com/user-attachments/assets/88e1019a-9638-4d60-8e0b-89cf169d53bb)
-
-
 
 ## Features
 
@@ -52,18 +48,18 @@ CodeArena when test case fails
 • Vscode theme from codemirror
 
 ## Tech Stack:
+
 • Frontend: ReactJS\
 • Frontend Language: TypeScript\
 • Styling: TailwindCSS\
 • Component Library: Shadcn, Magic ui, Code mirror\
-• Routing: Axios\
+• Routing: FetchAPI\
 • Backend: ExpressJS\
 • Database: MongoDB\
 • Message Queue: Bull\
 • Child_process: For executing OS Commands with NodeJS\
 • ORM: Mongoose\
 • Deployment: Vercel (Frontend)
-
 
 ### Pre-requisites
 
