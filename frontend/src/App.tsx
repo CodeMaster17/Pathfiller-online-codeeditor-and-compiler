@@ -3,9 +3,10 @@ import CodingArena from './pages/CodingArena';
 import CodingPlayground from './pages/CodingPlayground';
 import CodingBattleGround from './pages/CodingBattleGround';
 import Home from './pages/Home';
-import Footer from './components/common/Footer';
+
 import ProblemSet from './pages/ProblemSet';
 import NotFound from './pages/NotFound';
+import Footer from './components/Footer/Footer';
 
 
 function App() {
