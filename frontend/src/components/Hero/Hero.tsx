@@ -15,7 +15,7 @@ const HeroArea = () => {
           <a href={CODING_PLAYGROUND_ROUTE}>Start with Playground</a>
         </Button>
         <Button className='border-2 border-brand-orange text-white m-3 hover:bg-brand-orange hover:text-black text-lg'>
-          <a href={PROBLEM_SET_ROUTE}>Try Battleground</a>
+          <a href={PROBLEM_SET_ROUTE}>Dive into Arena</a>
         </Button>
       </div>
       <GridPatternSquares />
