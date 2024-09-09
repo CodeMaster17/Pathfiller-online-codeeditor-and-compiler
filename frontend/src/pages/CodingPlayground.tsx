@@ -20,7 +20,6 @@ import SubmitButton from '@/components/core/SubmitButton';
 const CodingPlayground = () => {
   const [userCode, setUserCode] = useState<string>('');
   const [inputValue, setInputValue] = useState<string>('');
-  const [jobId, setJobId] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("C++");
   const [status, setStatus] = useState<string | null>("")
@@ -56,10 +55,9 @@ const CodingPlayground = () => {
       };
 
       const data = await getJobIdByPayloadForPlayground(payload);
-      setJobId(data.jobId);
 
       const intervalId = setInterval(async () => {
-        const response = await getJobStatusByIdForPlayground(jobId);
+        const response = await getJobStatusByIdForPlayground(data.jobId);
         const statusResult = await response.json();
         const { success, job_res, error } = statusResult;
 
@@ -94,7 +92,7 @@ const CodingPlayground = () => {
     } catch (error) {
       setOutput("An error occurred while running the code.");
     }
-  }, [selectedLanguage, userCode, inputValue, jobId]);
+  }, [selectedLanguage, userCode, inputValue]);
 
   return (
     <div>
