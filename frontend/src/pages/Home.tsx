@@ -1,4 +1,4 @@
-import Footer from '@/components/Footer/Footer'
+
 import { LeaderboardDemo } from '@/components/Leaderboard/Leaderboard'
 import Navbar from '@/components/Navbar/Navbar'
 import CodeBlocks from '@/components/CodeBlocks/CodeBlocks'
@@ -13,7 +13,6 @@ const Home = () => {
       <Features />
       <LeaderboardDemo />
       <CodeBlocks />
-      <Footer />
     </div>
   )
 }
