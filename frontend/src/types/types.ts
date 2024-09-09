@@ -56,3 +56,8 @@ export interface payloadTypeArena {
   code: string;
   problem_id: string;
 }
+
+export interface IRenderTabsProps {
+  icon: React.ReactNode;
+  tabName: string;
+}

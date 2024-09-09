@@ -91,7 +91,7 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
 
 
   return (
-    <div className='h-full w-full border bg-dark-layer-2 overflow-hidden'>
+    <div className='h-full w-full  bg-dark-layer-2 overflow-hidden'>
 
       <ResizablePanelGroup
         direction="vertical"

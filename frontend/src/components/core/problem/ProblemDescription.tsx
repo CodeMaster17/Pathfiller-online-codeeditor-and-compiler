@@ -136,31 +136,6 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 						<div>You can return the answer in any order.</div>
 					</div>
 
-					{/* Examples */}
-					{/* <div className="mt-10">
-						{problem.examples.map((example, index) => (
-							<div key={example.id}>
-								<p className="font-medium text-white">Example {index + 1}: </p>
-								{example.img && <img src={example.img} alt="" className="mt-3" />}
-								<div className="example-card text-zinc-600">
-									<pre>
-										<strong className="text-white">Input: <span className="text-gray-400">nums = [2,7,11,15], target = 9</span></strong>
-										{example.inputText}
-										<br />
-										<strong className="text-white">Output: <span className="text-gray-400">[0,1]</span></strong>
-										{example.outputText}
-										<br />
-										{example.explanation && (
-											<>
-												<strong className="text-white">Explanation: <span className="text-gray-400">Because nums[0] + nums[1] == 9, we return [0, 1].</span></strong>
-												{example.explanation}
-											</>
-										)}
-									</pre>
-								</div>
-							</div>
-						))}
-					</div> */}
 
 					{/* Constraints */}
 					<div className="my-8">
