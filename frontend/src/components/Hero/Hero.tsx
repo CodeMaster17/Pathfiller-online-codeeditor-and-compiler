@@ -1,6 +1,6 @@
 import './Hero.css';
 import { Button } from '../ui/button';
-import { CODING_PLAYGROUND_ROUTE } from '@/routes';
+import { CODING_PLAYGROUND_ROUTE, PROBLEM_SET_ROUTE } from '@/routes';
 import GridPatternSquares from '../ui/GridPattern';
 
 const HeroArea = () => {
@@ -12,7 +12,10 @@ const HeroArea = () => {
         Your code is your craft. Let every keystroke reflect your dedication to excellence.</p>
       <div className="header-buttons">
         <Button className='bg-brand-orange text-black m-3 hover:bg-brand-orange-s text-lg'>
-          <a href={CODING_PLAYGROUND_ROUTE}>Start Coding</a>
+          <a href={CODING_PLAYGROUND_ROUTE}>Start with Playground</a>
+        </Button>
+        <Button className='border-2 border-brand-orange text-white m-3 hover:bg-brand-orange hover:text-black text-lg'>
+          <a href={PROBLEM_SET_ROUTE}>Try Battleground</a>
         </Button>
       </div>
       <GridPatternSquares />

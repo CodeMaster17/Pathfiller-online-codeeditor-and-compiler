@@ -1,7 +1,8 @@
+import { HOME_ROUTE } from "@/routes"
 
 const HomeRoute = () => {
     return (
-        <a href="/">PathFiller</a>
+        <a href={HOME_ROUTE}>PathFiller</a>
     )
 }
 

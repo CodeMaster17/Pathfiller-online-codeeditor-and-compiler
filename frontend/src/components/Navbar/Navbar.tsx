@@ -13,7 +13,7 @@ const Navbar = () => {
       <ul className="navbarList flex items-center px-4">
         <li>
           <Button className='mr-3 bg-black'>
-            <a href={PROBLEM_SET_ROUTE}>Problems</a>
+            <a href={PROBLEM_SET_ROUTE}>Start with DSA</a>
           </Button>
         </li>
 
