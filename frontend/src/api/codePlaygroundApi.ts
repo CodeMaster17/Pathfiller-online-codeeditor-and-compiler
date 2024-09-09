@@ -24,5 +24,6 @@ export const getJobIdByPayloadForPlayground = async (
   if (!response.ok) {
     throw new Error("Failed to fetch job id");
   }
-  return response.json();
+  const data = await response.json();
+  return data;
 };
