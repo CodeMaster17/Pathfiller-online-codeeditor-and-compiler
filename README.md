@@ -1,4 +1,8 @@
-# Pathfillers - An Online Coding Platform
+<h1 align="center"><img height="150" src="https://i.pinimg.com/280x280_RS/7f/1f/21/7f1f213c60ab316d0a3a249910e9da51.jpg" /><br>Pathfiller</h1>
+
+<p align="center">
+ An interactive platform where users can code, execute with custom inputs, and sharpen their coding skills by solving a wide range of problems.
+</p>
 
 ## Features
 
