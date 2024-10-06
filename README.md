@@ -1,5 +1,28 @@
 # Pathfillers - An Online Coding Platform
 
+## Features
+
+• Language support for C++\
+• Language support for python\
+• Pagination support\
+• Search functionality for questions\
+• Code mirror - For code editor space\
+• Vscode theme from codemirror
+
+## Tech Stack:
+
+• Frontend: ReactJS\
+• Frontend Language: TypeScript\
+• Styling: TailwindCSS\
+• Component Library: Shadcn, Magic ui, Code mirror\
+• Routing: FetchAPI\
+• Backend: ExpressJS\
+• Database: MongoDB\
+• Message Queue: Bull\
+• Child_process: For executing OS Commands with NodeJS\
+• ORM: Mongoose\
+• Deployment: Vercel (Frontend)
+
 #### Frontend Deployement Link: https://pathfillers.vercel.app/
 
 <img width="1377" alt="image" src="https://github.com/user-attachments/assets/611bce92-04ae-4423-82ed-b006d16f4371">
@@ -38,28 +61,6 @@ CodeArena when test case fails
 
 ![image](https://github.com/user-attachments/assets/88e1019a-9638-4d60-8e0b-89cf169d53bb)
 
-## Features
-
-• Language support for C++\
-• Language support for python\
-• Pagination support\
-• Search functionality for questions\
-• Code mirror - For code editor space\
-• Vscode theme from codemirror
-
-## Tech Stack:
-
-• Frontend: ReactJS\
-• Frontend Language: TypeScript\
-• Styling: TailwindCSS\
-• Component Library: Shadcn, Magic ui, Code mirror\
-• Routing: FetchAPI\
-• Backend: ExpressJS\
-• Database: MongoDB\
-• Message Queue: Bull\
-• Child_process: For executing OS Commands with NodeJS\
-• ORM: Mongoose\
-• Deployment: Vercel (Frontend)
 
 ### Pre-requisites
 
