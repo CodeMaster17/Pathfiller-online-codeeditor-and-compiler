@@ -9,10 +9,19 @@ if (!fs.existsSync(dirCodes)) {
 }
 
 const generateFile = async (format, content) => {
+
+  // generating random id
   const jobId = uuid();
+
+  // generating name of the file
   const filename = `${jobId}.${format}`;
+
+  // fetching file name
   const filepath = path.join(dirCodes, filename);
-  await fs.writeFileSync(filepath, content);
+
+  // write incoming on the file
+  fs.writeFileSync(filepath, content);
+
   return filepath;
 };
 
