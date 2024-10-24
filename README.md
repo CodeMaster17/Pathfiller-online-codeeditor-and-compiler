@@ -3,6 +3,11 @@
 <p align="center">
  An interactive platform where users can code, execute with custom inputs, and sharpen their coding skills by solving a wide range of problems.
 </p>
+<p align="center">
+(*Hosted the application, but Azure credits just ended. Reviving it soon!)
+</p>
+
+
 
 ## Features
 
