@@ -1,0 +1,153 @@
+{
+    "level": "INFO",
+    "message": "DATABASE_CONNECTED",
+    "timestamp": "2024-10-26T12:08:46.136Z",
+    "meta": {
+        "CONNECTION_NAME": "pathfillers"
+    }
+}
+{
+    "level": "INFO",
+    "message": "APPLICATION_STARTED",
+    "timestamp": "2024-10-26T12:08:46.137Z",
+    "meta": {
+        "PORT": "5003",
+        "SERVER_URL": "http://localhost:3000"
+    }
+}
+{
+    "level": "INFO",
+    "message": "DATABASE_CONNECTED",
+    "timestamp": "2024-10-26T12:14:03.079Z",
+    "meta": {
+        "CONNECTION_NAME": "pathfillers"
+    }
+}
+{
+    "level": "INFO",
+    "message": "APPLICATION_STARTED",
+    "timestamp": "2024-10-26T12:14:03.083Z",
+    "meta": {
+        "PORT": "5003",
+        "SERVER_URL": "http://localhost:3000"
+    }
+}
+{
+    "level": "INFO",
+    "message": "DATABASE_CONNECTED",
+    "timestamp": "2024-10-26T12:14:35.175Z",
+    "meta": {
+        "CONNECTION_NAME": "pathfillers"
+    }
+}
+{
+    "level": "INFO",
+    "message": "APPLICATION_STARTED",
+    "timestamp": "2024-10-26T12:14:35.176Z",
+    "meta": {
+        "PORT": "5003",
+        "SERVER_URL": "http://localhost:3000"
+    }
+}
+{
+    "level": "INFO",
+    "message": "DATABASE_CONNECTED",
+    "timestamp": "2024-10-26T12:14:52.796Z",
+    "meta": {
+        "CONNECTION_NAME": "pathfillers"
+    }
+}
+{
+    "level": "INFO",
+    "message": "APPLICATION_STARTED",
+    "timestamp": "2024-10-26T12:14:52.797Z",
+    "meta": {
+        "PORT": "5003",
+        "SERVER_URL": "http://localhost:3000"
+    }
+}
+{
+    "level": "INFO",
+    "message": "DATABASE_CONNECTED",
+    "timestamp": "2024-10-26T12:15:10.615Z",
+    "meta": {
+        "CONNECTION_NAME": "pathfillers"
+    }
+}
+{
+    "level": "INFO",
+    "message": "APPLICATION_STARTED",
+    "timestamp": "2024-10-26T12:15:10.616Z",
+    "meta": {
+        "PORT": "5003",
+        "SERVER_URL": "http://localhost:3000"
+    }
+}
+{
+    "level": "INFO",
+    "message": "DATABASE_CONNECTED",
+    "timestamp": "2024-10-26T12:15:28.899Z",
+    "meta": {
+        "CONNECTION_NAME": "pathfillers"
+    }
+}
+{
+    "level": "INFO",
+    "message": "APPLICATION_STARTED",
+    "timestamp": "2024-10-26T12:15:28.901Z",
+    "meta": {
+        "PORT": "5003",
+        "SERVER_URL": "http://localhost:3000"
+    }
+}
+{
+    "level": "INFO",
+    "message": "DATABASE_CONNECTED",
+    "timestamp": "2024-10-26T12:15:52.977Z",
+    "meta": {
+        "CONNECTION_NAME": "pathfillers"
+    }
+}
+{
+    "level": "INFO",
+    "message": "APPLICATION_STARTED",
+    "timestamp": "2024-10-26T12:15:52.978Z",
+    "meta": {
+        "PORT": "5003",
+        "SERVER_URL": "http://localhost:3000"
+    }
+}
+{
+    "level": "INFO",
+    "message": "DATABASE_CONNECTED",
+    "timestamp": "2024-10-26T12:23:37.961Z",
+    "meta": {
+        "CONNECTION_NAME": "pathfillers"
+    }
+}
+{
+    "level": "INFO",
+    "message": "APPLICATION_STARTED",
+    "timestamp": "2024-10-26T12:23:37.962Z",
+    "meta": {
+        "PORT": "5003",
+        "SERVER_URL": "http://localhost:3000"
+    }
+}
+{
+    "level": "INFO",
+    "message": "DATABASE_CONNECTED",
+    "timestamp": "2024-10-29T07:14:45.482Z",
+    "meta": {
+        "CONNECTION_NAME": "pathfillers"
+    }
+}
+{
+    "level": "INFO",
+    "message": "APPLICATION_STARTED",
+    "timestamp": "2024-10-29T07:14:45.483Z",
+    "meta": {
+        "PORT": "5002",
+        "SERVER_URL": "http://localhost:3000"
+    }
+}
