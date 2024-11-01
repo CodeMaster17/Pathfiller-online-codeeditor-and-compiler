@@ -38,7 +38,7 @@ const ProblemSet = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [totalProblems, setTotalProblems] = useState<number>(0);
-  const [focus, setFocus] = useState(false);
+  const [focus, setFocus] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const handleRoute = (id: string) => {

@@ -1,6 +1,9 @@
-import React from 'react'
+// FIXME: Type of props constraints unsettled
+type ProblemConstraintsProps = {
+    constraints: string;
+};
 
-const ProblemConstraints = ({ constraints }) => {
+const ProblemConstraints = ({ constraints }:ProblemConstraintsProps) => {
     return (
         <div className="my-8">
             <div className="text-white font-medium">Constraints:</div>
