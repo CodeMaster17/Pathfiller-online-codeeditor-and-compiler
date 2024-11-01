@@ -25,7 +25,6 @@ import { IProblem, ITag } from "@/types/types";
 import { getCurrentProblems, getProblemsBySearchQuery, getTotalPages } from "@/lib/utils";
 import { EASY_DIFFICULTY, MEDIUM_DIFFICULTY } from "@/constants/problemConstants";
 import { getAllProblems } from "@/api/problemApi";
-import { Search } from "lucide-react";
 
 
 
@@ -38,7 +37,6 @@ const ProblemSet = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [totalProblems, setTotalProblems] = useState<number>(0);
-  const [focus, setFocus] = useState(false);
 
   const navigate = useNavigate();
   const handleRoute = (id: string) => {
@@ -83,30 +81,16 @@ const ProblemSet = () => {
     return <div>Error: {error}</div>;
   }
 
-  const handleFocus=()=>{
-    setFocus(true);
-  }
-  const handleFocusOut=()=>{
-    setFocus(false);
-  }
-
   return (
     <div className="bg-dark-layer-2 ">
       <Navbar />
       <div className="min-h-screen pt-5 max-w-7xl mx-auto">
-        <h1 className="text-brand-orange text-2xl font-semibold my-3">Problems</h1>
-        <div className="flex items-center">
         <Input
           placeholder="Search for a question"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="max-w-md placeholder-slate-400 rounded-r-none"
-          onFocus={handleFocus}
-          onBlur={handleFocusOut}
-      />
-        <Search className={`bg-white h-10 w-10 p-2 rounded-r-md text-black justify-center cursor-pointer hover:bg-gray-100 border-l-ring ${focus?`ring-2 ring-offset-2  ring-black`:`outline-none`}`}/>
-        
-        </div>
+          className="max-w-md placeholder-slate-400"
+        />
         <div className="mt-2 relative">
           {loading ? (
             <div className="absolute flex items-center justify-center text-white inset-0 h-8 text-bold">
@@ -143,7 +127,7 @@ const ProblemSet = () => {
                     </TableCell>
                     <TableCell className="text-right">
                       {problem.tags.map((tag: ITag, index: number) => (
-                        <span key={index} className="tag inline-block px-[0.4rem] py-[0.1rem] mr-1 mb-1 bg-gray-300 border border-gray-400 rounded-full text-dark-layer-1">
+                        <span key={index} className="tag inline-block px-1 mr-1 mb-1 bg-gray-300 border border-gray-400 rounded-full text-dark-layer-1">
                           {tag.name}
                         </span>
                       ))}
