@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CodingArena from './pages/CodingArena';
 import CodingPlayground from './pages/CodingPlayground';
 import Home from './pages/Home';
+import './index.css'
 
 import ProblemSet from './pages/ProblemSet';
 import NotFound from './pages/NotFound';

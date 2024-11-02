@@ -1,117 +1,118 @@
 .featuresContainer {
-    display: flex;
-    background-color: black;
-    color: #ffffff;
-    padding: 12rem 6rem;
-  }
-  
-  .featuresLeft {
-    width: 50%;
-  }
+  display: flex;
+  background-color: black;
+  color: #ffffff;
+  padding: 12rem 6rem;
+}
 
-  .codingPlayground, .codingBattleground{
-    border-top: 2px solid #9f9e9d;
-    border-right: 2px solid #9f9e9d;
-    border-bottom: 2px solid #9f9e9d;
-    padding: 1rem;
-    box-shadow: 5px 5px 5px #ffa825;
-    /* margin-top: 5rem; */
-    width: 50%;
-    padding-left: 6rem;
-  }
+.featuresLeft {
+  width: 50%;
+}
 
-  .codingBattleground{
-    margin-top: 7rem;
-  }
-  
-  .codingArena{
-    border-top: 2px solid #9f9e9d;
-    border-left: 2px solid #9f9e9d;
-    border-bottom: 2px solid #9f9e9d;
-    padding: 1rem;
-    margin-top: 7rem;
-    box-shadow: 5px 5px 5px #ffa825;
-    width: 50%;
-    padding-left: 8rem;
-    margin-left: 16rem;
-  }
+.codingPlayground,
+.codingBattleground {
+  border-top: 2px solid #9f9e9d;
+  border-right: 2px solid #9f9e9d;
+  border-bottom: 2px solid #9f9e9d;
+  padding: 1rem;
+  box-shadow: 5px 5px 5px #ffa825;
+  /* margin-top: 5rem; */
+  width: 50%;
+  padding-left: 6rem;
+}
 
-  .featureCard {
-    background-color: #2a2a2a;
-    border-radius: 8px;
-    padding: 24px;
-    text-align: center;
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .featureCard img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-  }
-  
-  .featureCard h3 {
-    font-size: 20px;
-    margin-bottom: 8px;
-  }
-  
-  .featureCard p {
-    font-size: 15px;
-    color: #c9c6c6;
-  }
-  
-  .featureCard:hover {
-    transform: translateY(-10px);
-  }
-  
-  .featuresRight {
-    width: 50%;
-    padding-left: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .featuresRight h1 {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-  
-  .featuresRight p {
-    font-size: 20px;
-    color: #cccbcb;
-    margin-bottom: 20px;
-  }
-  
-  .followUs {
-    margin-top: 56px;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .socialIcons {
-    display: flex;
-    gap: 15px;
-    /* margin-top: 10px; */
-  }
-  
-  .socialIcons svg {
-    width: 40px;
-    height: 30px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    background-color: #ffa825;
-    padding: 2px;
-    color: black;
-    border-radius: 1rem;
-  }
-  
-  .socialIcons svg:hover {
-    transform: scale(1.1);
-  }
-  
+.codingBattleground {
+  margin-top: 7rem;
+}
+
+.codingArena {
+  border-top: 2px solid #9f9e9d;
+  border-left: 2px solid #9f9e9d;
+  border-bottom: 2px solid #9f9e9d;
+  padding: 1rem;
+  margin-top: 7rem;
+  box-shadow: 5px 5px 5px #ffa825;
+  width: 50%;
+  padding-left: 8rem;
+  margin-left: 16rem;
+}
+
+.featureCard {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.featureCard img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.featureCard h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.featureCard p {
+  font-size: 15px;
+  color: #c9c6c6;
+}
+
+.featureCard:hover {
+  transform: translateY(-10px);
+}
+
+.featuresRight {
+  width: 50%;
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.featuresRight h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.featuresRight p {
+  font-size: 20px;
+  color: #cccbcb;
+  margin-bottom: 20px;
+}
+
+.followUs {
+  margin-top: 56px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 15px;
+  /* margin-top: 10px; */
+}
+
+.socialIcons svg {
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background-color: #ffa825;
+  padding: 2px;
+  color: black;
+  border-radius: 1rem;
+}
+
+.socialIcons svg:hover {
+  transform: scale(1.1);
+}
+

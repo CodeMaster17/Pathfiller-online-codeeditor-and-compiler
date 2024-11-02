@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/pagination";
 
 import { Input } from "@/components/ui/input";
-import Navbar from "@/components/Navbar/Navbar";
+import Navbar from "@/components/Navbar/Header";
 import { useNavigate } from "react-router-dom";
 import { IProblem, ITag } from "@/types/types";
 import { getCurrentProblems, getProblemsBySearchQuery, getTotalPages } from "@/lib/utils";
