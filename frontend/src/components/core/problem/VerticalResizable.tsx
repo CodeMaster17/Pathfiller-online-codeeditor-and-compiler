@@ -74,7 +74,6 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
 
 
       setTimeout(() => {
-        console.log("Clearing the interval")
         clearInterval(intervalId);
         if (status === PENDING_STATUS) {
           setStatus("Timelimit exceeded");
