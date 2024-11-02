@@ -10,7 +10,6 @@ interface JobData {
     id: string;
     language: 'cpp' | 'py';
     filepath: string;
-    jobId: string;
     inputs: string[];
 }
 
@@ -72,9 +71,9 @@ jobQueuePlayground.on('failed', (error) => {
     console.error(error.data.id, error.failedReason);
 });
 
-const addJobToQueueForPlayground = async ({ jobId, inputs, language, filepath }: JobData) => {
+const addJobToQueueForPlayground = async ({ id, inputs, language, filepath }: JobData) => {
     await jobQueuePlayground.add({
-        id: jobId,
+        id: id,
         inputs: inputs,
         language: language,
         filepath: filepath

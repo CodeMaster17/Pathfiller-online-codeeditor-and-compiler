@@ -11,7 +11,7 @@ interface JobData {
     problemId: string;
     language: 'cpp' | 'py';
     filepath: string;
-    jobId: string;
+    id: string;
 }
 
 interface Mismatch {
@@ -33,6 +33,8 @@ const jobQueue = new Queue('job-queue', {
 const worker = new Worker<JobData>(
     'job-queue',
     async (job: Job<JobData>) => {
+        console.log(job.data);
+
         // finding the id of the job from the data
         const jobId = job.data.id;
 
@@ -68,7 +70,17 @@ const worker = new Worker<JobData>(
                     }
                 }
             } else if (jobDoc.language === 'py') {
-                output = await executePy(jobDoc.filepath);
+                for (const testCase of problem.testCases) {
+                    output = await executePy(jobDoc.filepath, testCase.input);
+
+                    if (output && output.trim() !== testCase.output.trim()) {
+                        mismatches.push({
+                            input: testCase.input,
+                            expectedOutput: testCase.output,
+                            actualOutput: output
+                        });
+                    }
+                }
             }
 
             jobDoc.completedAt = new Date();
@@ -103,23 +115,22 @@ worker.on('failed', (job: Job<JobData> | undefined, err: Error) => {
 });
 
 process.on('SIGINT', async () => {
-    console.log('Shutting down gracefully...');
     await worker.close();
     await redisClient.quit();
     process.exit(0);
 });
 
-const addJobToQueue = async ({ jobId, problemId, language, filepath }: JobData) => {
+const addJobToQueue = async ({ id, problemId, language, filepath }: JobData) => {
     try {
+        console.log('problemId', problemId);
         await jobQueue.add('job', {
-            id: jobId,
+            id: id, // it refers to the id of the job
             problemId: problemId,
             language: language,
             filepath: filepath
         });
-        console.log(`Added job ${jobId} to the queue.`);
     } catch (err) {
-        console.error(`Error adding job ${jobId} to queue:`, err);
+        console.error(`Error adding job ${id} to queue:`, err);
     }
 };
 

@@ -20,6 +20,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../', 'public')));
 
+// app.use('/api/v1/auth', u);
+app.use('/api/v1/code', codeRouter);
+app.use('/api/v1/playground', playgroundRouter);
+app.use('/api/v1/problem', problemRouter);
+
 // 404 Handler
 app.use((req: Request, _: Response, next: NextFunction) => {
     try {
@@ -28,11 +33,6 @@ app.use((req: Request, _: Response, next: NextFunction) => {
         httpError(next, error, req, 404);
     }
 });
-
-// app.use('/api/v1/auth', u);
-app.use('/api/v1/code', codeRouter);
-app.use('/api/v1/playground', playgroundRouter);
-app.use('/api/v1/problem', problemRouter);
 
 app.use(globalErrorHandler);
 
