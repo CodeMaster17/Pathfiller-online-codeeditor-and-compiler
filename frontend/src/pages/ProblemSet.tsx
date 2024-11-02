@@ -46,9 +46,9 @@ const ProblemSet = () => {
   useEffect(() => {
     const fetchProblems = async () => {
       try {
-        const data: IProblem[] = await getAllProblems();
-        setProblems(data);
-        setTotalProblems(data.length);
+        const response = await getAllProblems();
+        setProblems(response.data);
+        setTotalProblems(response.data.length);
         setLoading(false);
       } catch (err) {
         if (err instanceof Error) {
