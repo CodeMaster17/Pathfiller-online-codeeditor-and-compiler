@@ -14,6 +14,7 @@
   "dependencies": {
     "@upstash/redis": "^1.34.0",
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "bee-queue": "^1.7.1",
     "bull": "^4.16.0",
     "bullmq": "^5.12.11",
