@@ -10,7 +10,8 @@ const app: Application = express();
 import codeRouter from './router/codeRouter';
 import playgroundRouter from './router/playgroundRouter';
 import problemRouter from './router/problemRouter';
-import { responseMessage } from './constants/responseMessage';
+import userRouter from './router/authRouter';
+import responseMessage from './constants/responseMessage';
 import httpError from './utils/httpError';
 import globalErrorHandler from './middleware/globalErrorHandler';
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, '../', 'public')));
 app.use('/api/v1/code', codeRouter);
 app.use('/api/v1/playground', playgroundRouter);
 app.use('/api/v1/problem', problemRouter);
+app.use('/api/v1/user', userRouter);
 
 // 404 Handler
 app.use((req: Request, _: Response, next: NextFunction) => {

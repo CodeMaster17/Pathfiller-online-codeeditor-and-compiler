@@ -3,7 +3,7 @@ import Problem from '../models/problem_model';
 import Tag from '../models/tag_model';
 import TestCase from '../models/test_case_model';
 import httpResponse from '../utils/httpResponse';
-import { responseMessage } from '../constants/responseMessage';
+import responseMessage from '../constants/responseMessage';
 import httpError from '../utils/httpError';
 
 interface TagInterface {
@@ -86,7 +86,6 @@ export const getProblemById = async (req: Request, res: Response): Promise<Respo
         }
 
         return res.status(200).json(problem);
-
     } catch (err) {
         return res.status(500).json({ message: 'Server error' });
     }
