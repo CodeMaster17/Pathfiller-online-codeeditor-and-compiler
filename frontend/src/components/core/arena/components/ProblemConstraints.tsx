@@ -1,6 +1,7 @@
-import React from 'react'
-
-const ProblemConstraints = ({ constraints }) => {
+type ProblemConstraintsProps = {
+    constraints: string;
+};
+const ProblemConstraints = ({ constraints }:ProblemConstraintsProps) => {
     return (
         <div className="my-8">
             <div className="text-white font-medium">Constraints:</div>

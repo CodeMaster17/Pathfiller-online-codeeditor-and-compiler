@@ -38,7 +38,7 @@ const ProblemSet = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [totalProblems, setTotalProblems] = useState<number>(0);
-  const [focus, setFocus] = useState(false);
+  const [focus, setFocus] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const handleRoute = (id: string) => {
@@ -78,11 +78,6 @@ const ProblemSet = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   const handleFocus=()=>{
     setFocus(true);
   }
@@ -90,12 +85,16 @@ const ProblemSet = () => {
     setFocus(false);
   }
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div className="bg-dark-layer-2 ">
       <Navbar />
       <div className="min-h-screen pt-5 max-w-7xl mx-auto">
-        <h1 className="text-brand-orange text-2xl font-semibold my-3">Problems</h1>
-        <div className="flex items-center">
+      <h1 className="text-brand-orange text-2xl font-semibold my-3">Problems</h1>
+      <div className="flex items-center">
         <Input
           placeholder="Search for a question"
           value={searchQuery}
@@ -105,7 +104,7 @@ const ProblemSet = () => {
           onBlur={handleFocusOut}
       />
         <Search className={`bg-white h-10 w-10 p-2 rounded-r-md text-black justify-center cursor-pointer hover:bg-gray-100 border-l-ring ${focus?`ring-2 ring-offset-2  ring-black`:`outline-none`}`}/>
-        
+
         </div>
         <div className="mt-2 relative">
           {loading ? (
@@ -143,7 +142,7 @@ const ProblemSet = () => {
                     </TableCell>
                     <TableCell className="text-right">
                       {problem.tags.map((tag: ITag, index: number) => (
-                        <span key={index} className="tag inline-block px-[0.4rem] py-[0.1rem] mr-1 mb-1 bg-gray-300 border border-gray-400 rounded-full text-dark-layer-1">
+                         <span key={index} className="tag inline-block px-[0.4rem] py-[0.1rem] mr-1 mb-1 bg-gray-300 border border-gray-400 rounded-full text-dark-layer-1">
                           {tag.name}
                         </span>
                       ))}
