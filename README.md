@@ -58,5 +58,15 @@ CodeArena page
 CodeArena when test case fails
 ![image](https://github.com/user-attachments/assets/5893d549-9415-4589-bef4-b3f81d3952c1)
 
+### Flow Diagram for data flow
 
+#### CodeArena
+
+![image](https://github.com/user-attachments/assets/09d68f1e-925b-4828-ba80-0ecdf0c1570b)
+
+#### CodePlayground
+![image](https://github.com/user-attachments/assets/07e38dc0-0de4-40c4-ba9a-4f1fe68f48ec)
+
+#### Scalable and secure approach
+![image](https://github.com/user-attachments/assets/88e1019a-9638-4d60-8e0b-89cf169d53bb)
 
