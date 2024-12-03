@@ -1,12 +1,11 @@
 import { useLocation } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 
-import { brainwave } from "@/assets";
-import { navigation } from "@/constants/heroIcons";
-import { Button } from "@/components/ui/button";
 import MenuSvg from "@/assets/MenuSvg";
-import { HamburgerMenu } from "./HeaderHelper";
+import { Button } from "@/components/ui/button";
+import { navigation } from "@/constants/heroIcons";
 import { useState } from "react";
+import { HamburgerMenu } from "./HeaderHelper";
 
 const HeaderBrainwave = () => {
     const pathname = useLocation();
@@ -67,15 +66,14 @@ const HeaderBrainwave = () => {
                     href="#signup"
                     className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
                 >
-                    New account
+                    Sign Up
                 </a>
-                <Button className="hidden lg:flex" href="#login">
+                <Button className="hidden lg:flex">
                     Sign in
                 </Button>
 
                 <Button
-                    className="ml-auto lg:hidden"
-                    px="px-3"
+                    className="ml-auto lg:hidden px-3"
                     onClick={toggleNavigation}
                 >
                     <MenuSvg openNavigation={openNavigation} />

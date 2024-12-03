@@ -6,12 +6,13 @@ import './index.css'
 
 import ProblemSet from './pages/ProblemSet';
 import NotFound from './pages/NotFound';
+import Footer from './components/Footer/Footer';
 
 
 function App() {
   return (
     <>
-      <div className='min-h-screen w-full'>
+      <div className='min-h-screen w-full bg-s1'>
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -20,7 +21,7 @@ function App() {
             <Route path="/problemset" element={<ProblemSet />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          {/* <Footer /> */}
+          <Footer />
         </Router>
       </div>
     </>

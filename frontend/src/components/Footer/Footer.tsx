@@ -1,59 +1,64 @@
 
-import { DEVELOPER_GITHUB_LINK, DEVELOPER_INSTAGRAM_LINK, DEVELOPER_LINKEDIN_LINK } from '@/constants/externalLinks';
-import { Heart } from 'lucide-react';
-import { Github } from 'lucide-react';
-import { Linkedin } from 'lucide-react';
-import { Instagram } from 'lucide-react';
-
-const socialLinks = [
+const socials = [
   {
-    id: 1,
-    name: 'GitHub',
-    link: DEVELOPER_GITHUB_LINK,
-    icon: <Github />,
+    id: "0",
+    title: "x",
+    icon: "/images/socials/x.svg",
+    url: "#",
   },
   {
-    id: 2,
-    name: 'LinkedIn',
-    link: DEVELOPER_LINKEDIN_LINK,
-    icon: <Linkedin />,
+    id: "1",
+    title: "Threads",
+    icon: "/images/socials/threads.svg",
+    url: "#",
   },
   {
-    id: 3,
-    name: 'Instagram',
-    link: DEVELOPER_INSTAGRAM_LINK,
-    icon: <Instagram />,
+    id: "2",
+    title: "Instagram",
+    icon: "/images/socials/instagram.svg",
+    url: "#",
   },
-]
+  {
+    id: "3",
+    title: "Discord",
+    icon: "/images/socials/discord.svg",
+    url: "#",
+  },
+];
 
 const Footer = () => {
   return (
-    <footer className="text-gray-600 body-font body-font bg-black">
-      <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-        <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-10 h-10 text-white p-2 bg-dark-yellow rounded-full" viewBox="0 0 24 24">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-          </svg>
-          <span className="ml-3 text-xl text-white">Pathfiller</span>
-        </a>
-        <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4 flex gap-2">
-          Made with
-          <span>
-            <Heart color="rgb(255 192 30)" />
-          </span>
-        </p>
-        <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-          {socialLinks.map((link) => (
-            <>
-              <a key={link.id} className=" ml-3 text-gray-500" href={link.link}>
-                {link.icon}
-              </a>
-            </>
-          ))}
-        </span>
+    <footer className="bg-s1">
+      <div className="container py-10 bg-s1">
+        <div className="flex w-full max-md:flex-col">
+          <div className="small-compact flex flex-1 flex-wrap items-center justify-center gap-5">
+            <p className="opacity-70 text-p5">Copyright, Harshit Yadav</p>
+          </div>
+          <div className="flex items-center justify-center sm:ml-auto">
+            <p className="legal-after relative mr-9 text-p5 transition-all duration-500 hover:text-p1">
+              Privacy Policy
+            </p>
+            <p className="text-p5 transition-all duration-500 hover:text-p1">
+              Terms of Use
+            </p>
+          </div>
+
+          <ul className="flex flex-1 justify-center gap-3 max-md:mt-10 md:justify-end">
+            {socials.map(({ id, url, icon, title }) => (
+              <li key={id}>
+                <a href={url} className="social-icon">
+                  <img
+                    src={icon}
+                    alt={title}
+                    className="size-4 object-contain"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </footer>
-  )
-}
-
-export default Footer
+  );
+};
+export default Footer;
