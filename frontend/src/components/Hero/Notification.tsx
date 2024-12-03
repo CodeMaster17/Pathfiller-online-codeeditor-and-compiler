@@ -1,7 +1,12 @@
 import { image1 } from "@/assets";
 import { notificationImages } from "@/constants/heroIcons";
 
-const Notification = ({ className, title }) => {
+interface NotificationProps {
+  className?: string;
+  title: string;
+}
+
+const Notification = ({ className, title }: NotificationProps) => {
   return (
     <div
       className={`${className || ""

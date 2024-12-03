@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { MouseParallax } from "react-just-parallax";
 
@@ -35,7 +36,8 @@ const Rings = () => {
   );
 };
 
-export const BackgroundCircles = ({ parallaxRef }) => {
+
+export const BackgroundCircles = ({ parallaxRef }: { parallaxRef: any }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

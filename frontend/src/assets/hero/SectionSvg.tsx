@@ -1,6 +1,10 @@
 import PlusSvg from "./PlusSvg";
 
-const SectionSvg = ({ crossesOffset }) => {
+interface SectionSvgProps {
+  crossesOffset?: string;
+}
+
+const SectionSvg: React.FC<SectionSvgProps> = ({ crossesOffset }) => {
   return (
     <>
       <PlusSvg

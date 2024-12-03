@@ -1,4 +1,8 @@
-export const Marker = ({ fill }) => {
+interface MarkerProps {
+    fill?: string;
+}
+
+export const Marker = ({ fill }: MarkerProps) => {
     return (
         <svg
             width="8"
