@@ -78,10 +78,10 @@ const ProblemSet = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const handleFocus=()=>{
+  const handleFocus = () => {
     setFocus(true);
   }
-  const handleFocusOut=()=>{
+  const handleFocusOut = () => {
     setFocus(false);
   }
 
@@ -93,17 +93,17 @@ const ProblemSet = () => {
     <div className="bg-dark-layer-2 ">
       <Navbar />
       <div className="min-h-screen pt-5 max-w-7xl mx-auto">
-      <h1 className="text-brand-orange text-2xl font-semibold my-3">Problems</h1>
-      <div className="flex items-center">
-        <Input
-          placeholder="Search for a question"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="max-w-md placeholder-slate-400 rounded-r-none"
-          onFocus={handleFocus}
-          onBlur={handleFocusOut}
-      />
-        <Search className={`bg-white h-10 w-10 p-2 rounded-r-md text-black justify-center cursor-pointer hover:bg-gray-100 border-l-ring ${focus?`ring-2 ring-offset-2  ring-black`:`outline-none`}`}/>
+        <h1 className="text-brand-orange text-2xl font-semibold my-3">Problems</h1>
+        <div className="flex items-center">
+          <Input
+            placeholder="Search for a question"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="max-w-md placeholder-slate-400 rounded-r-none"
+            onFocus={handleFocus}
+            onBlur={handleFocusOut}
+          />
+          <Search className={`bg-white h-10 w-10 p-2 rounded-r-md text-black justify-center cursor-pointer hover:bg-gray-100 border-l-ring ${focus ? `ring-2 ring-offset-2  ring-black` : `outline-none`}`} />
 
         </div>
         <div className="mt-2 relative">
@@ -124,25 +124,25 @@ const ProblemSet = () => {
               </TableHeader>
               <TableBody>
                 {currentItems.map((problem, index) => (
-                  <TableRow key={problem._id} className={index % 2 !== 0 ? "bg-dark-layer-1 hover:cursor-pointer" : "hover:cursor-pointer"} onClick={
-                    () => handleRoute(problem._id)
+                  <TableRow key={problem.data._id} className={index % 2 !== 0 ? "bg-dark-layer-1 hover:cursor-pointer" : "hover:cursor-pointer"} onClick={
+                    () => handleRoute(problem.data._id)
                   }>
                     <TableCell>{(currentPage - 1) * itemsPerPage + index + 1}</TableCell>
-                    <TableCell className="font-medium">{problem.title}</TableCell>
+                    <TableCell className="font-medium">{problem.data.title}</TableCell>
                     <TableCell
                       className={
-                        problem.difficulty === EASY_DIFFICULTY
+                        problem.data.difficulty === EASY_DIFFICULTY
                           ? "text-green-500"
-                          : problem.difficulty === MEDIUM_DIFFICULTY
+                          : problem.data.difficulty === MEDIUM_DIFFICULTY
                             ? "text-yellow-500"
                             : "text-red-500"
                       }
                     >
-                      {problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}
+                      {problem.data.difficulty.charAt(0).toUpperCase() + problem.data.difficulty.slice(1)}
                     </TableCell>
                     <TableCell className="text-right">
-                      {problem.tags.map((tag: ITag, index: number) => (
-                         <span key={index} className="tag inline-block px-[0.4rem] py-[0.1rem] mr-1 mb-1 bg-gray-300 border border-gray-400 rounded-full text-dark-layer-1">
+                      {problem.data.tags.map((tag: ITag, index: number) => (
+                        <span key={index} className="tag inline-block px-[0.4rem] py-[0.1rem] mr-1 mb-1 bg-gray-300 border border-gray-400 rounded-full text-dark-layer-1">
                           {tag.name}
                         </span>
                       ))}
