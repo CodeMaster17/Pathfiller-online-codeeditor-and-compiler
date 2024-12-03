@@ -1,9 +1,7 @@
-
-interface ProblemConstraintsProps {
+type ProblemConstraintsProps = {
     constraints: string;
-}
-
-const ProblemConstraints = ({ constraints }: ProblemConstraintsProps) => {
+};
+const ProblemConstraints = ({ constraints }:ProblemConstraintsProps) => {
     return (
         <div className="my-8">
             <div className="text-white font-medium">Constraints:</div>

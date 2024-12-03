@@ -6,8 +6,5 @@ node_modules
 *.py
 *.txt
 
-.env.*
-
-
 #logs
 *.log

@@ -1,15 +1,17 @@
 export interface IProblem {
-  _id: string;
-  id: string;
-  title: string;
-  description: string;
-  initialCode: string;
-  constraints?: string;
-  testCases: string[];
-  difficulty: "easy" | "medium" | "hard";
-  tags: ITag[];
-  createdAt: string;
-  updatedAt: string;
+  data: {
+    _id: string;
+    id: string;
+    title: string;
+    description: string;
+    initialCode: string;
+    constraints?: string;
+    testCases: string[];
+    difficulty: "easy" | "medium" | "hard";
+    tags: ITag[];
+    createdAt: string;
+    updatedAt: string;
+  };
 }
 
 export interface ITag {
