@@ -5,23 +5,23 @@ const features = [
     {
         id: "0",
         icon: "/images/feature-1.png",
-        caption: "Easy integration",
-        title: "Work smarter not harder",
-        text: "With Xora, tedious tasks are history. Automation and smart processes bring your productivity to new heights. It's like having an extra cup of coffee, but without the jitters.",
+        caption: "Play with code",
+        title: "Code Playground",
+        text: " A place where users can play with code. Users can code in a code editor and execute it with custom inputs. Users can see errors, output and metrics like execution time.",
         button: {
             icon: "/images/magictouch.svg",
-            title: "Watch the demo",
+            title: "Playground",
         },
     },
     {
         id: "1",
         icon: "/images/feature-2.png",
-        caption: "Secure & trustworthy",
-        title: "Sleep easy, we got your back",
+        caption: "Test your DSA skills",
+        title: "Code Battleground",
         text: "Your data security is our priority. With state-of-the-art encryption and robust privacy controls, Xora helps keeps your information secure and locked up tighter than Fort Knox.",
         button: {
             icon: "/images/docs.svg",
-            title: "Read the docs",
+            title: "Battleground",
         },
     },
 ];
@@ -30,12 +30,12 @@ const details = [
     {
         id: "0",
         icon: "/images/detail-1.png",
-        title: "AI automated video editing",
+        title: "Made for developers",
     },
     {
         id: "1",
         icon: "/images/detail-2.png",
-        title: "Collaborate with your team",
+        title: "Made for coders",
     },
     {
         id: "2",
@@ -97,7 +97,7 @@ const Features = () => {
                                         />
                                     </div>
 
-                                    <h3 className="relative z-2 max-w-36 mx-auto my-0 base-small text-center uppercase">
+                                    <h3 className="text-white relative z-2 max-w-36 mx-auto my-0 base-small text-center uppercase">
                                         {title}
                                     </h3>
                                 </li>
