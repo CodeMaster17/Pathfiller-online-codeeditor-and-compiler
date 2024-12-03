@@ -21,13 +21,14 @@ export interface ITag {
   createdAt: string;
   updatedAt: string;
 }
+export type Difficulty = "easy" | "medium" | "hard";
 
 export interface IProblemType {
   _id: string;
   id: string;
   title: string;
   description: string;
-  difficulty: "easy" | "medium" | "hard";
+  difficulty: Difficulty;
   problemStatement: string;
   examples: Array<{
     id: string;

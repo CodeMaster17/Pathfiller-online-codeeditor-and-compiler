@@ -1,4 +1,5 @@
-type Difficulty = 'easy' | 'medium' | 'hard';
+import { Difficulty } from "@/types/types";
+
 
 
 const difficultyColors: Record<Difficulty, { bg: string; text: string }> = {

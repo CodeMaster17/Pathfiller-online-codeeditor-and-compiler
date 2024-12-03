@@ -13,16 +13,18 @@ import { useParams } from "react-router-dom";
 const CodingArena = () => {
 
   const { id } = useParams<{ id: string }>();
-  const [problem, setProblem] = useState<IProblemType[]>({
+  const [problem, setProblem] = useState<IProblemType>({
+    _id: "",
     id: "",
     title: "",
     description: "",
-    difficulty: "",
+    difficulty: "easy",
     problemStatement: "",
     examples: [],
     constraints: "",
     likes: 0,
-    dislikes: 0
+    dislikes: 0,
+    tags: []
   });
 
   useEffect(() => {
