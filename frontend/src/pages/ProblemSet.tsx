@@ -27,7 +27,8 @@ import { getCurrentProblems, getProblemsBySearchQuery, getTotalPages } from "@/l
 import { IProblemType, ITag } from "@/types/types";
 import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import NotFound from "./Error/NotFound";
+
+import { ServerError } from "./Error/ServerError";
 
 
 
@@ -94,7 +95,7 @@ const ProblemSet = () => {
   }
 
   if (error) {
-    return <NotFound />
+    return <ServerError />
   }
 
   return (
