@@ -27,7 +27,7 @@ export interface IProblemType {
   id: string;
   title: string;
   description: string;
-  difficulty: string;
+  difficulty: "easy" | "medium" | "hard";
   problemStatement: string;
   examples: Array<{
     id: string;

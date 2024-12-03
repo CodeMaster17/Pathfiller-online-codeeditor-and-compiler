@@ -19,8 +19,9 @@ import {
 } from "@/components/ui/pagination";
 
 import { getAllProblems } from "@/api/problemApi";
+import { DifficultyBadge } from "@/components/core/problem/DifficultyBadge";
+import { TagsBadge } from "@/components/core/problem/TagsBadge";
 import { Input } from "@/components/ui/input";
-import { EASY_DIFFICULTY, MEDIUM_DIFFICULTY } from "@/constants/problemConstants";
 import { useToast } from "@/hooks/use-toast";
 import { getCurrentProblems, getProblemsBySearchQuery, getTotalPages } from "@/lib/utils";
 import { IProblemType, ITag } from "@/types/types";
@@ -100,8 +101,11 @@ const ProblemSet = () => {
     <div className="g7 md:px-4">
       {/* <Navbar /> */}
       <div className="min-h-screen pt-5 max-w-7xl mx-auto">
-        <h1 className="text-brand-orange text-2xl font-semibold my-3">Problems</h1>
-        <div className="flex items-center">
+        <h1 className="text-2xl font-bold text-white">Problem Set</h1>
+        <p className="mt-2 text-sm text-gray-400">
+          A comprehensive list of coding problems with their difficulty levels and categories.
+        </p>
+        <div className="flex items-center mt-4">
           <Input
             placeholder="Search for a question"
             value={searchQuery}
@@ -114,7 +118,7 @@ const ProblemSet = () => {
           <Search className={`bg-white h-8 w-10 p-2 rounded-r-md text-black justify-center cursor-pointer hover:bg-gray-100 border-l-ring ${focus ? `ring-2 ring-offset-2  ring-black` : `outline-none`}`} />
 
         </div>
-        <div className="mt-2 relative">
+        <div className="mt-2 relative border border-gray-700  rounded-lg">
           {loading ? (
             <div className="absolute flex items-center justify-center text-white inset-0 h-8 text-bold">
               <div className="loader">Loading...</div>
@@ -124,42 +128,30 @@ const ProblemSet = () => {
             <Table className="text-white">
               <TableHeader>
                 <TableRow>
-                  <TableHead>S.no</TableHead>
-                  <TableHead>Question</TableHead>
-                  <TableHead>Difficulty</TableHead>
-                  <TableHead className="pr-10 text-right">Category</TableHead>
+                  <TableHead className="text-gray-300 capitalize">S.No</TableHead>
+                  <TableHead className="text-gray-300 capitalize">Questions</TableHead>
+                  <TableHead className="text-gray-300 capitalize">Difficulty</TableHead>
+                  <TableHead className="pr-10 text-right capitalize text-gray-300">Category</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {currentItems.map((problem, index) => (
-                  <TableRow key={problem._id} className={index % 2 !== 0 ? "bg-black-100 hover:cursor-pointer" : "hover:cursor-pointer"} onClick={
+                  <TableRow key={problem._id} className={index % 2 !== 0 ? "border-b border-gray-700 hover:cursor-pointer" : "border-b hover:cursor-pointer border-gray-700"} onClick={
                     () => handleRoute(problem._id)
                   }>
                     <TableCell>{(currentPage - 1) * itemsPerPage + index + 1}</TableCell>
                     <TableCell className="font-medium">{problem.title}</TableCell>
-                    <TableCell
-                      className={
-                        problem.difficulty === EASY_DIFFICULTY
-                          ? "text-green-500"
-                          : problem.difficulty === MEDIUM_DIFFICULTY
-                            ? "text-yellow-500"
-                            : "text-red-500"
-                      }
-                    >
-                      {problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}
-                    </TableCell>
+                    <TableCell><DifficultyBadge difficulty={problem.difficulty} key={problem.id} /></TableCell>
                     <TableCell className="text-right">
-                      {problem.tags.map((tag: ITag, index: number) => (
-                        <span key={index} className="tag inline-block px-[0.4rem] py-[0.1rem] mr-1 mb-1 bg-gray-300 border border-gray-400 rounded-full text-dark-layer-1">
-                          {tag.name}
-                        </span>
+                      {problem.tags.map((tag: ITag) => (
+                        <TagsBadge key={tag.id} Tags={tag.name} />
                       ))}
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
-              <TableFooter className="bg-s1">
-                <TableRow>
+              <TableFooter className="bg-s1 rounded-b-lg">
+                <TableRow className="bg-s1 rounded-b-lg">
                   <TableCell colSpan={3}>Total Questions</TableCell>
                   <TableCell className="text-right text-white">{totalProblems}</TableCell>
                 </TableRow>
