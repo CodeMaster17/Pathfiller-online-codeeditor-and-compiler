@@ -21,10 +21,12 @@ import {
 import { getAllProblems } from "@/api/problemApi";
 import { Input } from "@/components/ui/input";
 import { EASY_DIFFICULTY, MEDIUM_DIFFICULTY } from "@/constants/problemConstants";
+import { useToast } from "@/hooks/use-toast";
 import { getCurrentProblems, getProblemsBySearchQuery, getTotalPages } from "@/lib/utils";
 import { IProblemType, ITag } from "@/types/types";
 import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import NotFound from "./Error/NotFound";
 
 
 
@@ -43,6 +45,7 @@ const ProblemSet = () => {
   const handleRoute = (id: string) => {
     navigate(`/codingarena/${id}`);
   }
+  const { toast } = useToast()
 
   useEffect(() => {
     const fetchProblems = async () => {
@@ -54,14 +57,18 @@ const ProblemSet = () => {
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
+          toast({
+            title: "Failed to fetch data.",
+            description: "Server Error. Please try again later.",
+          })
         } else {
           setError("An unknown error occurred");
         }
       } finally {
         setLoading(false);
+
       }
     };
-
     fetchProblems();
   }, []);
 
@@ -86,7 +93,7 @@ const ProblemSet = () => {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <NotFound />
   }
 
   return (
