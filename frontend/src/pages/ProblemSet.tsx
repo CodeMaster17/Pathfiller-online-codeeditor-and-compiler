@@ -49,7 +49,7 @@ const ProblemSet = () => {
       try {
         const response = await getAllProblems();
         setProblems(response.data);
-        setTotalProblems(response.length);
+        setTotalProblems(response.data.length);
         setLoading(false);
       } catch (err) {
         if (err instanceof Error) {
@@ -57,6 +57,7 @@ const ProblemSet = () => {
         } else {
           setError("An unknown error occurred");
         }
+      } finally {
         setLoading(false);
       }
     };
@@ -89,7 +90,8 @@ const ProblemSet = () => {
   }
 
   return (
-    <div className="bg-s1 mt-20 md:px-4">
+    <div className="g7 md:px-4">
+      {/* <Navbar /> */}
       <div className="min-h-screen pt-5 max-w-7xl mx-auto">
         <h1 className="text-brand-orange text-2xl font-semibold my-3">Problems</h1>
         <div className="flex items-center">
@@ -97,11 +99,12 @@ const ProblemSet = () => {
             placeholder="Search for a question"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="max-w-md placeholder-slate-400 rounded-r-none"
+            className="max-w-md placeholder-slate-400 rounded-r-none h-8"
             onFocus={handleFocus}
             onBlur={handleFocusOut}
           />
-          <Search className={`bg-white h-10 w-10 p-2 rounded-r-md text-black justify-center cursor-pointer hover:bg-gray-100 border-l-ring ${focus ? `ring-2 ring-offset-2  ring-black` : `outline-none`}`} />
+
+          <Search className={`bg-white h-8 w-10 p-2 rounded-r-md text-black justify-center cursor-pointer hover:bg-gray-100 border-l-ring ${focus ? `ring-2 ring-offset-2  ring-black` : `outline-none`}`} />
 
         </div>
         <div className="mt-2 relative">
@@ -122,7 +125,7 @@ const ProblemSet = () => {
               </TableHeader>
               <TableBody>
                 {currentItems.map((problem, index) => (
-                  <TableRow key={problem._id} className={index % 2 !== 0 ? "bg-dark-layer-1 hover:cursor-pointer" : "hover:cursor-pointer"} onClick={
+                  <TableRow key={problem._id} className={index % 2 !== 0 ? "bg-black-100 hover:cursor-pointer" : "hover:cursor-pointer"} onClick={
                     () => handleRoute(problem._id)
                   }>
                     <TableCell>{(currentPage - 1) * itemsPerPage + index + 1}</TableCell>
@@ -148,10 +151,10 @@ const ProblemSet = () => {
                   </TableRow>
                 ))}
               </TableBody>
-              <TableFooter>
+              <TableFooter className="bg-s1">
                 <TableRow>
                   <TableCell colSpan={3}>Total Questions</TableCell>
-                  <TableCell className="text-right">{totalProblems}</TableCell>
+                  <TableCell className="text-right text-white">{totalProblems}</TableCell>
                 </TableRow>
               </TableFooter>
             </Table>
