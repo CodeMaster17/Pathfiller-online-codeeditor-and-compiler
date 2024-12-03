@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -8,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useEffect, useState } from "react";
 
 import {
   Pagination,
@@ -18,14 +18,13 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-import { Input } from "@/components/ui/input";
-import Navbar from "@/components/Navbar/Header";
-import { useNavigate } from "react-router-dom";
-import { IProblem, ITag } from "@/types/types";
-import { getCurrentProblems, getProblemsBySearchQuery, getTotalPages } from "@/lib/utils";
-import { EASY_DIFFICULTY, MEDIUM_DIFFICULTY } from "@/constants/problemConstants";
 import { getAllProblems } from "@/api/problemApi";
+import { Input } from "@/components/ui/input";
+import { EASY_DIFFICULTY, MEDIUM_DIFFICULTY } from "@/constants/problemConstants";
+import { getCurrentProblems, getProblemsBySearchQuery, getTotalPages } from "@/lib/utils";
+import { IProblemType, ITag } from "@/types/types";
 import { Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -34,7 +33,7 @@ const itemsPerPage = 10;
 const ProblemSet = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [problems, setProblems] = useState<IProblem[]>([]);
+  const [problems, setProblems] = useState<IProblemType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [totalProblems, setTotalProblems] = useState<number>(0);
@@ -50,7 +49,7 @@ const ProblemSet = () => {
       try {
         const response = await getAllProblems();
         setProblems(response.data);
-        setTotalProblems(response.data.length);
+        setTotalProblems(response.length);
         setLoading(false);
       } catch (err) {
         if (err instanceof Error) {
@@ -66,14 +65,14 @@ const ProblemSet = () => {
   }, []);
 
   // getting problems based on search
-  const filteredProblems: IProblem[] = getProblemsBySearchQuery(problems, searchQuery);
+  const filteredProblems: IProblemType[] = getProblemsBySearchQuery(problems, searchQuery);
 
 
   // getting total pages for problems list
   const totalPages: number = getTotalPages(filteredProblems.length, itemsPerPage)
 
   // getting list of current items in table
-  const currentItems: IProblem[] = getCurrentProblems(filteredProblems, currentPage, itemsPerPage)
+  const currentItems: IProblemType[] = getCurrentProblems(filteredProblems, currentPage, itemsPerPage)
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -90,8 +89,7 @@ const ProblemSet = () => {
   }
 
   return (
-    <div className="bg-dark-layer-2 ">
-      <Navbar />
+    <div className="bg-s1 mt-20 md:px-4">
       <div className="min-h-screen pt-5 max-w-7xl mx-auto">
         <h1 className="text-brand-orange text-2xl font-semibold my-3">Problems</h1>
         <div className="flex items-center">
@@ -124,24 +122,24 @@ const ProblemSet = () => {
               </TableHeader>
               <TableBody>
                 {currentItems.map((problem, index) => (
-                  <TableRow key={problem.data._id} className={index % 2 !== 0 ? "bg-dark-layer-1 hover:cursor-pointer" : "hover:cursor-pointer"} onClick={
-                    () => handleRoute(problem.data._id)
+                  <TableRow key={problem._id} className={index % 2 !== 0 ? "bg-dark-layer-1 hover:cursor-pointer" : "hover:cursor-pointer"} onClick={
+                    () => handleRoute(problem._id)
                   }>
                     <TableCell>{(currentPage - 1) * itemsPerPage + index + 1}</TableCell>
-                    <TableCell className="font-medium">{problem.data.title}</TableCell>
+                    <TableCell className="font-medium">{problem.title}</TableCell>
                     <TableCell
                       className={
-                        problem.data.difficulty === EASY_DIFFICULTY
+                        problem.difficulty === EASY_DIFFICULTY
                           ? "text-green-500"
-                          : problem.data.difficulty === MEDIUM_DIFFICULTY
+                          : problem.difficulty === MEDIUM_DIFFICULTY
                             ? "text-yellow-500"
                             : "text-red-500"
                       }
                     >
-                      {problem.data.difficulty.charAt(0).toUpperCase() + problem.data.difficulty.slice(1)}
+                      {problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}
                     </TableCell>
                     <TableCell className="text-right">
-                      {problem.data.tags.map((tag: ITag, index: number) => (
+                      {problem.tags.map((tag: ITag, index: number) => (
                         <span key={index} className="tag inline-block px-[0.4rem] py-[0.1rem] mr-1 mb-1 bg-gray-300 border border-gray-400 rounded-full text-dark-layer-1">
                           {tag.name}
                         </span>

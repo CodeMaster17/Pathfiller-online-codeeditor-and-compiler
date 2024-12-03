@@ -23,6 +23,7 @@ export interface ITag {
 }
 
 export interface IProblemType {
+  _id: string;
   id: string;
   title: string;
   description: string;
@@ -38,6 +39,7 @@ export interface IProblemType {
   constraints: string;
   likes: number;
   dislikes: number;
+  tags: ITag[];
 }
 
 export interface IMismatch {

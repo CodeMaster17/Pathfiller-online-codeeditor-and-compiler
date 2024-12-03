@@ -1,4 +1,4 @@
-import { IProblem } from "@/types/types";
+import { IProblemType } from "@/types/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -47,17 +47,17 @@ export const getTotalPages = (problemLength: number, itemPerPage: number) => {
 
 // filter problems based on search query
 export const getProblemsBySearchQuery = (
-  problems: IProblem[],
+  problems: IProblemType[],
   searchQuery: string
 ) => {
   return problems.filter((problem) =>
-    problem.data.title.toLowerCase().includes(searchQuery.toLowerCase())
+    problem.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 };
 
 // get list of current items in problem list
 export const getCurrentProblems = (
-  filteredProblems: IProblem[],
+  filteredProblems: IProblemType[],
   currentPage: number,
   itemsPerPage: number
 ) => {
