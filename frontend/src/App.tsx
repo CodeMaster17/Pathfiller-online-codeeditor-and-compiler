@@ -5,24 +5,30 @@ import CodingPlayground from './pages/CodingPlayground';
 import Home from './pages/Home';
 
 import Footer from './components/Footer/Footer';
-import NotFound from './pages/NotFound';
 import ProblemSet from './pages/ProblemSet';
+import { Toaster } from './components/ui/toaster';
+import NotFound from './pages/Error/NotFound';
 
 
 function App() {
+
+  const pathname = window.location.pathname;
+
   return (
     <>
       <div className='min-h-screen w-full bg-s1'>
         <Router>
-          
+
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/codingarena/:id" element={<CodingArena />} />
             <Route path="/codingplayground" element={<CodingPlayground />} />
             <Route path="/problemset" element={<ProblemSet />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/problemset/*" element={<NotFound />} />
           </Routes>
-          <Footer />
+          <Toaster />
+          {pathname.includes("/codingplayground") || pathname.includes("/codingarena") ? "" : <Footer />}
         </Router>
       </div>
     </>
