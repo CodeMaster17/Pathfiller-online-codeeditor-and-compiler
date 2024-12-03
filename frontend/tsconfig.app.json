@@ -27,5 +27,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src","schema/dataSchema/**/*"]
+  "include": ["src", "schema/dataSchema/**/*", "src/assets"]
 }

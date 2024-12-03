@@ -51,7 +51,7 @@ export const getProblemsBySearchQuery = (
   searchQuery: string
 ) => {
   return problems.filter((problem) =>
-    problem.title.toLowerCase().includes(searchQuery.toLowerCase())
+    problem.data.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 };
 
