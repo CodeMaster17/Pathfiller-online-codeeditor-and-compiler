@@ -41,7 +41,7 @@ const ProblemDescriptionTab: React.FC<ProblemDescriptionProps> = ({ problem }) =
     };
 
     return (
-        <div className="flex px-0 py-6 h-[calc(100vh-94px)]">
+        <div className="flex px-0 py-6 h-[calc(100vh-94px)] bg-s1">
             <div className="px-5">
                 {/* Problem heading */}
                 <div className="w-full">

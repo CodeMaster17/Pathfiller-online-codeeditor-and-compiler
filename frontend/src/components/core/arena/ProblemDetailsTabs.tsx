@@ -17,8 +17,8 @@ const ProblemDetailsTabs: React.FC<ProblemDetailsTabsProps> = ({ problem, _solve
 
     return (
         <>
-            <div className="bg-dark-layer-2 w-full h-full">
-                <div className="text-white bg-black px-5 pb-2 flex space-x-3 cursor-pointer">
+            <div className="bg-s1 w-full h-full">
+                <div className="text-white bg-s1 px-5 pb-2 flex space-x-3 cursor-pointer">
                     <div className="text-dark-yellow font-bold"><a href="/">Pathfiller</a></div>
                     <div className="text-slate-800 text-transparent">|</div>
                     <div className="flex space-x-4">
@@ -33,7 +33,7 @@ const ProblemDetailsTabs: React.FC<ProblemDetailsTabsProps> = ({ problem, _solve
                 </div>
 
                 <Tabs defaultValue={DESCRIPTION_TAB} className="w-full h-full overflow-y-scroll">
-                    <TabsList className="bg-dark-layer-3 gap-1 w-full">
+                    <TabsList className="bg-s1 gap-1 w-full">
                         {/* render tabs */}
                         {ProblemDetailsPageTabs.map((tab, index) => {
                             return (

@@ -49,8 +49,8 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 
 
 	return (
-		<div className="bg-dark-layer-2 w-full overflow-y-scroll h-full">
-			<div className="text-white bg-black px-5 pb-2 flex space-x-3 cursor-pointer">
+		<div className="bg-s1 w-full overflow-y-scroll h-full">
+			<div className="text-white bg-s1 px-5 pb-2 flex space-x-3 cursor-pointer">
 				<div className="text-dark-yellow font-bold"><a href="/">Pathfiller</a></div>
 				<div className="text-slate-800 text-transparent">|</div>
 				<div className="flex space-x-4">
@@ -64,7 +64,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 				</div>
 			</div>
 			{/* TAB */}
-			<div className="flex h-9 w-full items-center pt-3 px-5 space-x-3 cursor-pointer rounded-lg bg-dark-layer-1 text-sm text-white">
+			<div className="flex h-9 w-full items-center pt-3 px-5 space-x-3 cursor-pointer rounded-lg bg-s1 text-sm text-white">
 				<div className="flex space-x-1">
 					<Book size={13} color="#ffa825" />
 					<div className="-translate-y-1">Description</div>
@@ -86,11 +86,11 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
 				</div>
 			</div>
 
-			<div className="flex px-0 py-6 h-[calc(100vh-94px)]">
+			<div className="flex px-0 py-6 h-[calc(100vh-94px)] bg-s1">
 				<div className="px-5">
 					{/* Problem heading */}
-					<div className="w-full">
-						<div className="flex space-x-4">
+					<div className="w-full bg-s1">
+						<div className="flex space-x-4 bg-s1">
 							{/* <div className="flex-1 mr-2 text-lg text-white font-medium">{problem?.title}</div> */}
 							<div className="flex-1 mr-2 text-2xl text-white font-medium">{problem.title}</div>
 						</div>

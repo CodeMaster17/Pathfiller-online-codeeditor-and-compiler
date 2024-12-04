@@ -17,7 +17,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ selectedLanguage, o
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button className='rounded-[5px] w-36 border-2 border-slate-400 bg-opacity-[.15] bg-white text-white flex justify-between items-center'>
+                <Button className='rounded-[5px] h-8 w-36 border-2 border-slate-400 bg-opacity-[.15] bg-white text-white flex justify-between items-center'>
                     <p>
                         {selectedLanguage}
                     </p>

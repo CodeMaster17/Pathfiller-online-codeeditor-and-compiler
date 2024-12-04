@@ -90,17 +90,17 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
 
 
   return (
-    <div className='h-full w-full  bg-dark-layer-2 overflow-hidden'>
+    <div className='h-full w-full  bg-s1 overflow-hidden'>
 
       <ResizablePanelGroup
         direction="vertical"
         className="min-h-[500px] w-full rounded-lg"
       >
         <ResizablePanel defaultSize={50}>
-          <div className="flex gap-x-5 w-full  rounded-lg ml-auto bg-dark-layer-1">
+          <div className="flex gap-x-5 w-full  rounded-lg ml-auto bg-s1">
             <div className='text-white items-center font-bold pt-2 pl-4'><span className='text-dark-yellow'>&lt;/&gt;</span> Code</div>
             {/* submit-button */}
-            <div className="flex flex-row-reverse ml-auto gap-x-5 ">
+            <div className="flex flex-row-reverse ml-auto gap-x-5 h-10 justify-center items-center px-4 ">
               <SubmitButton onClick={handleSubmit} isLoading={loading} />
               {/* language selector */}
               <LanguageSelector
@@ -113,6 +113,7 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
           <CodeEditor
             value={userCode}
             onChange={setUserCode}
+            language={selectedLanguage}
           />
         </ResizablePanel>
         <ResizableHandle />
