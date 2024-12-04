@@ -7,7 +7,7 @@ interface ButtonCustomProps {
     icon?: string;
     children: ReactNode;
     href?: string;
-    containerClassName?: string;
+    className?: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
     markerFill?: string;
 }
@@ -16,13 +16,13 @@ const ButtonCustom: React.FC<ButtonCustomProps> = ({
     icon,
     children,
     href,
-    containerClassName,
+    className,
     onClick,
     markerFill,
 }) => {
     const Inner = () => (
         <>
-            <span className="relative flex items-center min-h-[60px] px-4 g4 rounded-2xl inner-before group-hover:before:opacity-100 overflow-hidden">
+            <span className="relative flex items-center px-4 g4 rounded-2xl inner-before group-hover:before:opacity-100 overflow-hidden">
                 <span className="absolute -left-[1px]">
                     <Marker fill={markerFill} />
                 </span>
@@ -43,11 +43,13 @@ const ButtonCustom: React.FC<ButtonCustomProps> = ({
             <span className="glow-before glow-after" />
         </>
     );
+
+
     return href ? (
         <a
             className={clsx(
-                "relative p-0.5 g5 rounded-2xl shadow-500 group",
-                containerClassName,
+                "relative  g5 rounded-2xl shadow-500 group",
+                className,
             )}
             href={href}
         >
@@ -56,8 +58,8 @@ const ButtonCustom: React.FC<ButtonCustomProps> = ({
     ) : (
         <button
             className={clsx(
-                "relative p-0.5 g5 rounded-2xl shadow-500 group",
-                containerClassName,
+                "relative g5 rounded-2xl shadow-500 group",
+                className,
             )}
             onClick={onClick}
         >
