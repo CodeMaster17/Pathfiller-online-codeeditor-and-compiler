@@ -63,13 +63,15 @@ const HeaderBrainwave = () => {
                 </nav>
 
                 <a
-                    href="#signup"
+                    href="/auth/signup"
                     className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
                 >
                     Sign Up
                 </a>
                 <Button className="hidden lg:flex">
-                    Sign in
+                    <a href="/auth/signin">
+                        Sign in
+                    </a>
                 </Button>
 
                 <Button
