@@ -1,9 +1,10 @@
-import { EASY_DIFFICULTY, MEDIUM_DIFFICULTY } from '@/constants/problemConstants';
-import { IProblemType } from '@/types/types';
+import { IProblemType, ITag } from '@/types/types';
 import { useEffect, useState } from 'react';
-import { AiFillLike, AiOutlineLoading3Quarters, AiFillDislike } from 'react-icons/ai';
-import ProblemDescription from './components/ProblemDescription';
+import { AiFillDislike, AiFillLike, AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { DifficultyBadge } from '../problem/DifficultyBadge';
+import { TagsBadge } from '../problem/TagsBadge';
 import ProblemConstraints from './components/ProblemConstraints';
+import ProblemDescription from './components/ProblemDescription';
 interface ProblemDescriptionProps {
     problem: IProblemType;
 
@@ -20,12 +21,6 @@ const ProblemDescriptionTab: React.FC<ProblemDescriptionProps> = ({ problem }) =
         setDisliked(false);
     }, []);
 
-    const difficultyColor =
-        problem.difficulty === EASY_DIFFICULTY
-            ? "text-dark-green-s"
-            : problem.difficulty === MEDIUM_DIFFICULTY
-                ? "text-dark-yellow"
-                : "text-dark-pink";
 
     const handleLike = async () => {
         if (updating) return;
@@ -54,14 +49,14 @@ const ProblemDescriptionTab: React.FC<ProblemDescriptionProps> = ({ problem }) =
                         {/* Title */}
                         <div className="flex-1 mr-2 text-2xl text-white font-medium">{problem.title}</div>
                     </div>
-                    <div className="flex items-center mt-4">
+                    <div className="flex items-center mt-2">
 
                         {/* Displaying difficulty */}
-                        <div
-                            className={`${difficultyColor} rounded-[21px] bg-opacity-[.15] bg-white px-2.5 py-1 flex justify-center items-center text-xs font-medium capitalize `}
-                        >
-                            {problem.difficulty}
-                        </div>
+
+                        <DifficultyBadge difficulty={problem.difficulty} />
+                        {problem.tags.map((tag: ITag) => (
+                            <TagsBadge key={tag.id} Tags={tag.name} />
+                        ))}
                         {/* {_solved && (
 								<div className="rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-s text-dark-green-s">
 									<BsCheck2Circle />
