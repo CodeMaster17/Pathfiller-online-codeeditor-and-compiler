@@ -36,26 +36,29 @@
 
 https://github.com/user-attachments/assets/8384e4c2-d656-4266-9e5c-71e967f2f60a
 
-<img width="1377" alt="image" src="https://github.com/user-attachments/assets/611bce92-04ae-4423-82ed-b006d16f4371">
+![image](https://github.com/user-attachments/assets/6742bdee-ea0c-4325-b891-59e6f96ff5fa)
+
+![image](https://github.com/user-attachments/assets/da970582-5923-4437-b5b1-9ab2dadfe67f)
 
 ### Coding Playground
 
 • A place where users can play with code.\
 • Users can code in a code editor and execute it with custom inputs.\
 • Users can see errors, output and metrics like execution time.
-<img width="1374" alt="image" src="https://github.com/user-attachments/assets/e08a9521-f6a0-4b58-a93b-65e1f3ac7770">
+
 
 ### Coding Arena
 
 • A place where users can practice their coding skills by solving various problems available on the platform.
 
 Problem list page
-![image](https://github.com/user-attachments/assets/c380f0e0-e291-488e-8ece-2568a28e5ffa)
+![image](https://github.com/user-attachments/assets/6dd99e66-8ac7-46ce-9004-f3b7ed5e849b)
+
 
 CodeArena page
-![image](https://github.com/user-attachments/assets/75083bb4-d377-4161-96e2-c5272ce6673c)
+![image](https://github.com/user-attachments/assets/2bf6c9dd-6ca7-40e8-9877-5259d054fb29)
 
-CodeArena when test case fails
+CodeArena when test case fails (under development)
 ![image](https://github.com/user-attachments/assets/5893d549-9415-4589-bef4-b3f81d3952c1)
 
 ### Flow Diagram for data flow
