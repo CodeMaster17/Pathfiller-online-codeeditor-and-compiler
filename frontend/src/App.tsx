@@ -10,11 +10,19 @@ import { SignInForm } from './pages/Auth/SignInForm';
 import NotFound from './pages/Error/NotFound';
 import ProblemSet from './pages/ProblemSet';
 import { SignUpForm } from './pages/Auth/SignUpForm';
+import { useEffect, useState } from 'react';
 
 
 function App() {
+  const [urlTracker, setUrlTracker] = useState<string>("/")
+  useEffect(() => {
 
-  const pathname = window.location.pathname;
+    (function url() {
+      const pathname = window.location.pathname;
+      setUrlTracker(pathname)
+    })()
+
+  }, [urlTracker])
 
   return (
     <>
@@ -32,7 +40,7 @@ function App() {
             <Route path="/problemset/*" element={<NotFound />} />
           </Routes>
           <Toaster />
-          {pathname.includes("/codingplayground") || pathname.includes("/codingarena") ? "" : <Footer />}
+          {urlTracker.includes("/codingplayground") || urlTracker.includes("/codingarena") ? "" : <Footer />}
         </Router>
       </div>
     </>
