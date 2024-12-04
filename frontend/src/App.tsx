@@ -5,9 +5,11 @@ import CodingPlayground from './pages/CodingPlayground';
 import Home from './pages/Home';
 
 import Footer from './components/Footer/Footer';
-import ProblemSet from './pages/ProblemSet';
 import { Toaster } from './components/ui/toaster';
+import { SignInForm } from './pages/Auth/SignInForm';
 import NotFound from './pages/Error/NotFound';
+import ProblemSet from './pages/ProblemSet';
+import { SignUpForm } from './pages/Auth/SignUpForm';
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/auth/signin" element={<SignInForm />} />
+            <Route path="/auth/signup" element={<SignUpForm />} />
             <Route path="/codingarena/:id" element={<CodingArena />} />
             <Route path="/codingplayground" element={<CodingPlayground />} />
             <Route path="/problemset" element={<ProblemSet />} />
