@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../ui/button';
+import ButtonCustom from '../ButtonCustom/ButtonCustom';
 
 interface SubmitButtonProps {
     isLoading: boolean;
@@ -8,13 +8,13 @@ interface SubmitButtonProps {
 
 const SubmitButton: React.FC<SubmitButtonProps> = ({ isLoading, onClick }) => {
     return (
-        <Button
-            className='bg-green-600 text-base'
+        <ButtonCustom
+            className='h-8 rounded-lg text-xs'
             onClick={onClick}
-            disabled={isLoading}
+        // disabled={isLoading}
         >
-            {isLoading ? "Running..." : "Submit"}
-        </Button>
+            {isLoading ? "Running..." : "Run Code"}
+        </ButtonCustom>
     );
 };
 

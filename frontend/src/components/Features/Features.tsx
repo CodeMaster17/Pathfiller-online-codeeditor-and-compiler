@@ -78,7 +78,7 @@ const Features = () => {
                                     {title}
                                 </h2>
                                 <p className="mb-11 body-1 max-md:mb-8 max-md:body-3 text-white">{text}</p>
-                                <ButtonCustom icon={button.icon}>{button.title}</ButtonCustom>
+                                <ButtonCustom className="min-h-[60px]" icon={button.icon}>{button.title}</ButtonCustom>
                             </div>
                         ))}
 
