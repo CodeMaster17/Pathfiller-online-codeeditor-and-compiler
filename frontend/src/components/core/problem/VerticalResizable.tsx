@@ -27,6 +27,7 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [status, setStatus] = useState<string | null>("")
   const [jobId, setJobId] = useState<string>("")
+  const [loader, setLoader] = useState<boolean>(false);
 
   const [mismatchesData, setMismatchesData] = useState<IMismatch[]>([]);
 
@@ -48,10 +49,10 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
 
       // setting the status of the execution
       const intervalId = setInterval(async () => {
+        setLoader(true);
         const response = await getJobStatusById(data.jobId);
         const statusResult = await response.json();
         const { success, job_res } = statusResult
-
         if (success) {
           const { status: jobStatus, mismatches } = job_res;
           setStatus(job_res.status)
@@ -109,6 +110,7 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
               />
             </div>
           </div>
+
           {/* ---- code-editor ---- */}
           <CodeEditor
             value={userCode}
@@ -119,7 +121,7 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
         <ResizableHandle />
 
         {/* --- output screen --- */}
-        <ResizablePanel defaultSize={50}>
+        {!!loader && <ResizablePanel defaultSize={50}>
           <div className="flex h-full p-6 w-full">
             <span className="font-semibold text-white">
               <div>
@@ -134,7 +136,8 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
               </div>
             </span>
           </div>
-        </ResizablePanel >
+        </ResizablePanel>}
+
       </ResizablePanelGroup >
     </div >
   );
