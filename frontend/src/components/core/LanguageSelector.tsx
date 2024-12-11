@@ -33,8 +33,8 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ selectedLanguage, o
                     C++
                 </DropdownMenuCheckboxItem>
                 <DropdownMenuCheckboxItem
-                    checked={selectedLanguage === "Python"}
-                    onCheckedChange={() => onLanguageChange("Python")}
+                    checked={selectedLanguage === "python"}
+                    onCheckedChange={() => onLanguageChange("python")}
                 >
                     Python
                 </DropdownMenuCheckboxItem>

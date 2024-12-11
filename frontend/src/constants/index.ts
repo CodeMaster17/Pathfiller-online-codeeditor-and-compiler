@@ -7,6 +7,8 @@ export const PROBLEM_ROUTE = "http://localhost:5002/api/v1/problem";
 export const PLAYGROUND_ROUTE = "http://localhost:5002/api/v1/playground";
 //   "https://pathfiller.kiitians.com/api/v1/playground";
 
+export const PINSTON_API = "https://emkc.org/api/v2/piston/execute";
+
 export const CodeBlocksCode = `#include <iostream>
 using namespace std;
 
