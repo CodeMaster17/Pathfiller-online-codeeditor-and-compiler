@@ -34,7 +34,7 @@ const HeaderBrainwave = () => {
                 }`}
         >
             <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
-                <a className="block w-[12rem] xl:mr-8" href="#hero">
+                <a className="block w-[12rem] xl:mr-8" href="/">
                     <p className="text-white h5">Pathfiller</p>
                 </a>
 

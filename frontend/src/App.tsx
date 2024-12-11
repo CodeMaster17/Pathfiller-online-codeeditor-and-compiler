@@ -15,8 +15,8 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [urlTracker, setUrlTracker] = useState<string>("/")
-  useEffect(() => {
 
+  useEffect(() => {
     (function url() {
       const pathname = window.location.pathname;
       setUrlTracker(pathname)
@@ -28,7 +28,6 @@ function App() {
     <>
       <div className='min-h-screen w-full bg-s1'>
         <Router>
-
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth/signin" element={<SignInForm />} />
