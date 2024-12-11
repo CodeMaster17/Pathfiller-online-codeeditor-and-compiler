@@ -1,5 +1,5 @@
 import { PINSTON_API } from "@/constants";
-import { LANGUAGE_CONFIG } from "@/constants/CodeEditorConstant";
+import { LANGUAGE_CONFIG_CONSTANT } from "@/constants/languageConstants";
 import { CodeEditorState } from "@/types/CodeEditorTypes";
 import { ReactCodeMirrorRef } from "@uiw/react-codemirror";
 import { create } from "zustand";
@@ -62,7 +62,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
     // running the code
     runCode: async (language, code, inputs) => {
       try {
-        const runtime = LANGUAGE_CONFIG[language].pistonRuntime;
+        const runtime = LANGUAGE_CONFIG_CONSTANT[language].pistonRuntime;
 
         const response = await fetch(PINSTON_API, {
           method: "POST",

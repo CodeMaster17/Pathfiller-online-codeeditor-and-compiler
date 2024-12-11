@@ -105,7 +105,7 @@ const CodingPlayground = () => {
     await runCode(selectedLanguage, userCode, inputValue);
 
     const result = getExecutionResult();
-    console.log(result)
+
     if (result) {
       setOutput(result.output);
       setStatus(result.error ? "Error" : "Success");
@@ -121,8 +121,7 @@ const CodingPlayground = () => {
   // setup the editor when language changes
   useEffect(() => {
     const savedCode = localStorage.getItem(`editor-code-${selectedLanguage}`);
-    console.log("savedCode", savedCode)
-    console.log("editor", editor)
+
     if (editor && savedCode) {
       editor.view?.dispatch({
         changes: {
