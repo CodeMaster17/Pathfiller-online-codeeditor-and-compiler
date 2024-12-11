@@ -11,7 +11,7 @@ const features = [
         button: {
             icon: "/images/magictouch.svg",
             title: "Playground",
-            href: "/playground",
+            href: "/codingplayground",
         },
     },
     {
