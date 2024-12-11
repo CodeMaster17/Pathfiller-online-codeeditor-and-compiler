@@ -47,7 +47,7 @@ const details = [
     {
         id: "3",
         icon: "/images/detail-4.png",
-        title: "24 / 7 Customer support",
+        title: "Inhosue Code Compiler",
     },
 ];
 
