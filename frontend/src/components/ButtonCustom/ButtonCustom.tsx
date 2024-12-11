@@ -22,7 +22,7 @@ const ButtonCustom: React.FC<ButtonCustomProps> = ({
 }) => {
     const Inner = () => (
         <>
-            <span className="relative flex items-center px-4 g4 rounded-2xl inner-before group-hover:before:opacity-100 overflow-hidden">
+            <div className="relative flex items-center px-4 g4 rounded-2xl inner-before group-hover:before:opacity-100 overflow-hidden">
                 <span className="absolute -left-[1px]">
                     <Marker fill={markerFill} />
                 </span>
@@ -38,23 +38,25 @@ const ButtonCustom: React.FC<ButtonCustomProps> = ({
                 <span className="relative z-2 font-poppins base-bold text-p1 uppercase">
                     {children}
                 </span>
-            </span>
+            </div>
 
-            <span className="glow-before glow-after" />
+            <div className="glow-before glow-after" />
         </>
     );
 
 
     return href ? (
-        <a
-            className={clsx(
-                "relative  g5 rounded-2xl shadow-500 group",
-                className,
-            )}
-            href={href}
-        >
-            <Inner />
-        </a>
+        <button>
+            <a
+                className={clsx(
+                    "relative inline   g5 rounded-2xl shadow-500 group",
+                    className,
+                )}
+                href={href}
+            >
+                <Inner />
+            </a>
+        </button>
     ) : (
         <button
             className={clsx(

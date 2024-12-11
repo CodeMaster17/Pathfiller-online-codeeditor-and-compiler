@@ -11,6 +11,7 @@ const features = [
         button: {
             icon: "/images/magictouch.svg",
             title: "Playground",
+            href: "/codingplayground",
         },
     },
     {
@@ -22,6 +23,7 @@ const features = [
         button: {
             icon: "/images/docs.svg",
             title: "Battleground",
+            href: "/battleground",
         },
     },
 ];
@@ -78,7 +80,7 @@ const Features = () => {
                                     {title}
                                 </h2>
                                 <p className="mb-11 body-1 max-md:mb-8 max-md:body-3 text-white">{text}</p>
-                                <ButtonCustom className="min-h-[60px]" icon={button.icon}>{button.title}</ButtonCustom>
+                                <ButtonCustom className="min-h-[60px]" href={button.href} icon={button.icon}>{button.title}</ButtonCustom>
                             </div>
                         ))}
 
