@@ -1,6 +1,7 @@
 
 import LanguageSelector from '@/components/core/LanguageSelector';
 import StatusIndicator from '@/components/core/StatusIndicator';
+import SubmitButton from '@/components/core/SubmitButton';
 import InputArea from '@/components/core/playground/InputArea';
 import {
   ResizableHandle,
@@ -11,7 +12,6 @@ import { getExecutionResult, useCodeEditorStore } from '@/lib/CodeEditorLib';
 import { javascript } from '@codemirror/lang-javascript';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import ReactCodeMirror from '@uiw/react-codemirror';
-import { Play } from 'lucide-react';
 import { useEffect, useState } from "react";
 
 const CodingPlayground = () => {
@@ -98,13 +98,14 @@ const CodingPlayground = () => {
 
 
   // Running the code through Piston API
-  const { runCode, editor, setEditor, initializeEditor } = useCodeEditorStore();
+  const { runCode, editor, setEditor, initializeEditor, executionResult } = useCodeEditorStore();
 
   const handleCodeRun = async () => {
     setLoading(true)
     await runCode(selectedLanguage, userCode, inputValue);
 
     const result = getExecutionResult();
+    console.log(result)
     if (result) {
       setOutput(result.output);
       setStatus(result.error ? "Error" : "Success");
@@ -144,10 +145,11 @@ const CodingPlayground = () => {
         </p>
         <div className='flex gap-3 items-center '>
 
-          <button onClick={handleCodeRun} className='text-xs flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-md hover:from-purple-600 hover:to-blue-600 transition-colors'>
+          {/* <button onClick={handleCodeRun} className='text-xs flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-md hover:from-purple-600 hover:to-blue-600 transition-colors'>
             <Play size={16} className="mr-2" />
             Run Code
-          </button>
+          </button> */}
+          <SubmitButton onClick={handleCodeRun} isLoading={loading} />
 
           <LanguageSelector
             selectedLanguage={selectedLanguage}
@@ -225,12 +227,16 @@ const CodingPlayground = () => {
                     {/* status indicator */}
                     <div className='w-full flex flex-col justify-center items-start'>
                       <StatusIndicator status={status} />
-                      {output &&
+                      {output ?
                         <div className='p-4 mt-2 w-[95%] m-auto bg-gray-800 rounded-lg'>
                           <p className="text-white w-[80%]">
                             {loading ? "Running..." : output}
                           </p>
 
+                        </div> : <div className='p-4 mt-2 w-[95%] m-auto bg-gray-800 rounded-lg'>
+                          <p className="text-white w-[80%]">
+                            {loading ? "Running..." : executionResult?.error}
+                          </p>
                         </div>}
                     </div>
 
