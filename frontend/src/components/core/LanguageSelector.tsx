@@ -19,15 +19,15 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ selectedLanguage, o
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button className='rounded-[5px] h-8 w-36 border-2 border-slate-400 bg-opacity-[.15] bg-white text-white flex justify-between items-center'>
+                <Button className='rounded-[5px] h-8 w-32 border-2 border-slate-400 bg-s1 text-white flex justify-between items-center text-xs'>
                     <p className='uppercase'>
                         {selectedLanguage}
                     </p>
-                    <ChevronDown size="20" />
+                    <ChevronDown size="10" />
                 </Button>
 
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-36">
+            <DropdownMenuContent className="w-36 ">
                 {Object.values(LANGUAGE_CONFIG_CONSTANT).map((lang) => (
                     <DropdownMenuCheckboxItem
                         key={lang.id}

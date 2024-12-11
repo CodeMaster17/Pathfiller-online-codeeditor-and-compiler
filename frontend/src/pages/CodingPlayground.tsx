@@ -2,7 +2,6 @@
 import LanguageSelector from '@/components/core/LanguageSelector';
 import StatusIndicator from '@/components/core/StatusIndicator';
 import InputArea from '@/components/core/playground/InputArea';
-import { Button } from '@/components/ui/button';
 import {
   ResizableHandle,
   ResizablePanel,
@@ -12,16 +11,17 @@ import { getExecutionResult, useCodeEditorStore } from '@/lib/CodeEditorLib';
 import { javascript } from '@codemirror/lang-javascript';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import ReactCodeMirror from '@uiw/react-codemirror';
+import { Play } from 'lucide-react';
 import { useEffect, useState } from "react";
-
 
 const CodingPlayground = () => {
   const [userCode, setUserCode] = useState<string>('');
   const [inputValue, setInputValue] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("C++");
-  const [status, setStatus] = useState<string | null>("")
+  const [status, setStatus] = useState<string>("")
   const [output, setOutput] = useState<string | null>(null);
+
 
   {/* This is to be displyaed when using cusotm backend server */ }
   // const [startTime, setStartTime] = useState<string>("");
@@ -136,17 +136,39 @@ const CodingPlayground = () => {
 
 
   return (
-    <div>
+    <>
+      {/* Navbar */}
+      <div className='w-full h-12 flex justify-between px-4 items-center border-b-[1px] border-gray-800'>
+        <p className='text-white '>
+          <a href="/">Pathfiller</a>
+        </p>
+        <div className='flex gap-3 items-center '>
+
+          <button onClick={handleCodeRun} className='text-xs flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-md hover:from-purple-600 hover:to-blue-600 transition-colors'>
+            <Play size={16} className="mr-2" />
+            Run Code
+          </button>
+
+          <LanguageSelector
+            selectedLanguage={selectedLanguage}
+            onLanguageChange={handleLanguageChange}
+          />
+        </div>
+      </div>
+
+
+      {/* Editor area */}
       <ResizablePanelGroup
         direction="horizontal"
-        className="min-h-[calc(100vh-8px)] max-w-full rounded-lg  text-black my-1"
+        className="min-h-screen max-w-full  text-black"
       >
         <ResizablePanel defaultSize={70}>
-          <div className="flex flex-col h-full gap-x-5 w-full rounded-lg ml-auto bg-dark-layer-1 px-3">
-            <div className="text-white items-center font-bold py-2">
+          <div className="flex flex-col h-full gap-x-5 w-full  ml-auto bg-s1 px-3">
+
+            <div className="text-white items-center font-bold py-2 text-xs">
               <span className="text-dark-yellow">&lt;/&gt;</span> CodePlayground
             </div>
-            <div className="flex h-full w-full items-center justify-center p-1 bg-dark-layer-3">
+            <div className="flex h-full w-full items-center justify-center p-1 bg-s border-[1px] border-gray-800">
 
               {/* code editor */}
               <ReactCodeMirror
@@ -154,24 +176,27 @@ const CodingPlayground = () => {
                 theme={vscodeDark}
                 extensions={[javascript()]}
                 onChange={handleCodeChange}
-                className="w-full h-full"
+                className="w-full h-full "
                 onCreateEditor={(editor) => setEditor(editor)}
               />
             </div>
           </div>
         </ResizablePanel>
+
         <ResizableHandle withHandle />
+
         <ResizablePanel defaultSize={30}>
           <div className="h-full">
-            <div className="h-full w-full  rounded-l-md bg-dark-layer-2 overflow-hidden">
+            <div className="h-full w-full  rounded-l-md bg-s overflow-hidden">
               <ResizablePanelGroup
                 direction="vertical"
                 className="min-h-[500px] w-full rounded-lg"
               >
                 <ResizablePanel defaultSize={50}>
-                  <div className="flex gap-x-5 w-full rounded-lg ml-auto bg-dark-layer-1 px-3">
-                    <div className="text-white items-center font-bold pt-2">
-                      <span className="text-dark-yellow">&lt;/&gt;</span> Input
+
+                  <div className="flex gap-x-5 w-full items-center justify-center rounded-lg ml-auto  px-3 bg-s1">
+                    <div className="text-white items-center font-bold pt-2  text-xs bg-s1">
+                      <span className="text-dark-yellow text-xs">&lt;/&gt;</span> Input
                     </div>
 
 
@@ -179,34 +204,36 @@ const CodingPlayground = () => {
                     <div className="flex flex-row-reverse ml-auto gap-x-5">
                       {/* <SubmitButton onClick={handleCodeRun} isLoading={loading} />
                        */}
-                      <Button onClick={handleCodeRun}>
-                        Run Code
-                      </Button>
-                      <LanguageSelector
-                        selectedLanguage={selectedLanguage}
-                        onLanguageChange={handleLanguageChange}
-                      />
+
                     </div>
                   </div>
+
+                  {/* Input Box */}
                   <InputArea inputValue={inputValue} onInputChange={handleInputChange} />
+
+
                 </ResizablePanel>
                 <ResizableHandle />
                 <ResizablePanel defaultSize={75}>
                   <>
-                    <div className="flex gap-x-5 w-full rounded-lg ml-auto bg-dark-layer-1">
+                    <div className="flex gap-x-5 w-full rounded-lg ml-auto bg-s1 text-xs">
                       <div className="text-white items-center font-bold py-2 pl-4">
-                        <span className="text-dark-yellow">&lt;/&gt;</span> Output
+                        <span className="text-dark-yellow text-xs">&lt;/&gt;</span> Output
                       </div>
                     </div>
 
                     {/* status indicator */}
-                    <StatusIndicator status={status} />
+                    <div className='w-full flex flex-col justify-center items-start'>
+                      <StatusIndicator status={status} />
+                      {output &&
+                        <div className='p-4 mt-2 w-[95%] m-auto bg-gray-800 rounded-lg'>
+                          <p className="text-white w-[80%]">
+                            {loading ? "Running..." : output}
+                          </p>
 
-                    <div className='p-4'>
-                      <p className="text-white">
-                        {loading ? "Running..." : output}
-                      </p>
+                        </div>}
                     </div>
+
                     <div>
                       <div className='p-4'>
                         {/* This is to be displyaed when using cusotm backend server */}
@@ -222,7 +249,7 @@ const CodingPlayground = () => {
           </div>
         </ResizablePanel>
       </ResizablePanelGroup>
-    </div>
+    </>
   );
 }
 
