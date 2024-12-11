@@ -18,8 +18,8 @@ const features = [
         id: "1",
         icon: "/images/feature-2.png",
         caption: "Test your DSA skills",
-        title: "Code Battleground",
-        text: "Your data security is our priority. With state-of-the-art encryption and robust privacy controls, Xora helps keeps your information secure and locked up tighter than Fort Knox.",
+        title: "Problem Set",
+        text: "Test your DSA skills with our problem set. Users can solve problems in a code editor and submit their solutions. Users can see errors, output and metrics like execution time.",
         button: {
             icon: "/images/docs.svg",
             title: "Problem Set",
