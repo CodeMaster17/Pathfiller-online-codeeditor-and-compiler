@@ -19,6 +19,7 @@ export interface CodeEditorState {
     inputs: string
 
     runCode: (language: string, code: string, input: string) => Promise<void>;
+    getLangauges: () => Promise<void>;
     setEditor: (editor: ReactCodeMirrorRef) => void;
     initializeEditor: () => void;
 }

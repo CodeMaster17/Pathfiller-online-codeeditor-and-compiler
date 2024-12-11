@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from '../ui/button';
 import { ChevronDown } from 'lucide-react';
+import { LANGUAGE_CONFIG_CONSTANT } from '@/constants/languageConstants';
+
 
 interface LanguageSelectorProps {
     selectedLanguage: string;
@@ -18,7 +20,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ selectedLanguage, o
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button className='rounded-[5px] h-8 w-36 border-2 border-slate-400 bg-opacity-[.15] bg-white text-white flex justify-between items-center'>
-                    <p>
+                    <p className='uppercase'>
                         {selectedLanguage}
                     </p>
                     <ChevronDown size="20" />
@@ -26,20 +28,19 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ selectedLanguage, o
 
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-36">
-                <DropdownMenuCheckboxItem
-                    checked={selectedLanguage === "C++"}
-                    onCheckedChange={() => onLanguageChange("C++")}
-                >
-                    C++
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                    checked={selectedLanguage === "python"}
-                    onCheckedChange={() => onLanguageChange("python")}
-                >
-                    Python
-                </DropdownMenuCheckboxItem>
+                {Object.values(LANGUAGE_CONFIG_CONSTANT).map((lang) => (
+                    <DropdownMenuCheckboxItem
+                        key={lang.id}
+                        checked={selectedLanguage === lang.id}
+                        onCheckedChange={() => onLanguageChange(lang.id)}
+                    >
+                        <img src={lang.logoPath} alt={lang.label} className='size-4' />
+                        &nbsp;
+                        {lang.label}
+                    </DropdownMenuCheckboxItem>
+                ))}
             </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu >
     );
 };
 

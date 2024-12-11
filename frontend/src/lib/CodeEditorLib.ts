@@ -4,6 +4,7 @@ import { CodeEditorState } from "@/types/CodeEditorTypes";
 import { ReactCodeMirrorRef } from "@uiw/react-codemirror";
 import { create } from "zustand";
 
+// @ts-expect-error: This is a custom hook
 export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
   return {
     language: "",
