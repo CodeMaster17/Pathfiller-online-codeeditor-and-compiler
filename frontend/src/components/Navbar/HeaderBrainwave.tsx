@@ -62,7 +62,7 @@ const HeaderBrainwave = () => {
                     <HamburgerMenu />
                 </nav>
 
-                <a
+                {/* <a
                     href="/auth/signup"
                     className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
                 >
@@ -72,7 +72,7 @@ const HeaderBrainwave = () => {
                     <a href="/auth/signin">
                         Sign in
                     </a>
-                </Button>
+                </Button> */}
 
                 <Button
                     className="ml-auto lg:hidden px-3"
