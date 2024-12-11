@@ -63,7 +63,6 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
     runCode: async (language, code, inputs) => {
       try {
         const runtime = LANGUAGE_CONFIG_CONSTANT[language].pistonRuntime;
-
         const response = await fetch(PINSTON_API, {
           method: "POST",
           headers: {
@@ -71,7 +70,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
           },
           body: JSON.stringify({
             language: runtime.language,
-            version: "3.10.0",
+            version: runtime.version,
             files: [
               {
                 name: "main",
