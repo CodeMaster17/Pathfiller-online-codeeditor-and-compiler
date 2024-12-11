@@ -46,22 +46,42 @@ const CodingArena = () => {
   const solved = false;
 
   return (
-    <div className="h-screen bg-black">
+    <>
+      <div className='w-full h-12 flex justify-between px-4 items-center border-b-[1px] border-gray-800'>
+        <p className='text-white '>
+          <a href="/">Pathfiller</a>
+        </p>
+        <div className='flex gap-3 items-center '>
+
+          {/* <button onClick={handleCodeRun} className='text-xs flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-md hover:from-purple-600 hover:to-blue-600 transition-colors'>
+            <Play size={16} className="mr-2" />
+            Run Code
+          </button>
+
+          <LanguageSelector
+            selectedLanguage={selectedLanguage}
+            onLanguageChange={handleLanguageChange}
+          /> */}
+        </div>
+      </div>
       <ResizablePanelGroup
         direction="horizontal"
         className=" min-h-full w-full rounded-lg"
       >
-        <ResizablePanel defaultSize={50} className="h-full">
+        <ResizablePanel defaultSize={50} className="min-h-screen">
           <ProblemDetailsTabs problem={problem} _solved={solved} />
         </ResizablePanel>
         <ResizableHandle withHandle />
+
         <ResizablePanel defaultSize={50}>
+
           <div className="flex h-full items-center justify-center p-1">
             <VerticalResizable problem={problem} />
           </div>
+          
         </ResizablePanel>
       </ResizablePanelGroup>
-    </div>
+    </>
   );
 };
 
