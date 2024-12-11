@@ -11,8 +11,7 @@
 
 ## Features
 
-• Language support for C++\
-• Language support for python\
+• Language support for C++, Java, Javascript, Go, Ruby and many more\
 • Pagination support\
 • Search functionality for questions\
 • Code mirror - For code editor space\
