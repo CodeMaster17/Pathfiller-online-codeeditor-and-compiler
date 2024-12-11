@@ -22,8 +22,8 @@ const features = [
         text: "Your data security is our priority. With state-of-the-art encryption and robust privacy controls, Xora helps keeps your information secure and locked up tighter than Fort Knox.",
         button: {
             icon: "/images/docs.svg",
-            title: "Battleground",
-            href: "/battleground",
+            title: "Problem Set",
+            href: "/problemset",
         },
     },
 ];

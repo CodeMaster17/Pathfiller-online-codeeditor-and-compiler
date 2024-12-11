@@ -43,7 +43,7 @@ export const navigation = [
   },
   {
     id: "2",
-    title: "Battleground",
+    title: "Problems Set",
     url: "/problemset",
   },
   {
