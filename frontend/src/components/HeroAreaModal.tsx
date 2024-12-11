@@ -15,7 +15,7 @@ export function HeroAreaModal({ open, onClose }: { open: boolean; onClose: () =>
 
                 <div className="flex items-center w-full justify-between">
                     <div className="flex justify-center items-center w-1/2 h-full">
-                        <img src="/my-image.png" alt="placeholder" className="rounded-full w-80 h-80" />
+                        <img src="/my-image.png" alt="placeholder" className="rounded-full lg:w-64 lg:h-64 xl:w-80 xl:h-80" />
                     </div>
                     <div className="w-1/2">
                         <div className=" font-bold h2">
