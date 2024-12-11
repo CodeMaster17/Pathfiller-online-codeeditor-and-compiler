@@ -25,7 +25,7 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
   const [userCode, setUserCode] = useState<string>('');
   const [selectedLanguage, setSelectedLanguage] = useState<string>("C++");
   const [loading, setLoading] = useState<boolean>(false);
-  const [status, setStatus] = useState<string | null>("")
+  const [status, setStatus] = useState<string>("")
   const [jobId, setJobId] = useState<string>("")
   const [loader, setLoader] = useState<boolean>(false);
 
@@ -98,7 +98,7 @@ const VerticalResizable: React.FC<VerticalResizableProps> = ({ problem }) => {
         className="min-h-[500px] w-full rounded-lg"
       >
         <ResizablePanel defaultSize={50}>
-          <div className="flex gap-x-5 w-full  rounded-lg ml-auto bg-s1">
+          <div className="flex gap-x-5 w-full  rounded-lg ml-auto bg-s1 text-sm">
             <div className='text-white items-center font-bold pt-2 pl-4'><span className='text-dark-yellow'>&lt;/&gt;</span> Code</div>
             {/* submit-button */}
             <div className="flex flex-row-reverse ml-auto gap-x-5 h-10 justify-center items-center px-4 ">
