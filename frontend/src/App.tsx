@@ -11,6 +11,7 @@ import NotFound from './pages/Error/NotFound';
 import ProblemSet from './pages/ProblemSet';
 import { SignUpForm } from './pages/Auth/SignUpForm';
 import { useEffect, useState } from 'react';
+import ResourcesPage from './pages/Resources/ResourcesPage';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/resources" element={<ResourcesPage />} />
             <Route path="/auth/signin" element={<SignInForm />} />
             <Route path="/auth/signup" element={<SignUpForm />} />
             <Route path="/codingarena/:id" element={<CodingArena />} />

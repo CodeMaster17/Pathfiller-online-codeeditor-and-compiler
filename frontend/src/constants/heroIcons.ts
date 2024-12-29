@@ -63,6 +63,11 @@ export const navigation = [
     url: "/auth/signin",
     onlyMobile: true,
   },
+  {
+    id: "6",
+    title: "Resources",
+    url: "/resources",
+  },
 ];
 
 export const heroIcons = [homeSmile, file02, searchMd, plusSquare];
