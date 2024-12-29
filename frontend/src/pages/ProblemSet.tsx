@@ -1,53 +1,23 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 
 import { getAllProblems } from "@/api/problemApi";
 import { DifficultyBadge } from "@/components/core/problem/DifficultyBadge";
 import { TagsBadge } from "@/components/core/problem/TagsBadge";
-import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { getCurrentProblems, getProblemsBySearchQuery, getTotalPages } from "@/lib/utils";
-import { IProblemType, ITag } from "@/types/types";
-import { Search } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Difficulty, IProblemType, ITag } from "@/types/types";
 
-import { ServerError } from "./Error/ServerError";
 import LoadingProblems from "@/components/core/problem/LoadingProblems";
+import { DataTable } from "@/components/core/problem/table/Datatable";
+import { ServerError } from "./Error/ServerError";
 
-
-
-const itemsPerPage = 10;
 
 const ProblemSet = () => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [searchQuery, setSearchQuery] = useState<string>("");
   const [problems, setProblems] = useState<IProblemType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [totalProblems, setTotalProblems] = useState<number>(0);
-  const [focus, setFocus] = useState<boolean>(false);
 
-  const navigate = useNavigate();
-  const handleRoute = (id: string) => {
-    navigate(`/codingarena/${id}`);
-  }
+
   const { toast } = useToast()
 
   useEffect(() => {
@@ -55,7 +25,6 @@ const ProblemSet = () => {
       try {
         const response = await getAllProblems();
         setProblems(response.data);
-        setTotalProblems(response.data.length);
         setLoading(false);
       } catch (err) {
         if (err instanceof Error) {
@@ -75,26 +44,48 @@ const ProblemSet = () => {
     fetchProblems();
   }, []);
 
-  // getting problems based on search
-  const filteredProblems: IProblemType[] = getProblemsBySearchQuery(problems, searchQuery);
 
 
-  // getting total pages for problems list
-  const totalPages: number = getTotalPages(filteredProblems.length, itemsPerPage)
-
-  // getting list of current items in table
-  const currentItems: IProblemType[] = getCurrentProblems(filteredProblems, currentPage, itemsPerPage)
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-  const handleFocus = () => {
-    setFocus(true);
-  }
-  const handleFocusOut = () => {
-    setFocus(false);
+  type IProblemTable = {
+    _id: string
+    title: string;
+    difficulty: Difficulty;
+    tags: ITag[];
   }
 
+  // columns of table
+  const columns: ColumnDef<IProblemTable>[] = [
+    {
+      header: "S.no",
+      cell: (info) => info.row.index + 1,
+    },
+    {
+      accessorKey: "title",
+      header: "Questions",
+    },
+    {
+      accessorKey: "difficulty",
+      header: "Difficulty",
+      cell: (info) => <DifficultyBadge difficulty={info.row.original.difficulty} key={info.row.original._id} />
+    },
+    {
+      accessorKey: "tags",
+      header: "Category",
+      cell: (info) => {
+        const tags = info.row.original.tags;
+        return (
+          <>
+            {
+              tags.map((tag: ITag) => (
+                <TagsBadge key={tag.id} Tags={tag.name} />
+              ))
+            }
+          </>
+
+        )
+      }
+    }
+  ]
 
   if (error) {
     return <ServerError />
@@ -108,86 +99,15 @@ const ProblemSet = () => {
         <p className="mt-2 text-sm text-gray-400">
           A comprehensive list of coding problems with their difficulty levels and categories.
         </p>
-        <div className="flex items-center mt-4">
-          <Input
-            placeholder="Search for a question"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="max-w-md placeholder-slate-400 rounded-r-none h-8"
-            onFocus={handleFocus}
-            onBlur={handleFocusOut}
-          />
-
-          <Search className={`bg-white h-8 w-10 p-2 rounded-r-md text-black justify-center cursor-pointer hover:bg-gray-100 border-l-ring ${focus ? `ring-2 ring-offset-2  ring-black` : `outline-none`}`} />
-
-        </div>
-        <div className="mt-2 relative border-gray-700  rounded-lg">
+        <div className="mt-2 relative rounded-lg">
           {loading ? (
             <>
               <LoadingProblems />
             </>
           ) : (
-            <Table className="text-white">
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-gray-300 capitalize">S.No</TableHead>
-                  <TableHead className="text-gray-300 capitalize">Questions</TableHead>
-                  <TableHead className="text-gray-300 capitalize">Difficulty</TableHead>
-                  <TableHead className="pr-10 text-right capitalize text-gray-300">Category</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {currentItems.map((problem, index) => (
-                  <TableRow key={problem._id} className={index % 2 !== 0 ? "border-b border-gray-700 hover:cursor-pointer" : "border-b hover:cursor-pointer border-gray-700"} onClick={
-                    () => handleRoute(problem._id)
-                  }>
-                    <TableCell>{(currentPage - 1) * itemsPerPage + index + 1}</TableCell>
-                    <TableCell className="font-medium">{problem.title}</TableCell>
-                    <TableCell><DifficultyBadge difficulty={problem.difficulty} key={problem.id} /></TableCell>
-                    <TableCell className="text-right">
-                      {problem.tags.map((tag: ITag) => (
-                        <TagsBadge key={tag.id} Tags={tag.name} />
-                      ))}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-              <TableFooter className="bg-s1 rounded-b-lg">
-                <TableRow className="bg-s1 rounded-b-lg">
-                  <TableCell colSpan={3}>Total Questions</TableCell>
-                  <TableCell className="text-right text-white">{totalProblems}</TableCell>
-                </TableRow>
-              </TableFooter>
-            </Table>
+            <DataTable columns={columns} data={problems} />
           )}
         </div>
-
-        {!loading && (
-          <Pagination className="text-gray-500 mt-5">
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious
-                  onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
-                />
-              </PaginationItem>
-              {Array.from({ length: totalPages }).map((_, index) => (
-                <PaginationItem key={index}>
-                  <PaginationLink
-                    isActive={currentPage === index + 1}
-                    onClick={() => handlePageChange(index + 1)}
-                  >
-                    {index + 1}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
-              <PaginationItem>
-                <PaginationNext
-                  onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        )}
       </div>
     </div>
   );
