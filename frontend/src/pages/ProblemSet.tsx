@@ -10,6 +10,7 @@ import { Difficulty, IProblemType, ITag } from "@/types/types";
 import LoadingProblems from "@/components/core/problem/LoadingProblems";
 import { DataTable } from "@/components/core/problem/table/Datatable";
 import { ServerError } from "./Error/ServerError";
+import ProblemNavbar from "@/components/common/Navbar";
 
 
 const ProblemSet = () => {
@@ -92,24 +93,26 @@ const ProblemSet = () => {
   }
 
   return (
-    <div className="g7 md:px-4">
-      {/* <Navbar /> */}
-      <div className="min-h-screen pt-5 max-w-7xl mx-auto">
-        <h1 className="text-2xl font-bold text-white">Problem Set</h1>
-        <p className="mt-2 text-sm text-gray-400">
-          A comprehensive list of coding problems with their difficulty levels and categories.
-        </p>
-        <div className="mt-2 relative rounded-lg">
-          {loading ? (
-            <>
-              <LoadingProblems />
-            </>
-          ) : (
-            <DataTable columns={columns} data={problems} />
-          )}
+    <>
+      <ProblemNavbar />
+      <div className="g7 md:px-4">
+        <div className="min-h-screen pt-5 max-w-7xl mx-auto">
+          <h1 className="text-2xl font-bold text-white">Problem Set</h1>
+          <p className="mt-2 text-sm text-gray-400">
+            A comprehensive list of coding problems with their difficulty levels and categories.
+          </p>
+          <div className="mt-2 relative rounded-lg">
+            {loading ? (
+              <>
+                <LoadingProblems />
+              </>
+            ) : (
+              <DataTable columns={columns} data={problems} />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
