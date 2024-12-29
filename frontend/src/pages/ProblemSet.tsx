@@ -29,6 +29,7 @@ import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import { ServerError } from "./Error/ServerError";
+import LoadingProblems from "@/components/core/problem/LoadingProblems";
 
 
 
@@ -94,6 +95,7 @@ const ProblemSet = () => {
     setFocus(false);
   }
 
+
   if (error) {
     return <ServerError />
   }
@@ -119,12 +121,11 @@ const ProblemSet = () => {
           <Search className={`bg-white h-8 w-10 p-2 rounded-r-md text-black justify-center cursor-pointer hover:bg-gray-100 border-l-ring ${focus ? `ring-2 ring-offset-2  ring-black` : `outline-none`}`} />
 
         </div>
-        <div className="mt-2 relative border border-gray-700  rounded-lg">
+        <div className="mt-2 relative border-gray-700  rounded-lg">
           {loading ? (
-            <div className="absolute flex items-center justify-center text-white inset-0 h-8 text-bold">
-              <div className="loader">Loading...</div>
-              <img src="" alt="" />
-            </div>
+            <>
+              <LoadingProblems />
+            </>
           ) : (
             <Table className="text-white">
               <TableHeader>
