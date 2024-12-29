@@ -51,11 +51,11 @@ const HeroAreaBrainwave = () => {
                 <div className="relative max-w-[23rem] mx-auto md:max-w-5xl xl:mb-24">
                     <div className="relative z-1 p-0.5 rounded-2xl bg-conic-gradient">
                         <div className="relative bg-n-8 rounded-[1rem]">
-                            <div className="h-[1.4rem] bg-n-10 rounded-t-[0.9rem]" />
+                            {/* <div className="h-[1.4rem] bg-n-10 rounded-t-[0.9rem]" /> */}
 
                             <div className="aspect-[33/40] rounded-b-[0.9rem] overflow-hidden md:aspect-[688/490] lg:aspect-[1024/490] border-2">
 
-                                <div className="code-border border rounded-lg flex flex-row py-2 px-2 text-[10px] sm:text-sm leading-[18px] sm:leading-6 relative w-full lg:w-full">
+                                <div className="code-border  rounded-lg flex flex-row py-2 px-2 text-[10px] sm:text-sm leading-[18px] sm:leading-6 relative w-full lg:w-full">
 
                                     <div className="text-center flex flex-col justify-start items-start w-[5%] text-white select-none text-richblack-400 font-inter font-bold overflow-hidden">
                                         {[...Array(18).keys()].map((i) => (
