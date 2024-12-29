@@ -1,4 +1,4 @@
-import { DEVELOPER_INSTAGRAM_LINK, DEVELOPER_LINKEDIN_LINK, DEVELOPER_TWITTER_LINK } from "@/constants/externalLinks";
+import { DEVELOPER_GITHUB_LINK, DEVELOPER_INSTAGRAM_LINK, DEVELOPER_LINKEDIN_LINK, DEVELOPER_TWITTER_LINK } from "@/constants/externalLinks";
 import Logo from "../Logo";
 
 
@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <Logo variant="small" />
         <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2024 Pathfiller —
-          <a href="https://twitter.com/knyttneve" className="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@CodeMaster17</a>
+          <a href={DEVELOPER_GITHUB_LINK} className="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@CodeMaster17</a>
         </p>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
           <a href={DEVELOPER_TWITTER_LINK} target="_blank" className="ml-3 text-gray-500">
