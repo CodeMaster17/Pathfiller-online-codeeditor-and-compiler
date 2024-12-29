@@ -5,6 +5,7 @@ import { useState } from "react";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { Button } from "../ui/button";
 import MenuSvg from "@/assets/MenuSvg";
+import Logo from "../Logo";
 
 const ProblemNavbar = () => {
   const pathname = useLocation();
@@ -31,10 +32,7 @@ const ProblemNavbar = () => {
         }`}
     >
       <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
-        <a className="block w-[12rem] xl:mr-8" href="/">
-          <p className="text-white h6">Pathfiller</p>
-        </a>
-
+        <Logo variant="small" />
         <nav
           className={`${openNavigation ? "flex" : "hidden"
             } fixed top-[5rem] left-0 right-0 bottom-0 bg-n-8 lg:static lg:flex lg:mx-auto lg:bg-transparent`}

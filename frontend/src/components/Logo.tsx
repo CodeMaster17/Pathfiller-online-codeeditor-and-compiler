@@ -6,9 +6,11 @@ const Logo = ({ variant }: ILogoProps) => {
         return (
 
             <h1 className="text-4xl sm:text-5xl md:text-2xl font-bold">
-                <span className="bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
-                    Pathfiller
-                </span>
+                <a href="/">
+                    <span className="bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
+                        Pathfiller
+                    </span>
+                </a>
             </h1>
 
         )

@@ -1,6 +1,5 @@
 // apis for fetching problems for code arena
 
-
 const fetchWithErrorHandling = async (url: string, options = {}) => {
   try {
     const response = await fetch(url, options);

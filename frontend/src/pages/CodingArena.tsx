@@ -9,6 +9,7 @@ import {
 import { IProblemType } from "@/types/types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Logo from "@/components/Logo";
 
 const CodingArena = () => {
 
@@ -48,9 +49,7 @@ const CodingArena = () => {
   return (
     <>
       <div className='w-full h-12 flex justify-between px-4 items-center border-b-[1px] border-gray-800'>
-        <p className='text-white '>
-          <a href="/">Pathfiller</a>
-        </p>
+        <Logo variant="small" />
         <div className='flex gap-3 items-center '>
 
           {/* <button onClick={handleCodeRun} className='text-xs flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-md hover:from-purple-600 hover:to-blue-600 transition-colors'>
@@ -66,7 +65,7 @@ const CodingArena = () => {
       </div>
       <ResizablePanelGroup
         direction="horizontal"
-        className=" min-h-full w-full rounded-lg"
+        className=" min-h-full max-h-screen overflow-hidden w-full rounded-lg"
       >
         <ResizablePanel defaultSize={50} className="min-h-screen">
           <ProblemDetailsTabs problem={problem} _solved={solved} />
@@ -78,7 +77,7 @@ const CodingArena = () => {
           <div className="flex h-full items-center justify-center p-1">
             <VerticalResizable problem={problem} />
           </div>
-          
+
         </ResizablePanel>
       </ResizablePanelGroup>
     </>

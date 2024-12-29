@@ -22,7 +22,7 @@ function App() {
       const pathname = window.location.pathname;
       setUrlTracker(pathname)
     })()
-
+    console.log(urlTracker)
   }, [urlTracker])
 
   return (
